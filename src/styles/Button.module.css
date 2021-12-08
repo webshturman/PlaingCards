@@ -1,0 +1,21 @@
+.default,.red{
+    margin: 10px 0 0 0;
+    background-color: blue;
+    border-radius: 10px;
+    color:white;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+}
+.default:disabled {
+    opacity: 0.5;
+}
+.default:focus {
+    background-color: deepskyblue;
+}
+.red {
+    background: red;
+}
+.changeButton{
+    margin-left: 10px;
+}
