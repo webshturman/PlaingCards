@@ -6,4 +6,5 @@ export enum PATH {
   RECOVERY_PASSWORD = '/recovery',
   ERROR = '/404',
   WRONG_PAGE = '/*',
+  TEST_PAGE = '/test',
 }

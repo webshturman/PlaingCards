@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Error404 } from 'a1-main/m1-ui/components/common/Error404';
 import { Profile } from 'a1-main/m1-ui/components/Profile';
+import { TestComponent } from 'a1-main/m1-ui/components/TestComponent';
 import { Login } from 'a2-features/f1/Login';
 import { Register } from 'a2-features/f2/Register';
 import { RecoveryPassword } from 'a2-features/f3/RecoveryPassword';
@@ -21,6 +22,7 @@ export const RoutesContainer = (): ReturnComponentType => (
       <Route path={PATH.NEW_PASSWORD} element={<NewPassword />} />
       <Route path={PATH.ERROR} element={<Error404 />} />
       <Route path={PATH.WRONG_PAGE} element={<Navigate to={PATH.ERROR} />} />
+      <Route path={PATH.TEST_PAGE} element={<TestComponent />} />
     </Routes>
   </div>
 );
