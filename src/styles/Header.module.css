@@ -1,0 +1,21 @@
+.header{
+    border-bottom: 1px solid darkblue;
+    margin-bottom: 30px;
+}
+
+.headerContainer{
+    max-width: 800px;
+    height: 60px;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+}
+.itemMenu a{
+    color: blue;
+
+}
+.itemMenu a.active{
+    color: black;
+    font-weight: 500;
+}

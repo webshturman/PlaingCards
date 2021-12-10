@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
 import { PATH } from 'enums/routes';
-import style from 'styles/App.module.css';
+import style from 'styles/ErrorPage.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Error404 = (): ReturnComponentType => (
