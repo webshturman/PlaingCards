@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/PlaingCards/static/css/main.d8178fb4.chunk.css",
+    "main.js": "/PlaingCards/static/js/main.a049bc96.chunk.js",
+    "main.js.map": "/PlaingCards/static/js/main.a049bc96.chunk.js.map",
+    "runtime-main.js": "/PlaingCards/static/js/runtime-main.9f18f711.js",
+    "runtime-main.js.map": "/PlaingCards/static/js/runtime-main.9f18f711.js.map",
+    "static/js/2.ac521d91.chunk.js": "/PlaingCards/static/js/2.ac521d91.chunk.js",
+    "static/js/2.ac521d91.chunk.js.map": "/PlaingCards/static/js/2.ac521d91.chunk.js.map",
+    "static/js/3.7731f106.chunk.js": "/PlaingCards/static/js/3.7731f106.chunk.js",
+    "static/js/3.7731f106.chunk.js.map": "/PlaingCards/static/js/3.7731f106.chunk.js.map",
+    "index.html": "/PlaingCards/index.html",
+    "static/css/main.d8178fb4.chunk.css.map": "/PlaingCards/static/css/main.d8178fb4.chunk.css.map",
+    "static/js/2.ac521d91.chunk.js.LICENSE.txt": "/PlaingCards/static/js/2.ac521d91.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9f18f711.js",
+    "static/js/2.ac521d91.chunk.js",
+    "static/css/main.d8178fb4.chunk.css",
+    "static/js/main.a049bc96.chunk.js"
+  ]
+}
