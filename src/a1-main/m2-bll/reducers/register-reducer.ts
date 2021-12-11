@@ -1,20 +1,21 @@
-export type initialRegisterStateType = any;
+import { ACTIONS_TYPE, RegisterActionType } from '../actions/register-actions';
 
-const initialRegisterState: initialRegisterStateType = {};
+export type initialRegisterStateType = {
+  signUpStatus: boolean;
+};
+
+const initialRegisterState: initialRegisterStateType = {
+  signUpStatus: false,
+};
 
 export const registerReducer = (
   state: initialRegisterStateType = initialRegisterState,
-  action: any,
+  action: RegisterActionType,
 ): initialRegisterStateType => {
   switch (action.type) {
-    // case ACTIONS_TYPE.SET_REGISTER_DATA:
+    case ACTIONS_TYPE.SET_REGISTER_STATUS:
+      return { ...state, signUpStatus: action.registerStatus };
     default:
       return state;
   }
 };
-
-// образец типов экшена
-
-export enum ACTIONS_TYPE {
-  SET_REGISTER_DATA = 'register-reducer/SET_REGISTER_DATA',
-}

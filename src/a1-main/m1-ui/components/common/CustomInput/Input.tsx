@@ -11,6 +11,8 @@ export const Input: FC<CustomInputType> = ({
   error,
   className,
   spanClassName,
+  value,
+  type,
 }): ReturnComponentType => {
   const handleInputValueChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (onChangeText) {
@@ -27,9 +29,10 @@ export const Input: FC<CustomInputType> = ({
     <div>
       <h1>{title}</h1>
       <input
-        type="text"
+        type={type}
         onChange={handleInputValueChange}
         className={finalInputClassName}
+        value={value}
       />
       {error && <span className={finalSpanClassName}>{error}</span>}
     </div>
