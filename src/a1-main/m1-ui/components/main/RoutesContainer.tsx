@@ -19,7 +19,9 @@ export const RoutesContainer = (): ReturnComponentType => (
       <Route path={PATH.REGISTER} element={<Register />} />
       <Route path={PATH.LOGIN} element={<Login />} />
       <Route path={PATH.RECOVERY_PASSWORD} element={<RecoveryPassword />} />
-      <Route path={PATH.NEW_PASSWORD} element={<NewPassword />} />
+      <Route path={PATH.NEW_PASSWORD} element={<NewPassword />}>
+        <Route path=":token" element={<NewPassword />} />
+      </Route>
       <Route path={PATH.ERROR} element={<Error404 />} />
       <Route path={PATH.WRONG_PAGE} element={<Navigate to={PATH.ERROR} />} />
       <Route path={PATH.TEST_PAGE} element={<TestComponent />} />

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import { Button } from '../a1-main/m1-ui/components/common/CustomButton/Button';
 import { Input } from '../a1-main/m1-ui/components/common/CustomInput/Input';
-import { renamePassword } from '../a1-main/m2-bll/reducers/password-reducer';
+import { renamePassword } from '../a1-main/m2-bll/thunks/password-thunk';
 import { CONFIRM_PASSWORD, EMPTY_STRING, PASSWORD } from '../constants/common';
 
 import { ReturnComponentType } from 'types/ReturnComponentType';
@@ -27,12 +27,10 @@ export const NewPassword = (): ReturnComponentType => {
   const handleSubmit = (): void => {
     if (password !== passwordConfirm) {
       console.log('The passwords do not match');
-      console.log(newPassword);
       return;
     }
+    console.log(token);
     dispatch(renamePassword(newPassword));
-    console.log(password);
-    console.log(passwordConfirm);
   };
   return (
     <div>

@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Button';
 import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
-import { sendMessageOnEmail } from '../../a1-main/m2-bll/reducers/password-reducer';
 import { AppRootState } from '../../a1-main/m2-bll/store';
+import { sendMessageOnEmail } from '../../a1-main/m2-bll/thunks/password-thunk';
 import { EMPTY_STRING, TITLE_EMAIL } from '../../constants/common';
 
 import { ReturnComponentType } from 'types/ReturnComponentType';
@@ -22,15 +22,18 @@ export const RecoveryPassword = (): ReturnComponentType => {
   );
   const [email, setEmail] = useState<string>(EMPTY_STRING);
   const [messageSuccess, setMessageSuccess] = useState<boolean>(sendMessageSuccess);
+
   useEffect(() => {
     setMessageSuccess(sendMessageSuccess);
   }, [sendMessageSuccess]);
+
   const dispatch = useDispatch();
+
   const letterToThePost: LetterType = {
     email,
     from: 'test-front-admin <ai73a@yandex.by>',
     message: `<div style='background-color: #d6f8f0; padding: 20px'>
-'password recovery link': <a href='http://localhost:3000/PlaingCards/$token$/#/new_pass'>link</a></div>`,
+'password recovery link': <a href='http://localhost:3000/PlaingCards/new_pass#/new_pass/$token$/'>link</a></div>`,
   };
 
   const handleSubmit = (): void => {
