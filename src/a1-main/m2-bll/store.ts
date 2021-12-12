@@ -2,6 +2,7 @@ import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
 import thunk, { ThunkAction } from 'redux-thunk';
 
 import { AuthActionsType } from './actions/auth-actions';
+import { PasswordActionType } from './actions/password-actions';
 import { RegisterActionType } from './actions/register-actions';
 import { authReducer } from './reducers/auth-reducer';
 import { passwordReducer } from './reducers/password-reducer';
@@ -18,12 +19,12 @@ const rootReducer = combineReducers({
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
-export type AppReducerType = ReturnType<typeof rootReducer>;
-export type AppActionsType = AuthActionsType | RegisterActionType;
+export type AppRootState = ReturnType<typeof rootReducer>;
+export type AppActionsType = AuthActionsType | RegisterActionType | PasswordActionType;
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
-  AppReducerType,
+  AppRootState,
   unknown,
   AppActionsType
 >;

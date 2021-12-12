@@ -6,7 +6,7 @@ import { Navigate, NavLink } from 'react-router-dom';
 import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Button';
 import { Checkbox } from '../../a1-main/m1-ui/components/common/CustomCheckBox/CheckBox';
 import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
-import { AppReducerType } from '../../a1-main/m2-bll/store';
+import { AppRootState } from '../../a1-main/m2-bll/store';
 import { toAuth } from '../../a1-main/m2-bll/thunks/auth-thunk';
 import { LoginCredentialsSendType } from '../../a1-main/m3-dal/types/loginType';
 import { EMPTY_STRING, FALSE, PASSWORD, TITLE_EMAIL } from '../../constants/common';
@@ -20,7 +20,7 @@ export const Login = (): ReturnComponentType => {
   const [password, setPassword] = useState<string>(EMPTY_STRING);
   const [rememberMe, setRememberMe] = useState<boolean>(FALSE);
   const loginCredentials: LoginCredentialsSendType = { email, password, rememberMe };
-  const AuthUserStatus = useSelector<AppReducerType, boolean>(state => state.auth.isAuth);
+  const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
   const handleSubmit = (): void => {
     dispatch(toAuth(loginCredentials));
   };
