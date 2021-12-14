@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useParams } from 'react-router-dom';
 
-import { Button } from '../a1-main/m1-ui/components/common/CustomButton/Button';
-import { Input } from '../a1-main/m1-ui/components/common/CustomInput/Input';
-import { renamePassword } from '../a1-main/m2-bll/thunks/password-thunk';
-import { CONFIRM_PASSWORD, EMPTY_STRING, PASSWORD } from '../constants/common';
+import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Button';
+import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
+import { AppRootState } from '../../a1-main/m2-bll/store';
+import { renamePassword } from '../../a1-main/m2-bll/thunks/password-thunk';
+import { CONFIRM_PASSWORD, EMPTY_STRING, PASSWORD } from '../../constants/common';
+import { PATH } from '../../enums/routes';
 
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -18,20 +20,25 @@ export type ReamePasswordType = {
 export const NewPassword = (): ReturnComponentType => {
   const [password, setPassword] = useState<string>(EMPTY_STRING);
   const [passwordConfirm, setPasswordConfirm] = useState<string>(EMPTY_STRING);
+
+  const passwordRename = useSelector<AppRootState, boolean>(
+    state => state.password.passwordRename,
+  );
   const dispatch = useDispatch();
+
   const { token } = useParams<string>();
   const newPassword: ReamePasswordType = {
     password,
     resetPasswordToken: token || '',
   };
+
   const handleSubmit = (): void => {
     if (password !== passwordConfirm) {
-      console.log('The passwords do not match');
       return;
     }
-    console.log(token);
     dispatch(renamePassword(newPassword));
   };
+  if (passwordRename) return <Navigate to={PATH.LOGIN} />;
   return (
     <div>
       <form onSubmit={handleSubmit}>
