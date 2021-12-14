@@ -2,7 +2,8 @@ import { useSelector } from 'react-redux';
 
 import { ReturnComponentType } from '../../../../types/ReturnComponentType';
 import { AppRootState } from '../../../m2-bll/store';
-import preloader from '../../circles.svg';
+
+import preloader from 'assets/images/preloader.svg';
 
 export const Loader = (): ReturnComponentType => {
   const loader = useSelector<AppRootState, boolean>(state => state.app.isFetching);

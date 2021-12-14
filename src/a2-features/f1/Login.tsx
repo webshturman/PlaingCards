@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, NavLink } from 'react-router-dom';
 
+import { Loader } from '../../a1-main/m1-ui/components/common/Loader';
 import { toggleIsFetching } from '../../a1-main/m2-bll/actions/auth-actions';
 
 import { Button } from 'a1-main/m1-ui/components/common/CustomButton/Button';
@@ -57,6 +58,8 @@ export const Login = (): ReturnComponentType => {
     setEmailError(errorEmailValidation);
     if (password.length === ZERO_LENGTH) {
       setPasswordError(errorPasswordValidation);
+      dispatch(toggleIsFetching(false));
+      return;
     }
     dispatch(toggleIsFetching(false));
   };
@@ -101,6 +104,7 @@ export const Login = (): ReturnComponentType => {
         </div>
       </form>
       <NavLink to={PATH.RECOVERY_PASSWORD}>I forgot password</NavLink>
+      {isFetching && Loader}
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { toggleIsFetching } from '../../m2-bll/actions/auth-actions';
 import { deleteAuthUserData } from '../../m2-bll/thunks/auth-thunk';
 
 import { Button } from './common/CustomButton/Button';
+import { Loader } from './common/Loader';
 
 import { AppRootState } from 'a1-main/m2-bll/store';
 import { PATH } from 'enums/routes';
@@ -38,6 +39,7 @@ export const Profile = (): ReturnComponentType => {
           Log out
         </Button>
       </div>
+      {isFetching && Loader}
     </div>
   );
 };

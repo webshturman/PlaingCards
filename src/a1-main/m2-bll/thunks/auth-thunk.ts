@@ -1,10 +1,13 @@
+import axios from 'axios';
 import { ThunkDispatch } from 'redux-thunk';
 
+import { setErrorMessageAC, setIsFethingAC } from '../actions/app-actions';
 import {
   AuthActionsType,
   setAuthUserData,
   toggleIsFetching,
 } from '../actions/auth-actions';
+import { successRenamePasswordAC } from '../actions/password-actions';
 import { nullAuthData } from '../reducers/auth-reducer';
 
 import { AppRootState, AppThunk } from 'a1-main/m2-bll/store';
@@ -29,27 +32,26 @@ export const getAuthUserData =
 export const toAuth =
   (credentials: LoginCredentialsSendType): AppThunk =>
   async dispatch => {
-    // dispatch(setIsFethingAC(true)); // прелоудер
+    dispatch(setIsFethingAC(true));
     try {
       const response = await authAPI.login(credentials);
       if (response.status === RESPONSE_STATUS_OK) {
         dispatch(setAuthUserData({ ...response.data }));
-        // dispatch(successRenamePasswordAC(false)); // отдать сереге обнуление редиректа на логин
-        // dispatch(setErrorMessageAC(false, '')); // сброс ошибки
-        // dispatch(setIsFethingAC(false)); // сброс прелоудера
+        dispatch(successRenamePasswordAC(false));
+        dispatch(setErrorMessageAC(false, ''));
+        dispatch(setIsFethingAC(false));
         console.log('login success, auth user data saved in store:');
         console.log(response.data);
         dispatch(getAuthUserData());
       }
     } catch (error) {
-      // if (axios.isAxiosError(error) && error.response) {
-      // типизация ошибки
-      // const errorMessage = error.response.data.error; // установка ошибки
-      // dispatch(setErrorMessageAC(true, `Не получилось залогиниться! ${errorMessage}`));
-      // dispatch(setIsFethingAC(false)); // сброс прелоудера
-      console.log(`login ${error}`);
+      if (axios.isAxiosError(error) && error.response) {
+        const errorMessage = error.response.data.error;
+        dispatch(setErrorMessageAC(true, `login error: ${errorMessage}`));
+        dispatch(setIsFethingAC(false));
+        console.log(`login ${error}`);
+      }
     }
-    // }
   };
 
 export const deleteAuthUserData =
