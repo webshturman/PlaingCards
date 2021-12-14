@@ -32,7 +32,7 @@ export const toAuth =
     try {
       const response = await authAPI.login(credentials);
       if (response.status === RESPONSE_STATUS_OK) {
-        await dispatch(getAuthUserData());
+        dispatch(getAuthUserData());
       }
     } catch (error: any) {
       console.log(`login ${error}`);
@@ -43,10 +43,12 @@ export const deleteAuthUserData =
   () => async (dispatch: ThunkDispatch<AppRootState, unknown, AuthActionsType>) => {
     try {
       const response = await authAPI.deleteMe();
+      console.log(response);
       if (response.status === RESPONSE_STATUS_OK) {
-        await dispatch(setAuthUserData({ ...nullAuthData }));
-        await dispatch(toggleIsFetching(false));
-        console.log('user data was deleted on server and browser');
+        dispatch(setAuthUserData({ ...nullAuthData }));
+        console.log('2');
+        dispatch(toggleIsFetching(false));
+        console.log('3');
       }
     } catch (error) {
       console.log(`Error deleting auth user data: ${error}`);

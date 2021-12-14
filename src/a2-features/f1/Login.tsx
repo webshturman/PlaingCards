@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, NavLink } from 'react-router-dom';
 
-import { Preloader } from '../../a1-main/m1-ui/components/common/Preloader/Preloader';
 import { toggleIsFetching } from '../../a1-main/m2-bll/actions/auth-actions';
 
 import { Button } from 'a1-main/m1-ui/components/common/CustomButton/Button';
@@ -102,7 +101,6 @@ export const Login = (): ReturnComponentType => {
         </div>
       </form>
       <NavLink to={PATH.RECOVERY_PASSWORD}>I forgot password</NavLink>
-      {isFetching && <Preloader />}
     </div>
   );
 };
