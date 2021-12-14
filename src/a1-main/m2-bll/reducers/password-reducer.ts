@@ -1,4 +1,4 @@
-import { ACTIONS_TYPE, PasswordActionType } from '../actions/password-actions';
+import { ACTIONS_TYPE_PASSWORD, PasswordActionType } from '../actions/password-actions';
 
 export type initialPasswordStateType = {
   sendMessageSuccess: boolean;
@@ -15,12 +15,12 @@ export const passwordReducer = (
   action: PasswordActionType,
 ): initialPasswordStateType => {
   switch (action.type) {
-    case ACTIONS_TYPE.SEND_MESSAGE_ON_MAIL:
+    case ACTIONS_TYPE_PASSWORD.SEND_MESSAGE_ON_MAIL:
       return {
         ...state,
         sendMessageSuccess: action.sendMessageSuccess,
       };
-    case ACTIONS_TYPE.RENAME_PASSWORD:
+    case ACTIONS_TYPE_PASSWORD.RENAME_PASSWORD:
       return {
         ...state,
         passwordRename: action.passwordRename,
@@ -29,5 +29,3 @@ export const passwordReducer = (
       return state;
   }
 };
-
-// образец типов экшена

@@ -7,8 +7,8 @@ import { Profile } from 'a1-main/m1-ui/components/Profile';
 import { TestComponent } from 'a1-main/m1-ui/components/TestComponent';
 import { Login } from 'a2-features/f1/Login';
 import { Register } from 'a2-features/f2/Register';
+import { NewPassword } from 'a2-features/f3/NewPassword';
 import { RecoveryPassword } from 'a2-features/f3/RecoveryPassword';
-import { NewPassword } from 'a2-features/NewPassword';
 import { PATH } from 'enums/routes';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
