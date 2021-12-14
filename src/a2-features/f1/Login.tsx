@@ -3,46 +3,106 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, NavLink } from 'react-router-dom';
 
-import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Button';
-import { Checkbox } from '../../a1-main/m1-ui/components/common/CustomCheckBox/CheckBox';
-import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
-import { AppRootState } from '../../a1-main/m2-bll/store';
-import { toAuth } from '../../a1-main/m2-bll/thunks/auth-thunk';
-import { LoginCredentialsSendType } from '../../a1-main/m3-dal/types/loginType';
-import { EMPTY_STRING, FALSE, PASSWORD, TITLE_EMAIL } from '../../constants/common';
-import { PATH } from '../../enums/routes';
+import { Preloader } from '../../a1-main/m1-ui/components/common/Preloader/Preloader';
+import { toggleIsFetching } from '../../a1-main/m2-bll/actions/auth-actions';
 
+import { Button } from 'a1-main/m1-ui/components/common/CustomButton/Button';
+import { Checkbox } from 'a1-main/m1-ui/components/common/CustomCheckBox/CheckBox';
+import { Input } from 'a1-main/m1-ui/components/common/CustomInput/Input';
+import { AppRootState } from 'a1-main/m2-bll/store';
+import { toAuth } from 'a1-main/m2-bll/thunks/auth-thunk';
+import { LoginCredentialsSendType } from 'a1-main/m3-dal/types/loginType';
+import {
+  emailValidator,
+  EMPTY_STRING,
+  PASSWORD,
+  TITLE_EMAIL,
+  ZERO_LENGTH,
+} from 'constants/common';
+import { PATH } from 'enums/routes';
+import style from 'styles/Login.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Login = (): ReturnComponentType => {
+  const errorEmailValidation = 'Email is incorrect';
+  const errorPasswordValidation = 'Password is required';
   const dispatch = useDispatch();
   const [email, setEmail] = useState<string>(EMPTY_STRING);
+  const [emailError, setEmailError] = useState<string>(EMPTY_STRING);
   const [password, setPassword] = useState<string>(EMPTY_STRING);
-  const [rememberMe, setRememberMe] = useState<boolean>(FALSE);
+  const [passwordError, setPasswordError] = useState<string>(EMPTY_STRING);
+  const [rememberMe, setRememberMe] = useState<boolean>(false);
   const loginCredentials: LoginCredentialsSendType = { email, password, rememberMe };
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
-  const handleSubmit = (): void => {
-    dispatch(toAuth(loginCredentials));
+  const isFetching = useSelector<AppRootState, boolean>(state => state.auth.isFetching);
+  const handleEmailValueChange = (emailValue: string): void => {
+    setEmail(emailValue);
+    if (emailError) {
+      setEmailError(EMPTY_STRING);
+    }
   };
-  if (AuthUserStatus) return <Navigate to={PATH.PROFILE} />;
+  const handlePasswordValueChange = (passwordValue: string): void => {
+    setPassword(passwordValue);
+    if (passwordError) {
+      setPasswordError(EMPTY_STRING);
+    }
+  };
+
+  const handleSubmit = (): void => {
+    dispatch(toggleIsFetching(true));
+    if (email.match(emailValidator)) {
+      setEmailError(EMPTY_STRING);
+      dispatch(toAuth(loginCredentials));
+      return;
+    }
+    setEmailError(errorEmailValidation);
+    if (password.length === ZERO_LENGTH) {
+      setPasswordError(errorPasswordValidation);
+    }
+    dispatch(toggleIsFetching(false));
+  };
+  if (AuthUserStatus) {
+    return <Navigate to={PATH.PROFILE} />;
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <Input title={TITLE_EMAIL} onChangeText={setEmail} value={email} type="email" />
+        <Input
+          title={TITLE_EMAIL}
+          onChangeText={(currentEmailValue: string) =>
+            handleEmailValueChange(currentEmailValue)
+          }
+          value={email}
+          type="text"
+        />
+        {emailError && (
+          <div>
+            <span className={style.errorText}>{emailError}</span>
+          </div>
+        )}
         <Input
           title={PASSWORD}
-          onChangeText={setPassword}
+          onChangeText={(currentPasswordValue: string) =>
+            handlePasswordValueChange(currentPasswordValue)
+          }
           value={password}
           type="password"
         />
+        {passwordError && (
+          <div>
+            <span className={style.errorText}>{passwordError}</span>
+          </div>
+        )}
         <Checkbox onChangeChecked={setRememberMe} checked={rememberMe} type="checkbox">
           Remember me
         </Checkbox>
         <div>
-          <Button>Login</Button>
+          <Button condition={isFetching}>Log in</Button>
         </div>
       </form>
       <NavLink to={PATH.RECOVERY_PASSWORD}>I forgot password</NavLink>
+      {isFetching && <Preloader />}
     </div>
   );
 };

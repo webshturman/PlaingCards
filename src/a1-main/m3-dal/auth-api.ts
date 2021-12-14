@@ -1,13 +1,26 @@
 import { AxiosResponse } from 'axios';
 
-import { instance } from './instance';
-import { LoginCredentialsSendType } from './types/loginType';
+import { instance } from 'a1-main/m3-dal/instance';
+import {
+  DeleteMeResponseStateType,
+  LoginCredentialsSendType,
+  LoginResponseStateType,
+  MeResponseStateType,
+} from 'a1-main/m3-dal/types/loginType';
 
 export const authAPI = {
   login(credentials: LoginCredentialsSendType) {
-    return instance.post<LoginCredentialsSendType, AxiosResponse<any>>(
+    return instance.post<LoginCredentialsSendType, AxiosResponse<LoginResponseStateType>>(
       `auth/login`,
       credentials,
     );
+  },
+
+  me() {
+    return instance.post<{}, AxiosResponse<MeResponseStateType>>(`auth/me`, {});
+  },
+
+  deleteMe() {
+    return instance.delete<{}, AxiosResponse<DeleteMeResponseStateType>>(`auth/me`, {});
   },
 };

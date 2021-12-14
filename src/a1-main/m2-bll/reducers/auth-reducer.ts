@@ -1,18 +1,20 @@
-import { AUTH_ACTIONS_TYPE, AuthActionsType } from '../actions/auth-actions';
+import { AuthStateType } from '../../m3-dal/types/loginType';
 
-export type AuthStateType = {
-  _id: string | null;
-  email: string | null;
-  name: string | null;
-  avatar?: string | null;
-  publicCardPacksCount: number | null;
-  created: Date | null;
-  updated: Date | null;
-  isAdmin: boolean | null;
-  verified: boolean | null;
-  rememberMe: boolean | null;
-  error?: string | null;
-  isAuth: boolean;
+import { AUTH_ACTIONS_TYPE, AuthActionsType } from 'a1-main/m2-bll/actions/auth-actions';
+
+export const nullAuthData = {
+  isAuth: false,
+  _id: null,
+  email: null,
+  name: null,
+  avatar: null,
+  publicCardPacksCount: null,
+  created: null,
+  updated: null,
+  isAdmin: null,
+  verified: null,
+  rememberMe: null,
+  error: null,
 };
 
 const initialAuthState = {
@@ -28,6 +30,7 @@ const initialAuthState = {
   rememberMe: null,
   error: null,
   isAuth: false,
+  isFetching: false,
 };
 
 export const authReducer = (
@@ -39,6 +42,12 @@ export const authReducer = (
       return {
         ...state,
         ...action.data,
+      };
+    }
+    case AUTH_ACTIONS_TYPE.TOGGLE_IS_FETCHING: {
+      return {
+        ...state,
+        isFetching: action.isFetching,
       };
     }
     default:
