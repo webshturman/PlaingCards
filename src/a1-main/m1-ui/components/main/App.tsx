@@ -1,5 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
+import { useDispatch } from 'react-redux';
+
+import { getAuthUserData } from '../../../m2-bll/thunks/auth-thunk';
 import { ErrorAll } from '../common/ErrorAll';
 import { Loader } from '../common/Loader';
 
@@ -9,11 +12,19 @@ import { Main } from './Main';
 import style from 'styles/App.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-export const App: FC = (): ReturnComponentType => (
-  <div className={style.container}>
-    <Loader />
-    <ErrorAll />
-    <Header />
-    <Main />
-  </div>
-);
+export const App: FC = (): ReturnComponentType => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAuthUserData());
+  }, []);
+
+  return (
+    <div className={style.container}>
+      <Loader />
+      <ErrorAll />
+      <Header />
+      <Main />
+    </div>
+  );
+};

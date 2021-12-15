@@ -1,3 +1,16 @@
 .errorText {
     color: red;
 }
+
+.forgotblock {
+    height: 60px;
+    padding: 20px;
+    font-weight: normal;
+}
+.forgotPassword{
+    color: rgba(0,0,0,0.5)
+}
+
+.SignUpBlock{
+    height: 60px;
+}

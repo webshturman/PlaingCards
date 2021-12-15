@@ -6,22 +6,6 @@ export type LoginCredentialsSendType = {
   rememberMe: boolean | null;
 };
 
-export type AuthStateType = {
-  _id: Nullable<string>;
-  email: Nullable<string>;
-  name: Nullable<string>;
-  avatar?: Nullable<string>;
-  publicCardPacksCount: Nullable<number>;
-  created: Nullable<Date>;
-  updated: Nullable<Date>;
-  isAdmin: Nullable<boolean>;
-  verified: Nullable<boolean>;
-  rememberMe: Nullable<boolean>;
-  error?: Nullable<string>;
-  isAuth: boolean;
-  isFetching: boolean;
-};
-
 export type LoginResponseStateType = {
   _id: Nullable<string>;
   email: Nullable<string>;

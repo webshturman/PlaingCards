@@ -1,19 +1,15 @@
 import { ACTIONS_TYPE_PASSWORD, PasswordActionType } from '../actions/password-actions';
 
-export type initialPasswordStateType = {
-  sendMessageSuccess: boolean;
-  passwordRename: boolean;
-};
-
-const initialPasswordState: initialPasswordStateType = {
+const initialPasswordState = {
   sendMessageSuccess: false,
   passwordRename: false,
 };
+type InitialPasswordStateType = typeof initialPasswordState;
 
 export const passwordReducer = (
-  state: initialPasswordStateType = initialPasswordState,
+  state: InitialPasswordStateType = initialPasswordState,
   action: PasswordActionType,
-): initialPasswordStateType => {
+): InitialPasswordStateType => {
   switch (action.type) {
     case ACTIONS_TYPE_PASSWORD.SEND_MESSAGE_ON_MAIL:
       return {

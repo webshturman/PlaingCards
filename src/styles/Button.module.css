@@ -1,6 +1,6 @@
 .default,.red{
-    margin: 10px 0 0 0;
-    background-color: blue;
+    margin: 20px 0 20px 0;
+    background-color: rgb(79, 98, 108);
     border-radius: 10px;
     color:white;
     cursor: pointer;

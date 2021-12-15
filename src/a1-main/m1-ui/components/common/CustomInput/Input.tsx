@@ -6,7 +6,7 @@ import style from 'styles/Input.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Input: FC<CustomInputType> = ({
-  title,
+  // title,
   onChangeText,
   error,
   className,
@@ -27,12 +27,13 @@ export const Input: FC<CustomInputType> = ({
 
   return (
     <div>
-      <h1>{title}</h1>
+      {/* <h1>{title}</h1> */}
       <input
         type={type}
         onChange={handleInputValueChange}
         className={finalInputClassName}
         value={value}
+        placeholder={type}
       />
       {error && <span className={finalSpanClassName}>{error}</span>}
     </div>

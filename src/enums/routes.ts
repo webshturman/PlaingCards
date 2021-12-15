@@ -7,4 +7,5 @@ export enum PATH {
   ERROR = '/404',
   WRONG_PAGE = '/*',
   TEST_PAGE = '/test',
+  CARDS = '/cards',
 }

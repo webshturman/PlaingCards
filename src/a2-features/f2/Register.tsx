@@ -19,6 +19,7 @@ export const Register = (): ReturnComponentType => {
   const signUpStatus = useSelector<AppRootState, boolean>(
     state => state.register.signUpStatus,
   );
+  const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
   const dispatch = useDispatch();
 
   const credentials: credentialsType = { email, password };
@@ -37,7 +38,7 @@ export const Register = (): ReturnComponentType => {
           title={TITLE_EMAIL}
           onChangeText={setEmail}
           value={email}
-          type="text"
+          type="email"
           // onEnter={showAlert}
           // error={error}
           // spanClassName={s.testSpanError}
@@ -55,7 +56,7 @@ export const Register = (): ReturnComponentType => {
           type="password"
         />
         <div>
-          <Button>Register</Button>
+          <Button condition={isFetching}>Register</Button>
         </div>
       </form>
     </div>

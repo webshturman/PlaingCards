@@ -24,6 +24,7 @@ export const NewPassword = (): ReturnComponentType => {
   const passwordRename = useSelector<AppRootState, boolean>(
     state => state.password.passwordRename,
   );
+  const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
   const dispatch = useDispatch();
 
   const { token } = useParams<string>();
@@ -55,7 +56,7 @@ export const NewPassword = (): ReturnComponentType => {
           type="password"
         />
         <div>
-          <Button>update</Button>
+          <Button condition={isFetching}>update</Button>
         </div>
       </form>
     </div>

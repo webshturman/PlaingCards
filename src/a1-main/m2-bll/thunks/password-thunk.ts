@@ -18,29 +18,28 @@ export const sendMessageOnEmail =
       await passwordAPI.sendMessage(letterToThePost);
       dispatch(successSendMessgeAC(true));
       dispatch(setErrorMessageAC(false, ''));
-      dispatch(setIsFethingAC(false));
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data.error;
         dispatch(
           setErrorMessageAC(true, `Не получилось отправить письмо! ${errorMessage}`),
         );
-        dispatch(setIsFethingAC(false));
+      } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+        dispatch(setErrorMessageAC(true, `Нет соединения`));
       }
+    } finally {
+      dispatch(setIsFethingAC(false));
     }
   };
 
 export const renamePassword =
   (newPassword: ReamePasswordType): AppThunk =>
   async dispatch => {
-    console.log('hhhhhh');
     dispatch(setIsFethingAC(true));
     try {
       await passwordAPI.updatePassword(newPassword);
-      console.log('hhhhhh2222222222');
       dispatch(successRenamePasswordAC(true));
       dispatch(setErrorMessageAC(false, ''));
-      dispatch(setIsFethingAC(false));
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data.error;
@@ -50,7 +49,10 @@ export const renamePassword =
             `Пароль не обновился пропробуйте снова! ${errorMessage}`,
           ),
         );
-        dispatch(setIsFethingAC(false));
+      } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+        dispatch(setErrorMessageAC(true, `Нет соединения`));
       }
+    } finally {
+      dispatch(setIsFethingAC(false));
     }
   };

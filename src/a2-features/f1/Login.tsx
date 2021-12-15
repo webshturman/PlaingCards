@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, NavLink } from 'react-router-dom';
 
-import { Loader } from '../../a1-main/m1-ui/components/common/Loader';
 import { toggleIsFetching } from '../../a1-main/m2-bll/actions/auth-actions';
 
 import { Button } from 'a1-main/m1-ui/components/common/CustomButton/Button';
@@ -34,7 +33,7 @@ export const Login = (): ReturnComponentType => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const loginCredentials: LoginCredentialsSendType = { email, password, rememberMe };
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
-  const isFetching = useSelector<AppRootState, boolean>(state => state.auth.isFetching);
+  const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
   const handleEmailValueChange = (emailValue: string): void => {
     setEmail(emailValue);
     if (emailError) {
@@ -76,7 +75,7 @@ export const Login = (): ReturnComponentType => {
             handleEmailValueChange(currentEmailValue)
           }
           value={email}
-          type="text"
+          type="email"
         />
         {emailError && (
           <div>
@@ -99,12 +98,21 @@ export const Login = (): ReturnComponentType => {
         <Checkbox onChangeChecked={setRememberMe} checked={rememberMe} type="checkbox">
           Remember me
         </Checkbox>
+        <div className={style.forgotblock}>
+          <NavLink to={PATH.RECOVERY_PASSWORD} className={style.forgotPassword}>
+            I forgot password
+          </NavLink>
+        </div>
         <div>
           <Button condition={isFetching}>Log in</Button>
         </div>
       </form>
-      <NavLink to={PATH.RECOVERY_PASSWORD}>I forgot password</NavLink>
-      {isFetching && Loader}
+      <div className={style.SignUpBlock}>
+        <p>Don`t have an account?</p>
+        <NavLink to={PATH.REGISTER} className={style.SignUp}>
+          SignUp
+        </NavLink>
+      </div>
     </div>
   );
 };

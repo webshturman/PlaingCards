@@ -20,6 +20,7 @@ export const RecoveryPassword = (): ReturnComponentType => {
   const sendMessageSuccess = useSelector<AppRootState, boolean>(
     state => state.password.sendMessageSuccess,
   );
+  const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
   const [email, setEmail] = useState<string>(EMPTY_STRING);
   const [messageSuccess, setMessageSuccess] = useState<boolean>(sendMessageSuccess);
 
@@ -50,9 +51,9 @@ export const RecoveryPassword = (): ReturnComponentType => {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <Input title={TITLE_EMAIL} onChangeText={setEmail} value={email} type="text" />
+          <Input title={TITLE_EMAIL} onChangeText={setEmail} value={email} type="email" />
           <div>
-            <Button>send</Button>
+            <Button condition={isFetching}>send</Button>
           </div>
         </form>
       )}

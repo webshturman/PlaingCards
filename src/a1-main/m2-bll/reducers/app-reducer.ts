@@ -1,21 +1,17 @@
 import { ACTIONS_TYPE_APP, AppActionType } from '../actions/app-actions';
 
-export type initialRecoveryStateType = {
-  error: boolean;
-  textError: string;
-  isFetching: boolean;
-};
-
-const initialRecoveryState: initialRecoveryStateType = {
+const initialRecoveryState = {
   error: false,
   textError: '',
   isFetching: false,
 };
 
+type InitialRecoveryStateType = typeof initialRecoveryState;
+
 export const appReducer = (
-  state: initialRecoveryStateType = initialRecoveryState,
+  state: InitialRecoveryStateType = initialRecoveryState,
   action: AppActionType,
-): initialRecoveryStateType => {
+): InitialRecoveryStateType => {
   switch (action.type) {
     case ACTIONS_TYPE_APP.SET_ERROR_MESSAGE:
       return { ...state, error: action.error, textError: action.textError };

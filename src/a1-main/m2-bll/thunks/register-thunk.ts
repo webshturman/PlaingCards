@@ -15,12 +15,15 @@ export const toSignUp =
       await registerAPI.signUp(credentials);
       dispatch(setRegisterStatus(true));
       dispatch(setErrorMessageAC(false, ''));
-      dispatch(setIsFethingAC(false));
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data.error;
         dispatch(setErrorMessageAC(true, `Регистрация не прошла! ${errorMessage}`));
-        dispatch(setIsFethingAC(false));
       }
+      // if (error) {
+      //   dispatch(setErrorMessageAC(true, `Нет соединения`));
+      // }
+    } finally {
+      dispatch(setIsFethingAC(false));
     }
   };

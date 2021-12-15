@@ -1,6 +1,7 @@
 .header{
-    border-bottom: 1px solid darkblue;
-    margin-bottom: 30px;
+    /*border-bottom: 1px solid darkblue;*/
+    margin-bottom: 50px;
+    background-color: rgb(249, 253, 253);
 }
 
 .headerContainer{
@@ -12,10 +13,13 @@
     margin: 0 auto;
 }
 .itemMenu a{
-    color: blue;
+    color: rgb(159, 194, 210);
 
 }
 .itemMenu a.active{
-    color: black;
-    font-weight: 500;
+    color: rgb(79, 98, 108);
+}
+
+.title{
+    font-size: 200%;
 }

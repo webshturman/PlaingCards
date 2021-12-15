@@ -1,11 +1,14 @@
 .superInput {
-    background-color: lightgrey;
-    margin:10px 0 10px 0;
+    background-color: white;
+    margin:20px 0 20px 0px;
+    padding: 5px;
     outline: none;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
+    /*border:none;*/
+    border-bottom: 2px solid rgb(159, 194, 210);
 }
 .superInput:focus {
-    border: 2px solid blue;
+    border-bottom: 3px solid rgb(79, 98, 108);
 }
 
 .errorInput {
