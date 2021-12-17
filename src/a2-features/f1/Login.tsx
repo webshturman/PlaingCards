@@ -104,7 +104,7 @@ export const Login = (): ReturnComponentType => {
           </NavLink>
         </div>
         <div>
-          <Button condition={isFetching}>Log in</Button>
+          <Button condition={!isFetching}>Log in</Button>
         </div>
       </form>
       <div className={style.SignUpBlock}>

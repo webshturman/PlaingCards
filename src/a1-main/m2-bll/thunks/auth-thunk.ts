@@ -10,7 +10,6 @@ import { authAPI } from 'a1-main/m3-dal/auth-api';
 import { LoginCredentialsSendType } from 'a1-main/m3-dal/types/loginType';
 
 export const getAuthUserData = (): AppThunk => async dispatch => {
-  dispatch(setIsFethingAC(true));
   try {
     const response = await authAPI.me();
     dispatch(setAuthUserData({ isAuth: true, ...response.data }));
@@ -22,7 +21,7 @@ export const getAuthUserData = (): AppThunk => async dispatch => {
       console.log(error);
     }
   } finally {
-    dispatch(setIsFethingAC(false));
+    dispatch(setIsFethingAC(true));
   }
 };
 
@@ -49,7 +48,7 @@ export const toAuth =
   };
 
 export const deleteAuthUserData = (): AppThunk => async dispatch => {
-  dispatch(setIsFethingAC(true));
+  // dispatch(setIsFethingAC(true));
   try {
     await authAPI.deleteMe();
     dispatch(setAuthUserData({ ...nullAuthData }));
@@ -62,6 +61,6 @@ export const deleteAuthUserData = (): AppThunk => async dispatch => {
       dispatch(setErrorMessageAC(true, `Нет соединения`));
     }
   } finally {
-    dispatch(setIsFethingAC(false));
+    dispatch(setIsFethingAC(true));
   }
 };

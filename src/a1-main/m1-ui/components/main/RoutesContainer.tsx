@@ -2,6 +2,9 @@ import React from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { Layout } from '../Layout';
+import { LoginForm } from '../Login/LoginForm';
+
 import { Error404 } from 'a1-main/m1-ui/components/common/Error404';
 import { Profile } from 'a1-main/m1-ui/components/Profile';
 import { TestComponent } from 'a1-main/m1-ui/components/TestComponent';
@@ -15,16 +18,38 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 export const RoutesContainer = (): ReturnComponentType => (
   <div>
     <Routes>
-      <Route path={PATH.PROFILE} element={<Profile />} />
-      <Route path={PATH.REGISTER} element={<Register />} />
-      <Route path={PATH.LOGIN} element={<Login />} />
-      <Route path={PATH.RECOVERY_PASSWORD} element={<RecoveryPassword />} />
-      <Route path={PATH.NEW_PASSWORD} element={<NewPassword />}>
-        <Route path=":token" element={<NewPassword />} />
-      </Route>
-      <Route path={PATH.ERROR} element={<Error404 />} />
-      <Route path={PATH.WRONG_PAGE} element={<Navigate to={PATH.ERROR} />} />
-      <Route path={PATH.TEST_PAGE} element={<TestComponent />} />
+       <Route path={PATH.LAYOUT} element={<Layout />}>
+          <Route path={PATH.PROFILE} element={<Profile />} />
+          <Route path={PATH.LOGIN_FORM} element={<LoginForm />}>
+            <Route path={PATH.LOGIN} element={<Login />} />
+            <Route path={PATH.REGISTER} element={<Register />} />
+            <Route path={PATH.RECOVERY_PASSWORD} element={<RecoveryPassword />} />
+            <Route path={PATH.NEW_PASSWORD} element={<NewPassword />}>
+              <Route path=":token" element={<NewPassword />} />
+            </Route>
+          </Route>
+          <Route path={PATH.ERROR} element={<Error404 />} />
+          <Route path={PATH.WRONG_PAGE} element={<Navigate to={PATH.ERROR} />} />
+          <Route path={PATH.TEST_PAGE} element={<TestComponent />} />
+       </Route>
     </Routes>
   </div>
 );
+
+// export const RoutesContainer = (): ReturnComponentType => (
+//   <div>
+//     <Routes>
+//       <Route path={PROFILE} element={<Profile />} />
+//       <Route path={REGISTER} element={<Register />} />
+//       <Route path={LOGIN_FORM} element={<LoginForm />} />
+//       <Route path={LOGIN} element={<Login />} />
+//       <Route path={RECOVERY_PASSWORD} element={<RecoveryPassword />} />
+//       <Route path={NEW_PASSWORD} element={<NewPassword />}>
+//         <Route path=":token" element={<NewPassword />} />
+//       </Route>
+//       <Route path={ERROR} element={<Error404 />} />
+//       <Route path={WRONG_PAGE} element={<Navigate to={ERROR} />} />
+//       <Route path={TEST_PAGE} element={<TestComponent />} />
+//     </Routes>
+//   </div>
+// );
