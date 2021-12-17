@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, NavLink } from 'react-router-dom';
 
-import { toggleIsFetching } from '../../a1-main/m2-bll/actions/auth-actions';
-
 import { Button } from 'a1-main/m1-ui/components/common/CustomButton/Button';
 import { Checkbox } from 'a1-main/m1-ui/components/common/CustomCheckBox/CheckBox';
 import { Input } from 'a1-main/m1-ui/components/common/CustomInput/Input';
@@ -51,27 +49,23 @@ export const Login = (): ReturnComponentType => {
   };
 
   const handleSubmit = (): void => {
-    dispatch(toggleIsFetching(true));
     if (email.length === ZERO_LENGTH && password.length === ZERO_LENGTH) {
       setEmailError(errorEmailRequired);
       setPasswordError(errorPasswordRequired);
       return;
     }
+
     if (email.length === ZERO_LENGTH) {
       setEmailError(errorEmailRequired);
-      dispatch(toggleIsFetching(false));
     }
     if (password.length === ZERO_LENGTH) {
       setPasswordError(errorPasswordRequired);
-      dispatch(toggleIsFetching(false));
     }
     if (email.match(emailValidator) === null && email.length > ZERO_LENGTH) {
       setEmailError(errorEmailValidation);
-      dispatch(toggleIsFetching(false));
     }
     if (password.length < passwordMinLength && password.length > ZERO_LENGTH) {
       setPasswordError(errorPasswordValidationMinLength);
-      dispatch(toggleIsFetching(false));
     }
     if (email.match(emailValidator) && password.length >= passwordMinLength) {
       setEmailError(EMPTY_STRING);
