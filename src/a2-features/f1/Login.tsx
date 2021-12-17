@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, NavLink } from 'react-router-dom';
 
-import { toggleIsFetching } from '../../a1-main/m2-bll/actions/auth-actions';
-
 import { Button } from 'a1-main/m1-ui/components/common/CustomButton/Button';
 import { Checkbox } from 'a1-main/m1-ui/components/common/CustomCheckBox/CheckBox';
 import { Input } from 'a1-main/m1-ui/components/common/CustomInput/Input';
@@ -23,8 +21,11 @@ import style from 'styles/Login.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Login = (): ReturnComponentType => {
+  const passwordMinLength = 7;
   const errorEmailValidation = 'Email is incorrect';
-  const errorPasswordValidation = 'Password is required';
+  const errorEmailRequired = 'Email is required';
+  const errorPasswordRequired = 'Password is required';
+  const errorPasswordValidationMinLength = 'Password must be at least 7 characters';
   const dispatch = useDispatch();
   const [email, setEmail] = useState<string>(EMPTY_STRING);
   const [emailError, setEmailError] = useState<string>(EMPTY_STRING);
@@ -48,19 +49,29 @@ export const Login = (): ReturnComponentType => {
   };
 
   const handleSubmit = (): void => {
-    dispatch(toggleIsFetching(true));
-    if (email.match(emailValidator)) {
-      setEmailError(EMPTY_STRING);
-      dispatch(toAuth(loginCredentials));
+    if (email.length === ZERO_LENGTH && password.length === ZERO_LENGTH) {
+      setEmailError(errorEmailRequired);
+      setPasswordError(errorPasswordRequired);
       return;
     }
-    setEmailError(errorEmailValidation);
+
+    if (email.length === ZERO_LENGTH) {
+      setEmailError(errorEmailRequired);
+    }
     if (password.length === ZERO_LENGTH) {
-      setPasswordError(errorPasswordValidation);
-      dispatch(toggleIsFetching(false));
-      return;
+      setPasswordError(errorPasswordRequired);
     }
-    dispatch(toggleIsFetching(false));
+    if (email.match(emailValidator) === null && email.length > ZERO_LENGTH) {
+      setEmailError(errorEmailValidation);
+    }
+    if (password.length < passwordMinLength && password.length > ZERO_LENGTH) {
+      setPasswordError(errorPasswordValidationMinLength);
+    }
+    if (email.match(emailValidator) && password.length >= passwordMinLength) {
+      setEmailError(EMPTY_STRING);
+      setPasswordError(EMPTY_STRING);
+      dispatch(toAuth(loginCredentials));
+    }
   };
   if (AuthUserStatus) {
     return <Navigate to={PATH.PROFILE} />;
