@@ -6,7 +6,13 @@ import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Butto
 import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
 import { AppRootState } from '../../a1-main/m2-bll/store';
 import { sendMessageOnEmail } from '../../a1-main/m2-bll/thunks/password-thunk';
-import { EMPTY_STRING, TITLE_EMAIL } from '../../constants/common';
+import {
+  emailValidator,
+  EMPTY_STRING,
+  TITLE_EMAIL,
+  ZERO_LENGTH,
+} from '../../constants/common';
+import style from '../../styles/Login.module.css';
 
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -22,7 +28,10 @@ export const RecoveryPassword = (): ReturnComponentType => {
   );
   const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
   const [email, setEmail] = useState<string>(EMPTY_STRING);
+  const [emailError, setEmailError] = useState<string>(EMPTY_STRING);
   const [messageSuccess, setMessageSuccess] = useState<boolean>(sendMessageSuccess);
+  const errorEmailValidation = 'Email is incorrect';
+  const errorEmailRequired = 'Email is required';
 
   useEffect(() => {
     setMessageSuccess(sendMessageSuccess);
@@ -38,7 +47,19 @@ export const RecoveryPassword = (): ReturnComponentType => {
   };
 
   const handleSubmit = (): void => {
-    dispatch(sendMessageOnEmail(letterToThePost));
+    if (email.length === ZERO_LENGTH) {
+      setEmailError(errorEmailRequired);
+      return;
+    }
+    if (email.match(emailValidator) === null && email.length > ZERO_LENGTH) {
+      setEmailError(errorEmailValidation);
+      return;
+    }
+
+    if (email.match(emailValidator)) {
+      setEmailError(EMPTY_STRING);
+      dispatch(sendMessageOnEmail(letterToThePost));
+    }
   };
   return (
     <div>
@@ -52,6 +73,11 @@ export const RecoveryPassword = (): ReturnComponentType => {
       ) : (
         <form onSubmit={handleSubmit}>
           <Input title={TITLE_EMAIL} onChangeText={setEmail} value={email} type="email" />
+          {emailError && (
+            <div>
+              <span className={style.errorText}>{emailError}</span>
+            </div>
+          )}
           <div>
             <Button condition={isFetching}>send</Button>
           </div>
