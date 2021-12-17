@@ -48,8 +48,8 @@ export const Login = (): ReturnComponentType => {
     }
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
     if (email.length === ZERO_LENGTH && password.length === ZERO_LENGTH) {
       setEmailError(errorEmailRequired);
       setPasswordError(errorPasswordRequired);
@@ -75,7 +75,7 @@ export const Login = (): ReturnComponentType => {
     }
   };
   if (AuthUserStatus) {
-    return <Navigate to={PATH.LAYOUT} />;
+    return <Navigate to={PATH.PROFILE} />;
   }
 
   return (

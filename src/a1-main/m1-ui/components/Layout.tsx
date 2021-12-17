@@ -9,4 +9,3 @@ export const Layout = (): ReturnComponentType => (
     <Outlet />
   </div>
 );
-export default Layout;
