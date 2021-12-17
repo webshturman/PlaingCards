@@ -39,7 +39,7 @@ export const NewPassword = (): ReturnComponentType => {
     }
     dispatch(renamePassword(newPassword));
   };
-  if (passwordRename) return <Navigate to={PATH.LOGIN} />;
+  if (passwordRename) return <Navigate to={PATH.LOGIN_FORM} />;
   return (
     <div>
       <form onSubmit={handleSubmit}>

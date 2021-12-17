@@ -20,11 +20,14 @@ export const sendMessageOnEmail =
       dispatch(setErrorMessageAC(false, ''));
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
+        console.log(error);
         const errorMessage = error.response.data.error;
         dispatch(
           setErrorMessageAC(true, `Не получилось отправить письмо! ${errorMessage}`),
         );
       } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+        console.log(error);
+        console.log(JSON.stringify(error));
         dispatch(setErrorMessageAC(true, `Нет соединения`));
       }
     } finally {

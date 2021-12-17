@@ -48,7 +48,6 @@ export const Login = (): ReturnComponentType => {
   };
 
   const handleSubmit = (): void => {
-    dispatch(toggleIsFetching(true));
     if (email.match(emailValidator)) {
       setEmailError(EMPTY_STRING);
       dispatch(toAuth(loginCredentials));
@@ -57,7 +56,6 @@ export const Login = (): ReturnComponentType => {
     setEmailError(errorEmailValidation);
     if (password.length === ZERO_LENGTH) {
       setPasswordError(errorPasswordValidation);
-      dispatch(toggleIsFetching(false));
       return;
     }
     dispatch(toggleIsFetching(false));

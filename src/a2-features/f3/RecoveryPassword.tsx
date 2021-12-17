@@ -34,7 +34,7 @@ export const RecoveryPassword = (): ReturnComponentType => {
     email,
     from: 'test-front-admin <ai73a@yandex.by>',
     message: `<div style='background-color: #d6f8f0; padding: 20px'>
-'password recovery link': <a href='http://localhost:3000/PlaingCards/new_pass#/new_pass/$token$/'>link</a></div>`,
+'password recovery link': <a href='http://localhost:3000/PlaingCards/new_pass#/login_form/new_pass/$token$/'>link</a></div>`,
   };
 
   const handleSubmit = (): void => {
