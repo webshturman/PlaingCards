@@ -16,22 +16,26 @@ export const Header = (): ReturnComponentType => {
     <div className={style.header}>
       <div className={style.headerContainer}>
         <h1 className={style.title}>Plaing Cards</h1>
-        <div className={style.itemMenu}>
-          <NavLink
-            to={PATH.PROFILE}
-            className={({ isActive }) => (isActive ? style.active : '')}
-          >
-            Profile
-          </NavLink>
-        </div>
-        <div className={style.itemMenu}>
-          <NavLink
-            to={PATH.CARDS}
-            className={({ isActive }) => (isActive ? style.active : '')}
-          >
-            Packs List
-          </NavLink>
-        </div>
+        {AuthUserStatus && (
+          <div>
+            <div className={style.itemMenu}>
+              <NavLink
+                to={PATH.PROFILE}
+                className={({ isActive }) => (isActive ? style.active : '')}
+              >
+                Profile
+              </NavLink>
+            </div>
+            <div className={style.itemMenu}>
+              <NavLink
+                to={PATH.CARDS}
+                className={({ isActive }) => (isActive ? style.active : '')}
+              >
+                Packs List
+              </NavLink>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

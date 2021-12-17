@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, NavLink } from 'react-router-dom';
@@ -48,7 +48,8 @@ export const Login = (): ReturnComponentType => {
     }
   };
 
-  const handleSubmit = (): void => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
     if (email.length === ZERO_LENGTH && password.length === ZERO_LENGTH) {
       setEmailError(errorEmailRequired);
       setPasswordError(errorPasswordRequired);
