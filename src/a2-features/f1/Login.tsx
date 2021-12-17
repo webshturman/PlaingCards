@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, NavLink } from 'react-router-dom';
@@ -48,7 +48,8 @@ export const Login = (): ReturnComponentType => {
     }
   };
 
-  const handleSubmit = (): void => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
     if (email.length === ZERO_LENGTH && password.length === ZERO_LENGTH) {
       setEmailError(errorEmailRequired);
       setPasswordError(errorPasswordRequired);
@@ -74,7 +75,7 @@ export const Login = (): ReturnComponentType => {
     }
   };
   if (AuthUserStatus) {
-    return <Navigate to={PATH.PROFILE} />;
+    return <Navigate to={PATH.LAYOUT} />;
   }
 
   return (
@@ -115,7 +116,7 @@ export const Login = (): ReturnComponentType => {
           </NavLink>
         </div>
         <div>
-          <Button condition={!isFetching}>Log in</Button>
+          <Button condition={isFetching}>Log in</Button>
         </div>
       </form>
       <div className={style.SignUpBlock}>

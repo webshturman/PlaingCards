@@ -21,7 +21,7 @@ export const RoutesContainer = (): ReturnComponentType => (
   <div>
     <Routes>
       <Route path={PATH.LAYOUT} element={<Layout />}>
-        {/* <Route index element={<Profile />} /> */}
+        <Route index element={<Profile />} />
         <Route path={PATH.LOGIN_FORM} element={<LoginForm />}>
           <Route index element={<Login />} />
           <Route path={PATH.REGISTER} element={<Register />} />
@@ -33,7 +33,7 @@ export const RoutesContainer = (): ReturnComponentType => (
         <Route path={PATH.ERROR} element={<Error404 />} />
         <Route path={PATH.WRONG_PAGE} element={<Navigate to={PATH.ERROR} />} />
         <Route path={PATH.TEST_PAGE} element={<TestComponent />} />
-        <Route path={PATH.PROFILE} element={<Profile />} />
+        {/* <Route path={PATH.PROFILE} element={<Profile />} /> */}
         <Route path={PATH.CARDS} element={<Cards />}>
           <Route index element={<CardsTable />} />
         </Route>

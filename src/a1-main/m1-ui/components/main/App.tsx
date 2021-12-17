@@ -21,7 +21,7 @@ export const App: FC = (): ReturnComponentType => {
     dispatch(getAuthUserData());
   }, []);
 
-  if (!isFetching) {
+  if (isFetching) {
     return (
       <div className={style.container}>
         <Loader />
