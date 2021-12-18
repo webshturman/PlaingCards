@@ -4,6 +4,7 @@ const initialRecoveryState = {
   error: false,
   textError: '',
   isFetching: false,
+  email: '',
 };
 
 type InitialRecoveryStateType = typeof initialRecoveryState;
@@ -17,6 +18,8 @@ export const appReducer = (
       return { ...state, error: action.error, textError: action.textError };
     case ACTIONS_TYPE_APP.SET_IS_FETHING:
       return { ...state, isFetching: action.isFetching };
+    case ACTIONS_TYPE_APP.SET_EMAIL:
+      return { ...state, email: action.email };
     default:
       return state;
   }

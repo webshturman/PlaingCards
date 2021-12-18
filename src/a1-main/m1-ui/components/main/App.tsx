@@ -16,10 +16,10 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 export const App: FC = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
-
+  const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
   useEffect(() => {
     dispatch(getAuthUserData());
-  }, []);
+  }, [AuthUserStatus]);
 
   if (isFetching) {
     return (

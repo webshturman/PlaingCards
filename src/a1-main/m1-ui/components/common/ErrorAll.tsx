@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ReturnComponentType } from '../../../../types/ReturnComponentType';
@@ -10,19 +12,17 @@ export const ErrorAll = (): ReturnComponentType => {
   const error = useSelector<AppRootState, boolean>(state => state.app.error);
   const textError = useSelector<AppRootState, string>(state => state.app.textError);
   const dispatch = useDispatch();
+  const deleteMessageError = (): any => dispatch(setErrorMessageAC(false, ''));
+  const time = 5000;
+  useEffect(() => {
+    setTimeout(deleteMessageError, time);
+  }, []);
+
   return (
     <div>
       {error && (
         <div className={s.errorAll}>
-          <button
-            type="button"
-            onClick={() => {
-              dispatch(setErrorMessageAC(false, ''));
-            }}
-          >
-            x
-          </button>
-          <h1>Произошла ошибка</h1>
+          <h1>An error has occurred</h1>
           <h2>{textError}</h2>
         </div>
       )}

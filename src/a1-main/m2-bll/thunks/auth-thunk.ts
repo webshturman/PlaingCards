@@ -34,14 +34,13 @@ export const toAuth =
       const response = await authAPI.login(credentials);
       dispatch(setAuthUserData({ ...response.data }));
       dispatch(successRenamePasswordAC(false));
-      dispatch(setErrorMessageAC(false, ''));
       dispatch(getAuthUserData());
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data.error;
         dispatch(setErrorMessageAC(true, `login error: ${errorMessage}`));
       } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
-        dispatch(setErrorMessageAC(true, `Нет соединения`));
+        dispatch(setErrorMessageAC(true, `no connection!`));
       }
     } finally {
       dispatch(setIsFethingAC(false));
@@ -55,11 +54,10 @@ export const deleteAuthUserData = (): AppThunk => async dispatch => {
     dispatch(setAuthUserData({ ...nullAuthData }));
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      console.log(error);
       const errorMessage = error.response;
-      dispatch(setErrorMessageAC(true, `не удалена: ${errorMessage}`));
+      dispatch(setErrorMessageAC(true, `you are not logged out: ${errorMessage}`));
     } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
-      dispatch(setErrorMessageAC(true, `Нет соединения`));
+      dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
     }
   } finally {
     dispatch(setIsFethingAC(false));

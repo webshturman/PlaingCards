@@ -1,5 +1,9 @@
 import { ChangeEvent, FC } from 'react';
 
+import { useDispatch } from 'react-redux';
+
+import { setEmailAC } from '../../../../m2-bll/actions/app-actions';
+
 import { CustomInputType } from './types/CustomInputType';
 
 import style from 'styles/Input.module.css';
@@ -14,9 +18,11 @@ export const Input: FC<CustomInputType> = ({
   value,
   type,
 }): ReturnComponentType => {
+  const dispatch = useDispatch();
   const handleInputValueChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (onChangeText) {
       onChangeText(e.currentTarget.value.trim());
+      dispatch(setEmailAC(e.currentTarget.value));
     }
   };
 

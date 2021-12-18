@@ -14,15 +14,13 @@ export const toSignUp =
     try {
       await registerAPI.signUp(credentials);
       dispatch(setRegisterStatus(true));
-      dispatch(setErrorMessageAC(false, ''));
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data.error;
-        dispatch(setErrorMessageAC(true, `Регистрация не прошла! ${errorMessage}`));
+        dispatch(setErrorMessageAC(true, `registration failed! ${errorMessage}`));
+      } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+        dispatch(setErrorMessageAC(true, `no connection!`));
       }
-      // if (error) {
-      //   dispatch(setErrorMessageAC(true, `Нет соединения`));
-      // }
     } finally {
       dispatch(setIsFethingAC(false));
     }

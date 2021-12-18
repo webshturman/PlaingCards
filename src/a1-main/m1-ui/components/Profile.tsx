@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { PATH } from '../../../enums/routes';
+import { setEmailAC } from '../../m2-bll/actions/app-actions';
 import { deleteAuthUserData } from '../../m2-bll/thunks/auth-thunk';
 
 import { Button } from './common/CustomButton/Button';
@@ -19,11 +20,10 @@ export const Profile = (): ReturnComponentType => {
 
   const logOut = (): void => {
     dispatch(deleteAuthUserData());
+    dispatch(setEmailAC(''));
   };
 
   if (!AuthUserStatus) return <Navigate to={PATH.LOGIN_FORM} />;
-
-  console.log('gggggggggggggggg');
   return (
     <div>
       <div>Profile</div>

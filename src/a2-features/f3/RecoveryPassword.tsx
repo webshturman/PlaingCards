@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Button';
 import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
@@ -12,6 +13,7 @@ import {
   TITLE_EMAIL,
   ZERO_LENGTH,
 } from '../../constants/common';
+import { PATH } from '../../enums/routes';
 import style from '../../styles/Login.module.css';
 
 import { ReturnComponentType } from 'types/ReturnComponentType';
@@ -26,6 +28,7 @@ export const RecoveryPassword = (): ReturnComponentType => {
   const sendMessageSuccess = useSelector<AppRootState, boolean>(
     state => state.password.sendMessageSuccess,
   );
+  const emailForMail = useSelector<AppRootState, string>(state => state.app.email);
   const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
   const [email, setEmail] = useState<string>(EMPTY_STRING);
   const [emailError, setEmailError] = useState<string>(EMPTY_STRING);
@@ -46,7 +49,8 @@ export const RecoveryPassword = (): ReturnComponentType => {
 'password recovery link': <a href='http://localhost:3000/PlaingCards/new_pass#/new_pass/$token$/'>link</a></div>`,
   };
 
-  const handleSubmit = (): void => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
     if (email.length === ZERO_LENGTH) {
       setEmailError(errorEmailRequired);
       return;
@@ -61,27 +65,41 @@ export const RecoveryPassword = (): ReturnComponentType => {
       dispatch(sendMessageOnEmail(letterToThePost));
     }
   };
+  console.log(email);
   return (
     <div>
       {messageSuccess ? (
         <div>
           <p>
-            Проверьте свою почту:
-            <b>{email}</b>. И перейдите по ссылке для восстановления пароля
+            check your mail:
+            <b>{emailForMail}</b>. <br />
+            follow the link for password recovery
           </p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <Input title={TITLE_EMAIL} onChangeText={setEmail} value={email} type="email" />
-          {emailError && (
+        <div>
+          <form onSubmit={handleSubmit}>
+            <Input
+              title={TITLE_EMAIL}
+              onChangeText={setEmail}
+              value={email}
+              type="email"
+            />
+            {emailError && (
+              <div>
+                <span className={style.errorText}>{emailError}</span>
+              </div>
+            )}
             <div>
-              <span className={style.errorText}>{emailError}</span>
+              <Button condition={isFetching}>send</Button>
             </div>
-          )}
-          <div>
-            <Button condition={isFetching}>send</Button>
+          </form>
+          <div className={style.forgotblock}>
+            <NavLink to={PATH.LOGIN_FORM} className={style.forgotPassword}>
+              I remembered the password
+            </NavLink>
           </div>
-        </form>
+        </div>
       )}
     </div>
   );

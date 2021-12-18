@@ -17,18 +17,12 @@ export const sendMessageOnEmail =
     try {
       await passwordAPI.sendMessage(letterToThePost);
       dispatch(successSendMessgeAC(true));
-      dispatch(setErrorMessageAC(false, ''));
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        console.log(error);
         const errorMessage = error.response.data.error;
-        dispatch(
-          setErrorMessageAC(true, `Не получилось отправить письмо! ${errorMessage}`),
-        );
+        dispatch(setErrorMessageAC(true, `email not sent! ${errorMessage}`));
       } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
-        console.log(error);
-        console.log(JSON.stringify(error));
-        dispatch(setErrorMessageAC(true, `Нет соединения`));
+        dispatch(setErrorMessageAC(true, `no connection!`));
       }
     } finally {
       dispatch(setIsFethingAC(false));
@@ -42,18 +36,17 @@ export const renamePassword =
     try {
       await passwordAPI.updatePassword(newPassword);
       dispatch(successRenamePasswordAC(true));
-      dispatch(setErrorMessageAC(false, ''));
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data.error;
         dispatch(
           setErrorMessageAC(
             true,
-            `Пароль не обновился пропробуйте снова! ${errorMessage}`,
+            `password has not been updated, try again! ${errorMessage}`,
           ),
         );
       } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
-        dispatch(setErrorMessageAC(true, `Нет соединения`));
+        dispatch(setErrorMessageAC(true, `no connection!`));
       }
     } finally {
       dispatch(setIsFethingAC(false));

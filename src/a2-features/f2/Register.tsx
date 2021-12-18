@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 
 import style from '../../styles/Login.module.css';
 
@@ -41,7 +41,8 @@ export const Register = (): ReturnComponentType => {
   const dispatch = useDispatch();
 
   const credentials: credentialsType = { email, password };
-  const handleSubmit = (): void => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
     if (
       email.length === ZERO_LENGTH &&
       password.length === ZERO_LENGTH &&
@@ -159,6 +160,11 @@ export const Register = (): ReturnComponentType => {
         )}
         <div>
           <Button condition={isFetching}>Register</Button>
+        </div>
+        <div className={style.forgotblock}>
+          <NavLink to={PATH.LOGIN_FORM} className={style.forgotPassword}>
+            I can login
+          </NavLink>
         </div>
       </form>
     </div>

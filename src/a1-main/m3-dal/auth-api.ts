@@ -21,6 +21,6 @@ export const authAPI = {
   },
 
   deleteMe() {
-    return instance.delete<{}, AxiosResponse<DeleteMeResponseStateType>>(`auth/me`, {});
+    return instance.delete<AxiosResponse<DeleteMeResponseStateType>>(`auth/me`);
   },
 };
