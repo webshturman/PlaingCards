@@ -11,7 +11,6 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Header = (): ReturnComponentType => {
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
-  console.log(AuthUserStatus);
   return (
     <div className={style.header}>
       <div className={style.headerContainer}>

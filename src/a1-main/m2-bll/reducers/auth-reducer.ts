@@ -1,9 +1,8 @@
-import { Nullable } from '../../../types/Nullable';
+import { MeResponseStateType } from '../../m3-dal/types/loginType';
 
 import { AUTH_ACTIONS_TYPE, AuthActionsType } from 'a1-main/m2-bll/actions/auth-actions';
 
-export const nullAuthData = {
-  isAuth: false,
+const initialAuthState = {
   _id: null,
   email: null,
   name: null,
@@ -15,24 +14,12 @@ export const nullAuthData = {
   verified: null,
   rememberMe: null,
   error: null,
-};
-
-const initialAuthState = {
-  _id: null as Nullable<string>,
-  email: null as Nullable<string>,
-  name: null as Nullable<string>,
-  avatar: null as Nullable<string>,
-  publicCardPacksCount: null as Nullable<number>,
-  created: null as Nullable<Date>,
-  updated: null as Nullable<Date>,
-  isAdmin: null as Nullable<boolean>,
-  verified: null as Nullable<boolean>,
-  rememberMe: null as Nullable<boolean>,
-  error: null as Nullable<string>,
   isAuth: false,
 };
-type AuthStateType = typeof initialAuthState;
-
+// type AuthStateType = typeof initialAuthState;
+type AuthStateType = MeResponseStateType & {
+  isAuth: boolean;
+};
 export const authReducer = (
   state: AuthStateType = initialAuthState,
   action: AuthActionsType,
@@ -41,8 +28,12 @@ export const authReducer = (
     case AUTH_ACTIONS_TYPE.SET_USER_DATA: {
       return {
         ...state,
-        ...action.data,
+        ...action.authUserData,
+        isAuth: action.isAuth,
       };
+    }
+    case AUTH_ACTIONS_TYPE.DELETE_USER_DATA: {
+      return initialAuthState;
     }
     default:
       return state;
