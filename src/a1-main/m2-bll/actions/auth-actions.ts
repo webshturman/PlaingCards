@@ -1,34 +1,23 @@
-import { Nullable } from '../../../types/Nullable';
+import { MeResponseStateType } from '../../m3-dal/types/loginType';
 
 export enum AUTH_ACTIONS_TYPE {
   SET_USER_DATA = 'PlaingCards/auth/SET-USER-DATA',
-  SET_USER_PHOTO = 'PlaingCards/auth/SET-USER-PHOTO',
-  TOGGLE_IS_FETCHING = 'PlaingCards/auth/TOGGLE-IS-FETCHING',
+  DELETE_USER_DATA = 'PlaingCards/auth/DELETE_USER_DATA',
 }
 
 type SetUserDataActionType = ReturnType<typeof setAuthUserData>;
-type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>;
+type DeleteUserDataActionType = ReturnType<typeof deleteUserData>;
 
-export type AuthActionsType = SetUserDataActionType | ToggleIsFetchingActionType;
+export type AuthActionsType = SetUserDataActionType | DeleteUserDataActionType;
 
-export const setAuthUserData = (authUserData: {
-  _id: Nullable<string>;
-  email: Nullable<string>;
-  name: Nullable<string>;
-  avatar?: Nullable<string>;
-  publicCardPacksCount: Nullable<number>;
-  created: Nullable<Date>;
-  updated: Nullable<Date>;
-  isAdmin: Nullable<boolean>;
-  verified: Nullable<boolean>;
-  rememberMe: Nullable<boolean>;
-  error?: Nullable<string>;
-  isAuth: boolean;
-}) =>
+export const setAuthUserData = (authUserData: MeResponseStateType, isAuth: boolean) =>
   ({
     type: AUTH_ACTIONS_TYPE.SET_USER_DATA,
-    data: { ...authUserData },
+    authUserData,
+    isAuth,
   } as const);
 
-export const toggleIsFetching = (isFetching: boolean) =>
-  ({ type: AUTH_ACTIONS_TYPE.TOGGLE_IS_FETCHING, isFetching } as const);
+export const deleteUserData = () =>
+  ({
+    type: AUTH_ACTIONS_TYPE.DELETE_USER_DATA,
+  } as const);

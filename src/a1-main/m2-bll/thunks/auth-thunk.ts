@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 import { setErrorMessageAC, setIsFethingAC } from '../actions/app-actions';
-import { setAuthUserData } from '../actions/auth-actions';
+import { deleteUserData, setAuthUserData } from '../actions/auth-actions';
 import { successRenamePasswordAC } from '../actions/password-actions';
-import { nullAuthData } from '../reducers/auth-reducer';
 
 import { AppThunk } from 'a1-main/m2-bll/store';
 import { authAPI } from 'a1-main/m3-dal/auth-api';
@@ -13,13 +12,14 @@ export const getAuthUserData = (): AppThunk => async dispatch => {
   dispatch(setIsFethingAC(true));
   try {
     const response = await authAPI.me();
-    dispatch(setAuthUserData({ isAuth: true, ...response.data }));
+    dispatch(setAuthUserData(response.data, true));
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      console.log(error);
-    }
-    if (error) {
-      console.log(error);
+      const errorMessage = error.response.data.error;
+      console.log(errorMessage);
+      // dispatch(setErrorMessageAC(true, `Вы не авторизованы! ${errorMessage}`));
+    } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+      dispatch(setErrorMessageAC(true, `Нет соединения`));
     }
   } finally {
     dispatch(setIsFethingAC(false));
@@ -32,15 +32,14 @@ export const toAuth =
     dispatch(setIsFethingAC(true));
     try {
       const response = await authAPI.login(credentials);
-      dispatch(setAuthUserData({ ...response.data }));
+      dispatch(setAuthUserData(response.data, true));
       dispatch(successRenamePasswordAC(false));
-      dispatch(getAuthUserData());
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data.error;
         dispatch(setErrorMessageAC(true, `login error: ${errorMessage}`));
       } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
-        dispatch(setErrorMessageAC(true, `no connection!`));
+        dispatch(setErrorMessageAC(true, `Нет соединения`));
       }
     } finally {
       dispatch(setIsFethingAC(false));
@@ -51,9 +50,10 @@ export const deleteAuthUserData = (): AppThunk => async dispatch => {
   dispatch(setIsFethingAC(true));
   try {
     await authAPI.deleteMe();
-    dispatch(setAuthUserData({ ...nullAuthData }));
+    dispatch(deleteUserData());
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
+      console.log(error);
       const errorMessage = error.response;
       dispatch(setErrorMessageAC(true, `you are not logged out: ${errorMessage}`));
     } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
