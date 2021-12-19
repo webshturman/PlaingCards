@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-import { setErrorMessageAC, setIsFethingAC } from '../actions/app-actions';
-import { deleteUserData, setAuthUserData } from '../actions/auth-actions';
+import { setErrorMessageAC, setIsFethingAC, setStatusAC } from '../actions/app-actions';
+import { setAuthUserData } from '../actions/auth-actions';
+import { deleteUserData} from '../actions/auth-actions';
 import { successRenamePasswordAC } from '../actions/password-actions';
 
 import { AppThunk } from 'a1-main/m2-bll/store';
@@ -29,7 +30,7 @@ export const getAuthUserData = (): AppThunk => async dispatch => {
 export const toAuth =
   (credentials: LoginCredentialsSendType): AppThunk =>
   async dispatch => {
-    dispatch(setIsFethingAC(true));
+    dispatch(setStatusAC(true));
     try {
       const response = await authAPI.login(credentials);
       dispatch(setAuthUserData(response.data, true));
@@ -39,27 +40,26 @@ export const toAuth =
         const errorMessage = error.response.data.error;
         dispatch(setErrorMessageAC(true, `login error: ${errorMessage}`));
       } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
-        dispatch(setErrorMessageAC(true, `Нет соединения`));
+        dispatch(setErrorMessageAC(true, `no connection!`));
       }
     } finally {
-      dispatch(setIsFethingAC(false));
+      dispatch(setStatusAC(false));
     }
   };
 
 export const deleteAuthUserData = (): AppThunk => async dispatch => {
-  dispatch(setIsFethingAC(true));
+  dispatch(setStatusAC(true));
   try {
     await authAPI.deleteMe();
     dispatch(deleteUserData());
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      console.log(error);
       const errorMessage = error.response;
       dispatch(setErrorMessageAC(true, `you are not logged out: ${errorMessage}`));
     } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
       dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
     }
   } finally {
-    dispatch(setIsFethingAC(false));
+    dispatch(setStatusAC(false));
   }
 };

@@ -60,12 +60,13 @@
         "allowExpressions": true
       }
     ],
-    "prettier/prettier": [
+    "prettier/prettier":  [
       "error",
       {
         "endOfLine": "auto"
       }
     ],
+
     "react/prop-types": 0,
     "react/display-name": "off",
     "react/react-in-jsx-scope": "off",

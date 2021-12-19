@@ -7,7 +7,7 @@ import { Cards } from '../Cards';
 import { CardsTable } from '../CardsTable';
 import { Error404 } from '../common/Error404';
 import { LoginForm } from '../common/LoginForm';
-// import Layout from '../Layout';
+import { PacksCardsTable } from '../PackCardsTable';
 import { Profile } from '../Profile';
 import { TestComponent } from '../TestComponent';
 
@@ -20,8 +20,6 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 export const RoutesContainer = (): ReturnComponentType => (
   <div>
     <Routes>
-      {/* <Route path={PATH.LAYOUT} element={<Layout />}> */}
-      {/* <Route index element={<Profile />} /> */}
       <Route path={PATH.LOGIN_FORM} element={<LoginForm />}>
         <Route index element={<Login />} />
         <Route path={PATH.REGISTER} element={<Register />} />
@@ -35,9 +33,9 @@ export const RoutesContainer = (): ReturnComponentType => (
       <Route path={PATH.TEST_PAGE} element={<TestComponent />} />
       <Route path={PATH.PROFILE} element={<Profile />} />
       <Route path={PATH.CARDS} element={<Cards />}>
-        <Route index element={<CardsTable />} />
+        <Route index element={<PacksCardsTable />} />
+        <Route path={PATH.CARDS_TABLE} element={<CardsTable />} />
       </Route>
-      {/* </Route> */}
     </Routes>
   </div>
 );

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppRootState } from '../../../m2-bll/store';
 import { getAuthUserData } from '../../../m2-bll/thunks/auth-thunk';
 import { ErrorAll } from '../common/ErrorAll';
-import { Loader } from '../common/Loader';
+import { Spinner } from '../common/Spinner';
 
 import { Header } from './Header';
 import { RoutesContainer } from './RoutesContainer';
@@ -24,14 +24,13 @@ export const App: FC = (): ReturnComponentType => {
   if (isFetching) {
     return (
       <div className={style.container}>
-        <Loader />
+        <Spinner />
       </div>
     );
   }
 
   return (
     <div className={style.container}>
-      {/* <Loader /> */}
       <ErrorAll />
       <Header />
       <RoutesContainer />

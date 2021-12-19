@@ -1,12 +1,12 @@
 import { ReturnComponentType } from '../../../../types/ReturnComponentType';
 
-import threedots from 'assets/images/threedots.svg';
+import preloader from 'assets/images/preloader.svg';
 import s from 'styles/App.module.css';
 
-export const Loader = (): ReturnComponentType => (
+export const Spinner = (): ReturnComponentType => (
   <div>
     <div className={s.preloader}>
-      <img src={threedots} alt="" />
+      <img src={preloader} alt="" />
     </div>
   </div>
 );

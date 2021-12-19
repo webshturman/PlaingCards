@@ -17,7 +17,6 @@ export const Profile = (): ReturnComponentType => {
 
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
   const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
-
   const logOut = (): void => {
     dispatch(deleteAuthUserData());
     dispatch(setEmailAC(''));

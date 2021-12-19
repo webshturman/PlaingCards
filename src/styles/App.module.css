@@ -26,6 +26,9 @@ body {
     font-size:larger;
     padding: 0px 80px 30px 80px;
 }
+.loader{
+    height: 30px;
+}
 
 .preloader{
     position: absolute;

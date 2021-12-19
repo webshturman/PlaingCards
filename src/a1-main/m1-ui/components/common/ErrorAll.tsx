@@ -13,7 +13,7 @@ export const ErrorAll = (): ReturnComponentType => {
   const textError = useSelector<AppRootState, string>(state => state.app.textError);
   const dispatch = useDispatch();
   const deleteMessageError = (): any => dispatch(setErrorMessageAC(false, ''));
-  const time = 5000;
+  const time = 3000;
   useEffect(() => {
     setTimeout(deleteMessageError, time);
   }, []);
