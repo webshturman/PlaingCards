@@ -7,7 +7,7 @@ import { PasswordActionType } from './actions/password-actions';
 import { RegisterActionType } from './actions/register-actions';
 import { appReducer } from './reducers/app-reducer';
 import { authReducer } from './reducers/auth-reducer';
-import { CardsActionType, cardsPackReducer } from './reducers/cards-reducer';
+import { CardsPackActionType, cardsPackReducer } from './reducers/cardspack-reducer';
 import { passwordReducer } from './reducers/password-reducer';
 import { profileReducer } from './reducers/profile-reducer';
 import { registerReducer } from './reducers/register-reducer';
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   register: registerReducer,
   auth: authReducer,
   app: appReducer,
-  cards: cardsPackReducer,
+  cardspack: cardsPackReducer,
 });
 
 // @ts-ignore
@@ -30,7 +30,7 @@ export type AppActionsType =
   | RegisterActionType
   | PasswordActionType
   | AppActionType
-  | CardsActionType;
+  | CardsPackActionType;
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

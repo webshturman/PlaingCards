@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import s from '../../../styles/Cards.module.css';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
-import { getPackCards } from '../../m2-bll/reducers/cards-reducer';
+import { getPackCards } from '../../m2-bll/reducers/cardspack-reducer';
 import { AppRootState } from '../../m2-bll/store';
 
 import { Loader } from './common/Loader';

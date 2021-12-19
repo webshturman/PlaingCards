@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { cardsPackAPI } from '../../m3-dal/cards-api';
+import { cardsPackAPI } from '../../m3-dal/cardspack-api';
 import { setErrorMessageAC, setStatusAC } from '../actions/app-actions';
 import { AppThunk } from '../store';
 
@@ -17,7 +17,7 @@ const initialProfileState: initialProfileStateType = {
 
 export const cardsPackReducer = (
   state: initialProfileStateType = initialProfileState,
-  action: CardsActionType,
+  action: CardsPackActionType,
 ): initialProfileStateType => {
   switch (action.type) {
     case ACTIONS_TYPE_CARDS.GET_CARDS_DATA:
@@ -27,7 +27,7 @@ export const cardsPackReducer = (
   }
 };
 
-export type CardsActionType = ReturnType<typeof getPackCardsAC>;
+export type CardsPackActionType = ReturnType<typeof getPackCardsAC>;
 
 export const getPackCardsAC = (packCards: any) =>
   ({ type: ACTIONS_TYPE_CARDS.GET_CARDS_DATA, packCards } as const);

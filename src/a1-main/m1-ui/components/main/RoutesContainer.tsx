@@ -3,7 +3,7 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Login } from '../../../../a2-features/f1/Login';
-import { Cards } from '../Cards';
+import { CardsPack } from '../CardsPack';
 import { CardsTable } from '../CardsTable';
 import { Error404 } from '../common/Error404';
 import { LoginForm } from '../common/LoginForm';
@@ -32,7 +32,7 @@ export const RoutesContainer = (): ReturnComponentType => (
       <Route path={PATH.WRONG_PAGE} element={<Navigate to={PATH.ERROR} />} />
       <Route path={PATH.TEST_PAGE} element={<TestComponent />} />
       <Route path={PATH.PROFILE} element={<Profile />} />
-      <Route path={PATH.CARDS} element={<Cards />}>
+      <Route path={PATH.CARDS} element={<CardsPack />}>
         <Route index element={<PacksCardsTable />} />
         <Route path={PATH.CARDS_TABLE} element={<CardsTable />} />
       </Route>
