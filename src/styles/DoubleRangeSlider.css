@@ -1,0 +1,40 @@
+.doubleRangeSliderRangeContainer {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Nouislider styles */
+.noUi-target {
+    height: 6px !important;
+    border: none !important;
+    cursor: pointer !important;
+    background: rgba(33, 38, 143, .5) !important;
+    box-shadow: none !important;
+}
+
+.noUi-connect {
+    background: #21268F !important;
+}
+
+.noUi-tooltip {
+    color: black !important;
+    font-weight: 700 !important;
+    bottom: 200% !important;
+}
+
+.noUi-handle {
+    background: #fff !important;
+    border-radius: 50% !important;
+    width: 20px !important;
+    height: 20px !important;
+    box-shadow: none !important;
+    border: 5px solid #21268F !important;
+    right: -14px !important;
+    top: -7px !important;
+    cursor: grab !important;
+}
+
+.noUi-handle:before, .noUi-handle:after {
+    content: none !important;
+}
