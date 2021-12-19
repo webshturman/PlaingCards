@@ -8,7 +8,7 @@ import { AppRootState } from '../../m2-bll/store';
 
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-export const Cards = (): ReturnComponentType => {
+export const CardsPack = (): ReturnComponentType => {
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
   if (!AuthUserStatus) return <Navigate to={PATH.LOGIN_FORM} />;
   return (

@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-
-import { getPackCards } from '../../m2-bll/reducers/cards-reducer';
+import { getPackCards } from '../../m2-bll/reducers/cardspack-reducer';
 import { AppRootState } from '../../m2-bll/store';
 
 import { Loader } from './common/Loader';
@@ -24,10 +23,10 @@ export const CardsTable = (): ReturnComponentType => {
   }, []);
 
 
-    // <div className={s.CardsBlock}>
+    // <div className={s.CardsBlock}>CardsTableContainer
 
 export const CardsTable = (): ReturnComponentType => (
-  // <div className={s.CardsWrapper}>
+  <div className={s.CardsWrapper}>
     <div className={s.CardsContainer}>
       <SelectingSidebar />
       <div className={s.CardsTableContainer}>
