@@ -1,0 +1,15 @@
+.tableContainer{
+    border: #0a102a 1px solid;
+    padding:2px
+}
+.tableColomn{
+    display: flex;
+    border: #1e0707 1px solid;
+    padding:2px
+}
+
+.tableRow{
+    width: 70px;
+    border: #280f0f 1px solid;
+    padding:2px
+}

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ReamePasswordType } from '../../../a2-features/f3/NewPassword';
 import { LetterType } from '../../../a2-features/f3/RecoveryPassword';
 import { passwordAPI } from '../../m3-dal/password-api';
-import { setErrorMessageAC, setIsFethingAC } from '../actions/app-actions';
+import { setErrorMessageAC, setStatusAC } from '../actions/app-actions';
 import {
   successRenamePasswordAC,
   successSendMessgeAC,
@@ -13,7 +13,7 @@ import { AppThunk } from '../store';
 export const sendMessageOnEmail =
   (letterToThePost: LetterType): AppThunk =>
   async dispatch => {
-    dispatch(setIsFethingAC(true));
+    dispatch(setStatusAC(true));
     try {
       await passwordAPI.sendMessage(letterToThePost);
       dispatch(successSendMessgeAC(true));
@@ -25,14 +25,14 @@ export const sendMessageOnEmail =
         dispatch(setErrorMessageAC(true, `no connection!`));
       }
     } finally {
-      dispatch(setIsFethingAC(false));
+      dispatch(setStatusAC(false));
     }
   };
 
 export const renamePassword =
   (newPassword: ReamePasswordType): AppThunk =>
   async dispatch => {
-    dispatch(setIsFethingAC(true));
+    dispatch(setStatusAC(true));
     try {
       await passwordAPI.updatePassword(newPassword);
       dispatch(successRenamePasswordAC(true));
@@ -49,6 +49,6 @@ export const renamePassword =
         dispatch(setErrorMessageAC(true, `no connection!`));
       }
     } finally {
-      dispatch(setIsFethingAC(false));
+      dispatch(setStatusAC(false));
     }
   };

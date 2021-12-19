@@ -10,5 +10,6 @@ export enum PATH {
   WRONG_PAGE = '*',
   TEST_PAGE = 'test',
   CARDS = '/cards/',
+  CARDS_PACK_TABLE = 'cards_pack_table',
   CARDS_TABLE = 'cards_table',
 }

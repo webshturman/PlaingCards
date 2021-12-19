@@ -10,7 +10,7 @@ import { AppRootState } from '../../m2-bll/store';
 import { Loader } from './common/Loader';
 import { UniversalTable } from './UniversalTable';
 
-export const CardsTable = (): ReturnComponentType => {
+export const PacksCardsTable = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
   const packCards = useSelector<AppRootState, Array<any>>(state => state.cards.packCards);
   const dispatch = useDispatch();
