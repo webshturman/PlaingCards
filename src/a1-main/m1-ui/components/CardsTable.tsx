@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import { AppRootState } from '../../m2-bll/store';
 import { getCards } from '../../m2-bll/thunks/cards-thunk';
@@ -17,12 +18,19 @@ export const CardsTable = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
   const cards = useSelector<AppRootState, cardsType[]>(state => state.cards);
   const dispatch = useDispatch();
-  const cardsHeaders = { updated: 'updated', user_name: 'name', rating: 'rating' };
+  const location = useLocation();
+  const packId = location.state;
+  const cardsHeaders = {
+    question: 'question',
+    answer: 'answer',
+    Grade: 'Grade',
+    updated: 'updated',
+    url: 'url',
+  };
 
   useEffect(() => {
-    dispatch(getCards('5f2be6cd9cf95e0004fe8960'));
+    dispatch(getCards(packId));
   }, []);
-
   return (
     <div className={s.CardsWrapper}>
       <div className={s.CardsContainer}>
