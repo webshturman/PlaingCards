@@ -12,7 +12,9 @@ import { UniversalTable } from './UniversalTable';
 
 export const PacksCardsTable = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
-  const packCards = useSelector<AppRootState, Array<any>>(state => state.cards.packCards);
+  const packCards = useSelector<AppRootState, Array<any>>(
+    state => state.cardspack.packCards,
+  );
   const dispatch = useDispatch();
   const packHeaders = { updated: 'updated', user_name: 'name', rating: 'rating' };
 

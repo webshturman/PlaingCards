@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 import { setErrorMessageAC, setIsFethingAC, setStatusAC } from '../actions/app-actions';
-import { setAuthUserData } from '../actions/auth-actions';
-import { deleteUserData} from '../actions/auth-actions';
+import { setAuthUserData, deleteUserData } from '../actions/auth-actions';
 import { successRenamePasswordAC } from '../actions/password-actions';
 
 import { AppThunk } from 'a1-main/m2-bll/store';

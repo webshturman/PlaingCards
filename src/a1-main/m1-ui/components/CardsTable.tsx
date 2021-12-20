@@ -2,38 +2,38 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getPackCards } from '../../m2-bll/reducers/cardspack-reducer';
 import { AppRootState } from '../../m2-bll/store';
+import { getCards } from '../../m2-bll/thunks/cards-thunk';
+import { cardsType } from '../../m3-dal/types/cardsType';
 
 import { Loader } from './common/Loader';
-import { UniversalTable } from './UniversalTable';
 import { SelectingSidebar } from './SelectingSidebar';
+import { UniversalTable } from './UniversalTable';
 
 import s from 'styles/Cards.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const CardsTable = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
-  const packCards = useSelector<AppRootState, Array<any>>(state => state.cards.packCards);
+  const cards = useSelector<AppRootState, cardsType[]>(state => state.cards);
   const dispatch = useDispatch();
-  const packHeaders = { updated: 'updated', user_name: 'name', rating: 'rating' };
+  const cardsHeaders = { updated: 'updated', user_name: 'name', rating: 'rating' };
 
   useEffect(() => {
-    dispatch(getPackCards());
+    dispatch(getCards('5f2be6cd9cf95e0004fe8960'));
   }, []);
 
-
-    // <div className={s.CardsBlock}>CardsTableContainer
-
-export const CardsTable = (): ReturnComponentType => (
-  <div className={s.CardsWrapper}>
-    <div className={s.CardsContainer}>
-      <SelectingSidebar />
-      <div className={s.CardsTableContainer}>
-        <h1 className={s.titleCardsBlock}>Plaing Cards</h1>
-        <div className={s.loader}>{status && <Loader />}</div>
-        <UniversalTable items={packCards} headers={packHeaders} />
+  return (
+    <div className={s.CardsWrapper}>
+      <div className={s.CardsContainer}>
+        <SelectingSidebar />
+        <div className={s.CardsTableContainer}>
+          <h1 className={s.titleCardsBlock}>Plaing Cards</h1>
+          <div className={s.loader}>{status && <Loader />}</div>
+          <UniversalTable items={cards} headers={cardsHeaders} />
+        </div>
       </div>
     </div>
-  // </div>
-);
+  );
+};
+// <div className={s.CardsBlock}>CardsTableContainer

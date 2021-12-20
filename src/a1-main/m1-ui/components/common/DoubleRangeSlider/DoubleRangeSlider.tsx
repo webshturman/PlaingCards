@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Nouislider from 'nouislider-react';
-
 import 'styles/DoubleRangeSlider.css';
 import 'nouislider/dist/nouislider.css';
+import Nouislider from 'nouislider-react';
+
 import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
 
 type MapDispatchToPropsType = {
