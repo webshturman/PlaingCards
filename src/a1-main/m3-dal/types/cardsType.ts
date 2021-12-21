@@ -26,3 +26,13 @@ export type cardsRequestType = {
   page?: number;
   pageCount?: number;
 };
+
+export type cardsResponseType = {
+  cards: cardsType[];
+  cardsTotalCount: number;
+  maxGrade: number;
+  minGrade: number;
+  page: number;
+  pageCount: number;
+  packUserId: string;
+};
