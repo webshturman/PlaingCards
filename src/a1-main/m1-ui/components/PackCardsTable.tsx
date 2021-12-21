@@ -4,7 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import s from '../../../styles/Cards.module.css';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
-import { getPackCards } from '../../m2-bll/reducers/cardspack-reducer';
+import {
+  createPackCardsTC,
+  deletePackCardsTC,
+  PacksType,
+  setPackCardsTC,
+  updatePackCardsTC,
+} from '../../m2-bll/reducers/cardspack-reducer';
 import { AppRootState } from '../../m2-bll/store';
 
 import { Loader } from './common/Loader';
@@ -12,21 +18,52 @@ import { UniversalTable } from './UniversalTable';
 
 export const PacksCardsTable = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
-  const packCards = useSelector<AppRootState, Array<any>>(
-    state => state.cardspack.packCards,
+  const packCards = useSelector<AppRootState, Array<PacksType>>(
+    state => state.cardspack.cardPacks,
   );
+  const sortPack = useSelector<AppRootState, string>(state => state.cardspack.sortPacks);
   const dispatch = useDispatch();
-  const packHeaders = { updated: 'updated', user_name: 'name', rating: 'rating' };
 
   useEffect(() => {
-    dispatch(getPackCards());
-  }, []);
+    dispatch(setPackCardsTC());
+  }, [sortPack]);
+
+  const packHeaders = {
+    user_name: 'write',
+    name: 'name',
+    cardsCount: 'cards',
+    updated: 'updated',
+    rating: 'rating',
+  };
+  const addPackCards = (): void => {
+    dispatch(createPackCardsTC('lakdlakfaldkad'));
+  };
+  const sortPackCards = (): void => {
+    dispatch(setPackCardsTC());
+  };
+  const deletePack = (id: string): void => {
+    dispatch(deletePackCardsTC(id));
+  };
+  const updatePack = (id: string, title: string): void => {
+    dispatch(updatePackCardsTC(id, title));
+  };
 
   return (
     <div className={s.CardsBlock}>
       <h1 className={s.titleCardsBlock}>Plaing Cards</h1>
       <div className={s.loader}>{status && <Loader />}</div>
-      <UniversalTable items={packCards} headers={packHeaders} />
+      <button type="button" onClick={addPackCards}>
+        AAAAAAA DDDD PACKKKKKKK
+      </button>
+      <button type="button" onClick={sortPackCards}>
+        Sortttttttttttttttttttt
+      </button>
+      <UniversalTable
+        items={packCards}
+        headers={packHeaders}
+        deleteItem={deletePack}
+        updateItem={updatePack}
+      />
     </div>
   );
 };

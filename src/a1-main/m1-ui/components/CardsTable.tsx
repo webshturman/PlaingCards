@@ -31,17 +31,12 @@ export const CardsTable = (): ReturnComponentType => {
   useEffect(() => {
     dispatch(getCards(packId));
   }, []);
+
   return (
-    <div className={s.CardsWrapper}>
-      <div className={s.CardsContainer}>
-        <SelectingSidebar />
-        <div className={s.CardsTableContainer}>
-          <h1 className={s.titleCardsBlock}>Plaing Cards</h1>
-          <div className={s.loader}>{status && <Loader />}</div>
-          <UniversalTable items={cards} headers={cardsHeaders} />
-        </div>
-      </div>
+    <div className={s.CardsBlock}>
+      <h1 className={s.titleCardsBlock}>Plaing Cards</h1>
+      <div className={s.loader}>{status && <Loader />}</div>
+      <UniversalTable items={cards} headers={cardsHeaders} />
     </div>
-  );
-};
-// <div className={s.CardsBlock}>CardsTableContainer
+  // </div>
+);

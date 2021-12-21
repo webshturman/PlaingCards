@@ -1,5 +1,4 @@
 export enum PATH {
-  // LAYOUT = '/',
   PROFILE = '/profile',
   LOGIN_FORM = '/',
   LOGIN = 'login',

@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Button';
 import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
 import { AppRootState } from '../../a1-main/m2-bll/store';
-import { sendMessageOnEmail } from '../../a1-main/m2-bll/thunks/password-thunk';
+import { sendMessageOnEmailTC } from '../../a1-main/m2-bll/thunks/password-thunk';
 import {
   emailValidator,
   EMPTY_STRING,
@@ -62,7 +62,7 @@ export const RecoveryPassword = (): ReturnComponentType => {
 
     if (email.match(emailValidator)) {
       setEmailError(EMPTY_STRING);
-      dispatch(sendMessageOnEmail(letterToThePost));
+      dispatch(sendMessageOnEmailTC(letterToThePost));
     }
   };
   console.log(email);
