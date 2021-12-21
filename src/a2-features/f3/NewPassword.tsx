@@ -6,7 +6,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Button';
 import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
 import { AppRootState } from '../../a1-main/m2-bll/store';
-import { renamePassword } from '../../a1-main/m2-bll/thunks/password-thunk';
+import { renamePasswordTC } from '../../a1-main/m2-bll/thunks/password-thunk';
 import {
   CONFIRM_PASSWORD,
   EMPTY_STRING,
@@ -87,7 +87,7 @@ export const NewPassword = (): ReturnComponentType => {
     ) {
       setPasswordError(EMPTY_STRING);
       setPasswordConfirmError(EMPTY_STRING);
-      dispatch(renamePassword(newPassword));
+      dispatch(renamePasswordTC(newPassword));
     }
   };
   if (passwordRename) return <Navigate to={PATH.LOGIN_FORM} />;

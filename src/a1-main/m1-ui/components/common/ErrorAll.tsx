@@ -16,7 +16,7 @@ export const ErrorAll = (): ReturnComponentType => {
   const time = 3000;
   useEffect(() => {
     setTimeout(deleteMessageError, time);
-  }, []);
+  }, [error]);
 
   return (
     <div>

@@ -10,7 +10,7 @@ import {
 } from '../actions/password-actions';
 import { AppThunk } from '../store';
 
-export const sendMessageOnEmail =
+export const sendMessageOnEmailTC =
   (letterToThePost: LetterType): AppThunk =>
   async dispatch => {
     dispatch(setStatusAC(true));
@@ -29,7 +29,7 @@ export const sendMessageOnEmail =
     }
   };
 
-export const renamePassword =
+export const renamePasswordTC =
   (newPassword: ReamePasswordType): AppThunk =>
   async dispatch => {
     dispatch(setStatusAC(true));
