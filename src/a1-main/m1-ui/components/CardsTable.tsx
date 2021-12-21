@@ -37,5 +37,6 @@ export const CardsTable = (): ReturnComponentType => {
       <div className={s.loader}>{status && <Loader />}</div>
       <UniversalTable items={cards} headers={cardsHeaders} />
     </div>
+    // </div>
   );
-};
+}

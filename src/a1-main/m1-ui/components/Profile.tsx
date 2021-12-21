@@ -23,6 +23,7 @@ export const Profile = (): ReturnComponentType => {
   };
 
   if (!AuthUserStatus) return <Navigate to={PATH.LOGIN_FORM} />;
+
   return (
     <div>
       <div>Profile</div>

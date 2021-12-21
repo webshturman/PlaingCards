@@ -1,0 +1,56 @@
+.SelectingSidebarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
+    border-radius: 10px 0 0 10px;
+    background-color: #ddd;
+}
+
+.profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px 0 10px 10px;
+    padding: 20px 0;
+    align-items: center;
+    background-color: #ccc;
+}
+
+.userAvatarContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.userAvatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.userName {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+}
+
+.userJobTitle {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+    opacity: .5;
+}
+
+.descriptionForDoubleRangeSlider {
+    padding: 10px;
+}
+
+.DoubleRangeSliderContainer {
+    margin-top: 50px;
+    width: 85%;
+}
