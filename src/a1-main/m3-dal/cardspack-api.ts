@@ -1,16 +1,16 @@
 import { instance } from './instance';
 
 export const cardsPackAPI = {
-  readCardsPack() {
-    return instance.get<any>(`cards/pack`);
+  readCardsPack(sortPacks: string) {
+    return instance.get<any>(`cards/pack`, { params: { sortPacks } });
   },
-  createCardsPack() {
-    return instance.get<any>(`cards/pack`);
+  createCardsPack(newPack: string) {
+    return instance.post<any>(`cards/pack`, { cardsPack: { name: newPack } });
   },
-  deleteCardsPack() {
-    return instance.get<any>(`cards/pack`);
+  deleteCardsPack(packId: string) {
+    return instance.delete<any>(`cards/pack/?id=${packId}`);
   },
-  updatesCardsPack() {
-    return instance.get<any>(`cards/pack`);
+  updatesCardsPack(_id: string, newName: string) {
+    return instance.put<any>(`cards/pack`, { cardsPack: { _id, name: newName } });
   },
 };
