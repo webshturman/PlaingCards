@@ -8,7 +8,6 @@ import { getCards } from '../../m2-bll/thunks/cards-thunk';
 import { cardsType } from '../../m3-dal/types/cardsType';
 
 import { Loader } from './common/Loader';
-import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
 
 import s from 'styles/Cards.module.css';
@@ -38,5 +37,6 @@ export const CardsTable = (): ReturnComponentType => {
       <div className={s.loader}>{status && <Loader />}</div>
       <UniversalTable items={cards} headers={cardsHeaders} />
     </div>
-  // </div>
-);
+    // </div>
+  );
+}

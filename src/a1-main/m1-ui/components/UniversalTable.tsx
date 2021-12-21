@@ -63,4 +63,4 @@ export const UniversalTable: FC<UniversalTableType> = ({
       ))}
     </div>
   );
-}
+};
