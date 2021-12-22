@@ -78,7 +78,7 @@ export const cardsPackReducer = (
     case ACTIONS_TYPE_CARDS_PACK.SET_CURRENT_PAGE:
       return { ...state, page: action.page };
     case ACTIONS_TYPE_CARDS_PACK.SET_CARD_PACKS_TOTAL_COUNT:
-      return { ...state,cardPacksTotalCount: action.cardPacksTotalCount };
+      return { ...state, cardPacksTotalCount: action.cardPacksTotalCount };
     default:
       return state;
   }
