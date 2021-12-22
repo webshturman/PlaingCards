@@ -32,11 +32,16 @@ export const CardsTable = (): ReturnComponentType => {
   }, []);
 
   return (
-    <div className={s.CardsBlock}>
-      <h1 className={s.titleCardsBlock}>Plaing Cards</h1>
+    <div className={s.cardsBlock}>
+      <h1 className={s.titleCardsBlock}>Playing Cards</h1>
       <div className={s.loader}>{status && <Loader />}</div>
-      <UniversalTable items={cards} headers={cardsHeaders} />
+      <UniversalTable
+        items={cards}
+        updateItem={() => {}}
+        deleteItem={() => {}}
+        headers={cardsHeaders}
+      />
     </div>
     // </div>
   );
-}
+};

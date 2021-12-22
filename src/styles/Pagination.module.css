@@ -1,0 +1,62 @@
+.pagination {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    font-size: 16px;
+}
+
+.currentNumber {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 12px 0;
+}
+
+.selectPage {
+    color: #fff;
+    display: inline-block;
+    font-weight: 700;
+    background-color: green !important;
+}
+
+.page {
+    display: inline-block;
+    text-align: center;
+    min-width: 45px;
+    padding: 5px 0;
+    font-size: 18px;
+    background-color: #999;
+    cursor: pointer;
+    &:first-child {
+        border-radius: 10px 0 0 10px;
+    }
+    &:last-child {
+        border-radius: 0 10px 10px 0;
+    }
+}
+
+.button {
+    color: #fff;
+    font-size: 18px;
+    background-color: darkgreen;
+    padding: 6px 12px;
+    border-radius: 8px;
+    margin: 0 10px;
+    white-space: nowrap;
+    &:hover {
+        background-color: #00aa00;
+        color: #fff;
+        text-shadow: #fff 0 0 4px;
+        box-shadow: #009900 0 0 15px;
+    }
+    &:disabled {
+        background-color: #555;
+        text-shadow: none;
+        box-shadow: none;
+        cursor: auto;
+    }
+}

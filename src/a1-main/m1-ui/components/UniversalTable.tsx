@@ -3,7 +3,6 @@ import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { PATH } from '../../../enums/routes';
-import style from '../../../styles/Login.module.css';
 import s from '../../../styles/Table.module.css';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 

@@ -10,6 +10,7 @@ export const Button: FC<ButtonType> = ({
   className,
   condition,
   onClick,
+  disabled,
 }): ReturnComponentType => {
   const finalClassName = `${condition ? style.red : style.default} ${className}`;
   return (
@@ -17,7 +18,7 @@ export const Button: FC<ButtonType> = ({
       type="submit"
       className={finalClassName}
       onClick={onClick}
-      disabled={condition}
+      disabled={disabled}
     >
       {children}
     </button>
