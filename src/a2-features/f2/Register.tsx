@@ -159,7 +159,9 @@ export const Register = (): ReturnComponentType => {
           </div>
         )}
         <div>
-          <Button condition={isFetching}>Register</Button>
+          <Button condition={isFetching} type="submit">
+            Register
+          </Button>
         </div>
         <div className={style.forgotblock}>
           <NavLink to={PATH.LOGIN_FORM} className={style.forgotPassword}>

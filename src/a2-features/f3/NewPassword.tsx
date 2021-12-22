@@ -121,7 +121,9 @@ export const NewPassword = (): ReturnComponentType => {
           </div>
         )}
         <div>
-          <Button condition={isFetching}>update</Button>
+          <Button condition={isFetching} type="submit">
+            update
+          </Button>
         </div>
       </form>
     </div>
