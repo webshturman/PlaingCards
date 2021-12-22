@@ -3,19 +3,18 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import { AppRootState } from '../../m2-bll/store';
-import { cardsType } from '../../m3-dal/types/cardsType';
-
 import { Button } from './common/CustomButton/Button';
 import { Loader } from './common/Loader';
 import { UniversalTable } from './UniversalTable';
 
+import { AppRootState } from 'a1-main/m2-bll/store';
 import {
   addNewCard,
   deleteCard,
   getCards,
   updateCardData,
 } from 'a1-main/m2-bll/thunks/cards-thunk';
+import { cardsType } from 'a1-main/m3-dal/types/cardsType';
 import s from 'styles/Cards.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -30,7 +29,6 @@ export const CardsTable = (): ReturnComponentType => {
     answer: 'answer',
     Grade: 'Grade',
     updated: 'updated',
-    url: 'url',
   };
   const newCard = {
     cardsPack_id: packId,
