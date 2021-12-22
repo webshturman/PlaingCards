@@ -9,6 +9,7 @@ import {
   deletePackCardsTC,
   PacksType,
   setPackCardsTC,
+  SortPackCardsAC,
   updatePackCardsTC,
 } from '../../m2-bll/reducers/cardspack-reducer';
 import { AppRootState } from '../../m2-bll/store';
@@ -29,7 +30,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
   }, [sortPack]);
 
   const packHeaders = {
-    user_name: 'write',
+    user_name: 'writer',
     name: 'name',
     cardsCount: 'cards',
     updated: 'updated',
@@ -38,8 +39,8 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const addPackCards = (): void => {
     dispatch(createPackCardsTC('lakdlakfaldkad'));
   };
-  const sortPackCards = (): void => {
-    dispatch(setPackCardsTC());
+  const sortPackCards = (value: string): void => {
+    dispatch(SortPackCardsAC(value));
   };
   const deletePack = (id: string): void => {
     dispatch(deletePackCardsTC(id));
@@ -49,21 +50,19 @@ export const PacksCardsTable = (): ReturnComponentType => {
   };
 
   return (
-    <div className={s.CardsBlock}>
-      <h1 className={s.titleCardsBlock}>Plaing Cards</h1>
-      <div className={s.loader}>{status && <Loader />}</div>
-      <button type="button" onClick={addPackCards}>
-        AAAAAAA DDDD PACKKKKKKK
-      </button>
-      <button type="button" onClick={sortPackCards}>
-        Sortttttttttttttttttttt
-      </button>
-      <UniversalTable
-        items={packCards}
-        headers={packHeaders}
-        deleteItem={deletePack}
-        updateItem={updatePack}
-      />
+    <div className={s.CardsContainer}>
+      <div className={s.CardsBlock}>
+        <h1 className={s.titleCardsBlock}>Plaing Cards</h1>
+        <div className={s.loader}>{status && <Loader />}</div>
+        <UniversalTable
+          items={packCards}
+          headers={packHeaders}
+          deleteItem={deletePack}
+          updateItem={updatePack}
+          sortFunction={sortPackCards}
+          addBlock={addPackCards}
+        />
+      </div>
     </div>
   );
 };

@@ -1,15 +1,19 @@
-.tableContainer{
-    border: #0a102a 1px solid;
-    padding:2px
+.table {
+    font-size: 14px;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 20px;
 }
-.tableColomn{
-    display: flex;
-    border: #1e0707 1px solid;
-    padding:2px
+th, td {
+    border-style: solid;
+    border-width: 5px 5px 5px 5px;
+    border-color: rgb(79, 98, 108);
+    color: rgb(114, 149, 162);
+    padding: 20px;
 }
 
-.tableRow{
-    width: 165px;
-    border: #280f0f 1px solid;
-    padding:2px
+th {
+    background: rgb(159, 194, 210);
+    color: white;
 }
+

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
+import { FIRST_ELEMENT, SECOND_ELEMENT } from '../../../constants/common';
+
 import { DoubleRangeSlider } from './common/DoubleRangeSlider/DoubleRangeSlider';
 
-import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
 import s from 'styles/SelectingSidebar.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 

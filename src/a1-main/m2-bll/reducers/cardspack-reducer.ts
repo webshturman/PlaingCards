@@ -6,7 +6,7 @@ import { AppThunk } from '../store';
 
 export enum ACTIONS_TYPE_CARDS_PACK {
   GET_CARDS_PACK_DATA = 'cardspack-reducer/GET_CARDS_PACK_DATA',
-  // SORT_CARDS_PACK_DATA = 'cardspack-reducer/SORT_CARDS_PACK_DATA',
+  SORT_CARDS_PACK_DATA = 'cardspack-reducer/SORT_CARDS_PACK_DATA',
 }
 
 export type PacksType = {
@@ -51,20 +51,22 @@ export const cardsPackReducer = (
   switch (action.type) {
     case ACTIONS_TYPE_CARDS_PACK.GET_CARDS_PACK_DATA:
       return { ...state, cardPacks: action.cardPacks };
-    // case ACTIONS_TYPE_CARDS_PACK.SORT_CARDS_PACK_DATA:
-    //   return { ...state, cardPacks: action.cardPacks };
+    case ACTIONS_TYPE_CARDS_PACK.SORT_CARDS_PACK_DATA:
+      return { ...state, sortPacks: action.sortValue };
     default:
       return state;
   }
 };
 
-export type CardsPackActionType = ReturnType<typeof setPackCardsAC>;
+export type CardsPackActionType =
+  | ReturnType<typeof setPackCardsAC>
+  | ReturnType<typeof SortPackCardsAC>;
 
 export const setPackCardsAC = (cardPacks: Array<PacksType>) =>
   ({ type: ACTIONS_TYPE_CARDS_PACK.GET_CARDS_PACK_DATA, cardPacks } as const);
 
-// export const SortPackCardsAC = (cardPacks: Array<PacksType>) =>
-//   ({ type: ACTIONS_TYPE_CARDS_PACK., cardPacks } as const);
+export const SortPackCardsAC = (sortValue: string) =>
+  ({ type: ACTIONS_TYPE_CARDS_PACK.SORT_CARDS_PACK_DATA, sortValue } as const);
 
 export const setPackCardsTC = (): AppThunk => async (dispatch, getState) => {
   const { sortPacks } = getState().cardspack;
