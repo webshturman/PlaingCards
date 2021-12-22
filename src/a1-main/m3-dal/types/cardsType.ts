@@ -36,3 +36,14 @@ export type cardsResponseType = {
   pageCount: number;
   packUserId: string;
 };
+export type cardsAddType = cardsType & {
+  answerImg?: string;
+  questionImg?: string;
+  questionVideo?: string;
+  answerVideo?: string;
+};
+export type cardsUpdateType = {
+  _id: string;
+  answer?: string;
+  question?: string;
+};

@@ -91,7 +91,9 @@ export const RecoveryPassword = (): ReturnComponentType => {
               </div>
             )}
             <div>
-              <Button condition={isFetching}>send</Button>
+              <Button condition={isFetching} type="submit">
+                send
+              </Button>
             </div>
           </form>
           <div className={style.forgotblock}>

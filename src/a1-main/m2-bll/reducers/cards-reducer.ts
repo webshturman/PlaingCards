@@ -1,15 +1,31 @@
 import { cardsType } from '../../m3-dal/types/cardsType';
 import { CARDS_ACTIONS_TYPE, CardsActionsType } from '../actions/cards-actions';
 
-const initialCardsState: cardsType[] = [];
-
+const initialCardsState = {
+  cards: [] as cardsType[],
+  cardsTotalCount: 0,
+  maxGrade: 10,
+  minGrade: 0,
+  page: 1,
+  pageCount: 10,
+  packUserId: '',
+  sortCards: '0updated',
+};
+type initialCardsStateType = typeof initialCardsState;
 export const cardsReducer = (
-  state: cardsType[] = initialCardsState,
+  state: initialCardsStateType = initialCardsState,
   action: CardsActionsType,
-): cardsType[] => {
+): initialCardsStateType => {
   switch (action.type) {
     case CARDS_ACTIONS_TYPE.SET_CARDS_DATA:
-      return [...state, ...action.cards];
+      return {
+        ...state,
+        cards: action.cardsData.cards,
+        packUserId: action.cardsData.packUserId,
+        cardsTotalCount: action.cardsData.cardsTotalCount,
+      };
+    // case CARDS_ACTIONS_TYPE.SET_CARDS_TOTAL_COUNT:
+    //   return { ...state, cardsTotalCount: action.cardsCount };
     default:
       return state;
   }
