@@ -11,11 +11,12 @@ export const Button: FC<ButtonType> = ({
   condition,
   onClick,
   type,
+  disabled,
 }): ReturnComponentType => {
   const finalClassName = `${condition ? style.red : style.default} ${className}`;
   return (
     // eslint-disable-next-line react/button-has-type
-    <button type={type} className={finalClassName} onClick={onClick} disabled={condition}>
+    <button type={type} className={finalClassName} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );
