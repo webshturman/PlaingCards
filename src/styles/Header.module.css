@@ -12,6 +12,13 @@
     align-items: center;
     margin: 0 auto;
 }
+.headerBlock{
+    display: flex;
+    align-items: center;
+}
+.itemMenu{
+    padding: 0 30px;
+}
 .itemMenu a{
     color: rgb(159, 194, 210);
 

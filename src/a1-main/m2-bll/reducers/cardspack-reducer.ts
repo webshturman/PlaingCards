@@ -4,6 +4,8 @@ import { cardsPackAPI } from '../../m3-dal/cardspack-api';
 import { setErrorMessageAC, setStatusAC } from '../actions/app-actions';
 import { AppThunk } from '../store';
 
+import { searchApi } from 'a1-main/m3-dal/search-api';
+
 export enum ACTIONS_TYPE_CARDS_PACK {
   GET_CARDS_PACK_DATA = 'cardspack-reducer/GET_CARDS_PACK_DATA',
   SORT_CARDS_PACK_DATA = 'cardspack-reducer/SORT_CARDS_PACK_DATA',
@@ -40,7 +42,7 @@ const initialPackCardState = {
   maxCardsCount: 0,
   minCardsCount: 0,
   page: 1,
-  pageCount: 5,
+  pageCount: 4,
   portionSize: 10,
   token: '',
   tokenDeathTime: 0,
@@ -118,6 +120,7 @@ export const setPackCardsTC = (): AppThunk => async (dispatch, getState) => {
       const response = await searchApi.searchPacks(searchText, pageCount, page);
       dispatch(setPackCardsAC(response.data.cardPacks));
       dispatch(setCardsPackTotalCountAC(response.data.cardPacksTotalCount));
+      dispatch(setSearchText(''));
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response;

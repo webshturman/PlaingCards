@@ -4,9 +4,15 @@ import { instance } from './instance';
 import { cardsAddType, cardsRequestType, cardsResponseType } from './types/cardsType';
 
 export const cardsAPI = {
-  getCardsList(PackId: string, page: number) {
+  // getCardsList(PackId: string, page: number) {
+  //   return instance.get<cardsRequestType, AxiosResponse<cardsResponseType>>(
+  //     `cards/card?cardsPack_id=${PackId}&page=${page}&pageCount=4`,
+  //   );
+  // },
+  getCardsList(cardsData: cardsRequestType) {
     return instance.get<cardsRequestType, AxiosResponse<cardsResponseType>>(
-      `cards/card?cardsPack_id=${PackId}&page=${page}&pageCount=4`,
+      `cards/card`,
+      { params: cardsData },
     );
   },
   addCard(newCard: cardsAddType) {

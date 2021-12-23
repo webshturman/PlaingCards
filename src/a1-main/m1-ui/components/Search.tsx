@@ -18,6 +18,7 @@ export const Search = (): any => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>): any => {
     e.preventDefault();
     dispatch(searchPacks(searchText));
+    setSearchText('');
   };
 
   const handleSearchValueChange = (value: string): void => {

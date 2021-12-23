@@ -1,36 +1,39 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { PATH } from '../../../enums/routes';
-import { setEmailAC } from '../../m2-bll/actions/app-actions';
-import { deleteAuthUserData } from '../../m2-bll/thunks/auth-thunk';
-
-import { Button } from './common/CustomButton/Button';
+import s from '../../../styles/Cards.module.css';
 
 import { AppRootState } from 'a1-main/m2-bll/store';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Profile = (): ReturnComponentType => {
-  const dispatch = useDispatch();
-
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
-  const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
-  const logOut = (): void => {
-    dispatch(deleteAuthUserData());
-    dispatch(setEmailAC(''));
-  };
 
   if (!AuthUserStatus) return <Navigate to={PATH.LOGIN_FORM} />;
 
   return (
-    <div>
-      <div>Profile</div>
-      <div>
-        <Button onClick={logOut} condition={isFetching}>
-          Log out
-        </Button>
+    <div className={s.CardsContainer}>
+      <div className={s.CardsBlock}>
+        <h1 className={s.titleCardsBlock}>My Packs list</h1>
+        {/* <div className={s.loader}>{status && <Loader />}</div> */}
+        {/* <UniversalTable */}
+        {/*  items={cards} */}
+        {/*  headers={cardsHeaders} */}
+        {/*  deleteItem={handleDeleteCard} */}
+        {/*  updateItem={handleUpdateCard} */}
+        {/*  sortFunction={() => {}} */}
+        {/*  addBlock={handleAddCard} */}
+        {/* /> */}
+        {/* <Pagination */}
+        {/*  totalItemsCount={cardsTotalCount} // это количество всех колод */}
+        {/*  currentPage={page} */}
+        {/*  onPageChanged={onPageChanged} */}
+        {/*  pageSize={pageCount} // это количество колод на странице */}
+        {/*  portionSize={PORTION_SIZE} // это количество страниц в блоке перемотки */}
+        {/* /> */}
       </div>
     </div>
   );
