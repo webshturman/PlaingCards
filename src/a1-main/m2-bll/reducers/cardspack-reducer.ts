@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { cardsPackAPI } from '../../m3-dal/cardspack-api';
+import { searchApi } from '../../m3-dal/search-api';
 import { setErrorMessageAC, setStatusAC } from '../actions/app-actions';
 import { AppThunk } from '../store';
 
@@ -9,6 +10,7 @@ export enum ACTIONS_TYPE_CARDS_PACK {
   SORT_CARDS_PACK_DATA = 'cardspack-reducer/SORT_CARDS_PACK_DATA',
   SET_CURRENT_PAGE = 'cardspack-reducer/SET-CURRENT-PAGE',
   SET_CARD_PACKS_TOTAL_COUNT = 'cardspack-reducer/SET-CARD-PACKS-TOTAL-COUNT',
+  SET_SEARCH_TEXT = 'cardspack-reducer/SET-SEARCH-TEXT',
   // SORT_CARDS_PACK_DATA = 'cardspack-reducer/SORT_CARDS_PACK_DATA',
 }
 
@@ -39,11 +41,12 @@ const initialPackCardState = {
   maxCardsCount: 0,
   minCardsCount: 0,
   page: 1,
-  pageCount: 3,
+  pageCount: 5,
   portionSize: 10,
   token: '',
   tokenDeathTime: 0,
   sortPacks: '0updated',
+  searchText: '',
 };
 
 type InitialPackCardStateStateType = typeof initialPackCardState;
@@ -52,7 +55,11 @@ export type CardsPackActionType =
   | ReturnType<typeof setPackCardsAC>
   | ReturnType<typeof setCardsPackTotalCountAC>
   | ReturnType<typeof setCurrentPageAC>
-  | ReturnType<typeof SortPackCardsAC>;
+  | ReturnType<typeof SortPackCardsAC>
+  | ReturnType<typeof setSearchText>;
+
+export const setSearchText = (searchText: string) =>
+  ({ type: ACTIONS_TYPE_CARDS_PACK.SET_SEARCH_TEXT, searchText } as const);
 
 export const setPackCardsAC = (cardPacks: Array<PacksType>) =>
   ({ type: ACTIONS_TYPE_CARDS_PACK.GET_CARDS_PACK_DATA, cardPacks } as const);
@@ -79,6 +86,8 @@ export const cardsPackReducer = (
       return { ...state, page: action.page };
     case ACTIONS_TYPE_CARDS_PACK.SET_CARD_PACKS_TOTAL_COUNT:
       return { ...state, cardPacksTotalCount: action.cardPacksTotalCount };
+    case ACTIONS_TYPE_CARDS_PACK.SET_SEARCH_TEXT:
+      return { ...state, searchText: action.searchText };
     default:
       return state;
   }
@@ -88,22 +97,38 @@ export const SortPackCardsAC = (sortValue: string) =>
   ({ type: ACTIONS_TYPE_CARDS_PACK.SORT_CARDS_PACK_DATA, sortValue } as const);
 
 export const setPackCardsTC = (): AppThunk => async (dispatch, getState) => {
-  const { sortPacks, pageCount } = getState().cardspack;
+  const { sortPacks, pageCount, page, searchText } = getState().cardspack;
   dispatch(setStatusAC(true));
-  try {
-    const cardsPack = await cardsPackAPI.readCardsPack(sortPacks, pageCount);
-    dispatch(setPackCardsAC(cardsPack.data.cardPacks));
-    console.log(cardsPack.data.cardPacksTotalCount);
-    /* dispatch(setCardsPackTotalCountAC(cardsPack.data.cardPacksTotalCount)); */
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      const errorMessage = error.response;
-      dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
-    } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
-      dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
+  if (!searchText) {
+    try {
+      const cardsPack = await cardsPackAPI.readCardsPack(sortPacks, pageCount, page);
+      dispatch(setPackCardsAC(cardsPack.data.cardPacks));
+      dispatch(setCardsPackTotalCountAC(cardsPack.data.cardPacksTotalCount));
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const errorMessage = error.response;
+        dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
+      } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+        dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
+      }
+    } finally {
+      dispatch(setStatusAC(false));
     }
-  } finally {
-    dispatch(setStatusAC(false));
+  } else {
+    try {
+      const response = await searchApi.searchPacks(searchText, pageCount, page);
+      dispatch(setPackCardsAC(response.data.cardPacks));
+      dispatch(setCardsPackTotalCountAC(response.data.cardPacksTotalCount));
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const errorMessage = error.response;
+        dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
+      } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+        dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
+      }
+    } finally {
+      dispatch(setStatusAC(false));
+    }
   }
 };
 

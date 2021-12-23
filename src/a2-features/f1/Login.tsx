@@ -13,7 +13,7 @@ import {
   emailValidator,
   EMPTY_STRING,
   PASSWORD,
-  TITLE_EMAIL,
+  EMAIL,
   ZERO_LENGTH,
 } from 'constants/common';
 import { PATH } from 'enums/routes';
@@ -82,7 +82,8 @@ export const Login = (): ReturnComponentType => {
     <div>
       <form onSubmit={handleSubmit}>
         <Input
-          title={TITLE_EMAIL}
+          title={EMAIL}
+          placeholder="Email"
           onChangeText={(currentEmailValue: string) =>
             handleEmailValueChange(currentEmailValue)
           }
@@ -96,6 +97,7 @@ export const Login = (): ReturnComponentType => {
         )}
         <Input
           title={PASSWORD}
+          placeholder="Password"
           onChangeText={(currentPasswordValue: string) =>
             handlePasswordValueChange(currentPasswordValue)
           }

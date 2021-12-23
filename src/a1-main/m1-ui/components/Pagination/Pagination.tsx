@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
+import { AppRootState } from '../../../m2-bll/store';
 import { Button } from '../common/CustomButton/Button';
 
 import s from 'styles/Pagination.module.css';
@@ -22,9 +25,11 @@ export const Pagination: React.FC<PaginationPropsType> = ({
   const one = 1;
   const pagesCount = Math.ceil(totalItemsCount / pageSize);
   const pages = [];
-  for (let i = 1; i <= pagesCount; i + one) {
+  // eslint-disable-next-line no-plusplus
+  for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
+  const appStatus = useSelector<AppRootState, boolean>(state => state.app.status);
   const portionCount = pagesCount / portionSize;
   const [portionNumber, setPortionNumber] = useState<number>(one);
   const leftPortionPageNumber = (portionNumber - one) * portionSize + one;
@@ -42,7 +47,7 @@ export const Pagination: React.FC<PaginationPropsType> = ({
         </Button>
 
         <Button
-          disabled={currentPage <= one}
+          disabled={currentPage <= one || appStatus}
           className={s.button}
           onClick={() => onPageChanged(currentPage - one)}
         >
@@ -50,7 +55,7 @@ export const Pagination: React.FC<PaginationPropsType> = ({
         </Button>
 
         <Button
-          disabled={currentPage >= pagesCount}
+          disabled={currentPage >= pagesCount || appStatus}
           className={s.button}
           onClick={() => onPageChanged(currentPage + one)}
         >
@@ -73,15 +78,17 @@ export const Pagination: React.FC<PaginationPropsType> = ({
           .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
           .map(page => (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-            <span
+            <button
+              type="button"
               key={page}
               onClick={() => {
                 onPageChanged(page);
               }}
+              disabled={appStatus}
               className={`${s.page} ${currentPage === page ? s.selectPage : ''}`}
             >
               {page}
-            </span>
+            </button>
           ))}
       </div>
     </div>

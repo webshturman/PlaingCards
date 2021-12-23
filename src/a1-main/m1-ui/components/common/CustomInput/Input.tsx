@@ -11,6 +11,7 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Input: FC<CustomInputType> = ({
   // title,
+  placeholder,
   onChangeText,
   error,
   className,
@@ -38,7 +39,7 @@ export const Input: FC<CustomInputType> = ({
         onChange={handleInputValueChange}
         className={finalInputClassName}
         value={value}
-        placeholder={type}
+        placeholder={placeholder}
       />
       {error && <span className={finalSpanClassName}>{error}</span>}
     </div>
