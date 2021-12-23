@@ -6,8 +6,8 @@ const initialCardsState = {
   cardsTotalCount: 0,
   maxGrade: 10,
   minGrade: 0,
-  page: 1,
-  pageCount: 10,
+  page: 2,
+  pageCount: 4,
   packUserId: '',
   sortCards: '0updated',
 };
@@ -24,8 +24,8 @@ export const cardsReducer = (
         packUserId: action.cardsData.packUserId,
         cardsTotalCount: action.cardsData.cardsTotalCount,
       };
-    // case CARDS_ACTIONS_TYPE.SET_CARDS_TOTAL_COUNT:
-    //   return { ...state, cardsTotalCount: action.cardsCount };
+    case CARDS_ACTIONS_TYPE.SET_CURRENT_CARD_PAGE:
+      return { ...state, page: action.page };
     default:
       return state;
   }

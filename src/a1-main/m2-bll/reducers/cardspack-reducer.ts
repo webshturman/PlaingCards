@@ -94,7 +94,7 @@ export const setPackCardsTC = (): AppThunk => async (dispatch, getState) => {
     const cardsPack = await cardsPackAPI.readCardsPack(sortPacks, pageCount);
     dispatch(setPackCardsAC(cardsPack.data.cardPacks));
     console.log(cardsPack.data.cardPacksTotalCount);
-    /* dispatch(setCardsPackTotalCountAC(cardsPack.data.cardPacksTotalCount)); */
+    // dispatch(setCardsPackTotalCountAC(cardsPack.data.cardPacksTotalCount));
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       const errorMessage = error.response;

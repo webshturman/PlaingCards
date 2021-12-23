@@ -20,6 +20,11 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 export const CardsTable = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
   const cards = useSelector<AppRootState, cardsType[]>(state => state.cards.cards);
+  // const cardsTotalCount = useSelector<AppRootState, number>(
+  //   state => state.cards.cardsTotalCount,
+  // );
+  const page = useSelector<AppRootState, number>(state => state.cards.page);
+  // const pageCount = useSelector<AppRootState, number>(state => state.cards.pageCount);
   const dispatch = useDispatch();
   const location = useLocation();
   const packId = location.state;
@@ -36,8 +41,9 @@ export const CardsTable = (): ReturnComponentType => {
   };
 
   useEffect(() => {
-    dispatch(getCards(packId));
-  }, [packId]);
+    console.log(page);
+    dispatch(getCards(packId, page));
+  }, []);
 
   const handleAddCard = (): void => {
     dispatch(addNewCard(newCard));
@@ -46,13 +52,12 @@ export const CardsTable = (): ReturnComponentType => {
     dispatch(deleteCard(cardId, packId));
   };
   const handleUpdateCard = (cardId: string, question: string): void => {
-    // const updatedCard = {
-    //   cardsPack_id: cardId,
-    //   question: 'NaN == NaN',
-    //   answer: 'false',
-    // };
     dispatch(updateCardData(cardId, question, packId));
   };
+  // const onPageChanged = (pageNumber: number): void => {
+  //   // dispatch(setCurrentCardPage(pageNumber));
+  //   console.log(pageNumber);
+  // };
 
   return (
     <div className={s.CardsContainer}>
@@ -67,6 +72,13 @@ export const CardsTable = (): ReturnComponentType => {
           sortFunction={() => {}}
           addBlock={handleAddCard}
         />
+        {/* <Pagination */}
+        {/*  totalItemsCount={cardsTotalCount} // это количество всех колод */}
+        {/*  currentPage={page} */}
+        {/*  onPageChanged={onPageChanged} */}
+        {/*  pageSize={pageCount} // это количество колод на странице */}
+        {/*  portionSize={PORTION_SIZE} // это количество страниц в блоке перемотки */}
+        {/* /> */}
       </div>
     </div>
   );

@@ -4,9 +4,9 @@ import { instance } from './instance';
 import { cardsAddType, cardsRequestType, cardsResponseType } from './types/cardsType';
 
 export const cardsAPI = {
-  getCardsList(PackId: string) {
+  getCardsList(PackId: string, page: number) {
     return instance.get<cardsRequestType, AxiosResponse<cardsResponseType>>(
-      `cards/card?cardsPack_id=${PackId}&pageCount=10`,
+      `cards/card?cardsPack_id=${PackId}&page=${page}&pageCount=4`,
     );
   },
   addCard(newCard: cardsAddType) {

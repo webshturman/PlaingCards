@@ -6,11 +6,11 @@ import { AppThunk } from '../store';
 import { cardsAddType } from 'a1-main/m3-dal/types/cardsType';
 
 export const getCards =
-  (PackId: string): AppThunk =>
+  (PackId: string, page: number): AppThunk =>
   async dispatch => {
     try {
       // eslint-disable-next-line camelcase
-      const response = await cardsAPI.getCardsList(PackId);
+      const response = await cardsAPI.getCardsList(PackId, page);
       dispatch(setCardsData(response.data));
       // dispatch(setTotalCardsCount(response.data.cardsTotalCount));
     } catch (error: any) {
@@ -20,11 +20,12 @@ export const getCards =
 
 export const addNewCard =
   (newCard: cardsAddType): AppThunk =>
-  async dispatch => {
+  async (dispatch, getState) => {
+    const { page } = getState().cards;
     dispatch(setStatusAC(true));
     try {
       await cardsAPI.addCard(newCard);
-      dispatch(getCards(newCard.cardsPack_id));
+      dispatch(getCards(newCard.cardsPack_id, page));
     } catch (error: any) {
       console.log(error);
     } finally {
@@ -34,11 +35,12 @@ export const addNewCard =
 
 export const deleteCard =
   (cardId: string, packId: string): AppThunk =>
-  async dispatch => {
+  async (dispatch, getState) => {
+    const { page } = getState().cards;
     dispatch(setStatusAC(true));
     try {
       await cardsAPI.deleteCard(cardId);
-      dispatch(getCards(packId));
+      dispatch(getCards(packId, page));
     } catch (error: any) {
       console.log(error);
     } finally {
@@ -48,11 +50,12 @@ export const deleteCard =
 
 export const updateCardData =
   (cardId: string, question: string, packId: string): AppThunk =>
-  async dispatch => {
+  async (dispatch, getState) => {
+    const { page } = getState().cards;
     dispatch(setStatusAC(true));
     try {
       await cardsAPI.updateCard(cardId, question);
-      dispatch(getCards(packId));
+      dispatch(getCards(packId, page));
     } catch (error: any) {
       console.log(error);
     } finally {

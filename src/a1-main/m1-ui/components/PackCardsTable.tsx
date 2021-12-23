@@ -37,6 +37,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
   );
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentPageAC(pageNumber));
+    console.log(pageNumber);
   };
 
   useEffect(() => {
