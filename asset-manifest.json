@@ -1,23 +1,27 @@
 {
   "files": {
-    "main.css": "/PlaingCards/static/css/main.803a9d69.chunk.css",
-    "main.js": "/PlaingCards/static/js/main.23fe8042.chunk.js",
-    "main.js.map": "/PlaingCards/static/js/main.23fe8042.chunk.js.map",
-    "runtime-main.js": "/PlaingCards/static/js/runtime-main.bac0d167.js",
-    "runtime-main.js.map": "/PlaingCards/static/js/runtime-main.bac0d167.js.map",
-    "static/js/2.d1ed62fd.chunk.js": "/PlaingCards/static/js/2.d1ed62fd.chunk.js",
-    "static/js/2.d1ed62fd.chunk.js.map": "/PlaingCards/static/js/2.d1ed62fd.chunk.js.map",
-    "static/js/3.a97d217f.chunk.js": "/PlaingCards/static/js/3.a97d217f.chunk.js",
-    "static/js/3.a97d217f.chunk.js.map": "/PlaingCards/static/js/3.a97d217f.chunk.js.map",
+    "main.css": "/PlaingCards/static/css/main.fb25cd20.chunk.css",
+    "main.js": "/PlaingCards/static/js/main.41f51c6e.chunk.js",
+    "main.js.map": "/PlaingCards/static/js/main.41f51c6e.chunk.js.map",
+    "runtime-main.js": "/PlaingCards/static/js/runtime-main.ee861fd2.js",
+    "runtime-main.js.map": "/PlaingCards/static/js/runtime-main.ee861fd2.js.map",
+    "static/css/2.9b70a56b.chunk.css": "/PlaingCards/static/css/2.9b70a56b.chunk.css",
+    "static/js/2.dd1f8e0d.chunk.js": "/PlaingCards/static/js/2.dd1f8e0d.chunk.js",
+    "static/js/2.dd1f8e0d.chunk.js.map": "/PlaingCards/static/js/2.dd1f8e0d.chunk.js.map",
+    "static/js/3.94f1ca15.chunk.js": "/PlaingCards/static/js/3.94f1ca15.chunk.js",
+    "static/js/3.94f1ca15.chunk.js.map": "/PlaingCards/static/js/3.94f1ca15.chunk.js.map",
     "index.html": "/PlaingCards/index.html",
-    "static/css/main.803a9d69.chunk.css.map": "/PlaingCards/static/css/main.803a9d69.chunk.css.map",
-    "static/js/2.d1ed62fd.chunk.js.LICENSE.txt": "/PlaingCards/static/js/2.d1ed62fd.chunk.js.LICENSE.txt",
-    "static/media/preloader.eb47674d.svg": "/PlaingCards/static/media/preloader.eb47674d.svg"
+    "static/css/2.9b70a56b.chunk.css.map": "/PlaingCards/static/css/2.9b70a56b.chunk.css.map",
+    "static/css/main.fb25cd20.chunk.css.map": "/PlaingCards/static/css/main.fb25cd20.chunk.css.map",
+    "static/js/2.dd1f8e0d.chunk.js.LICENSE.txt": "/PlaingCards/static/js/2.dd1f8e0d.chunk.js.LICENSE.txt",
+    "static/media/preloader.eb47674d.svg": "/PlaingCards/static/media/preloader.eb47674d.svg",
+    "static/media/threedots.4f35d4d7.svg": "/PlaingCards/static/media/threedots.4f35d4d7.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.bac0d167.js",
-    "static/js/2.d1ed62fd.chunk.js",
-    "static/css/main.803a9d69.chunk.css",
-    "static/js/main.23fe8042.chunk.js"
+    "static/js/runtime-main.ee861fd2.js",
+    "static/css/2.9b70a56b.chunk.css",
+    "static/js/2.dd1f8e0d.chunk.js",
+    "static/css/main.fb25cd20.chunk.css",
+    "static/js/main.41f51c6e.chunk.js"
   ]
 }
