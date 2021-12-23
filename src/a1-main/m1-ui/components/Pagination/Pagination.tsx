@@ -77,7 +77,6 @@ export const Pagination: React.FC<PaginationPropsType> = ({
         {pages
           .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
           .map(page => (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
             <button
               type="button"
               key={page}

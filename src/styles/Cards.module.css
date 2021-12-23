@@ -1,3 +1,12 @@
+.CardsContainer {
+    display: flex;
+    max-width: 1250px;
+    background-color: white;
+    box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
 .cardsBlock {
     display: flex;
     flex-direction: column;
@@ -6,16 +15,6 @@
 .CardsWrapper {
     display: flex;
     justify-content: center;
-}
-
-.CardsContainer {
-    display: flex;
-    height: 500px;
-    min-width: 700px;
-    background-color: white;
-    box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
-    border-radius: 10px;
-    margin: 0 100px;
 }
 
 .titleCardsBlock{

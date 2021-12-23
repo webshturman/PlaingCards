@@ -7,7 +7,8 @@ import Nouislider from 'nouislider-react';
 import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
 
 type MapDispatchToPropsType = {
-  onChangeRange: (value: [number, number]) => void;
+  onUpdate: (value: [number, number]) => void;
+  onChange: (values: any) => void;
 };
 
 type MapStateToPropsType = {
@@ -48,12 +49,12 @@ export class DoubleRangeSlider extends React.Component<
   }
 
   onUpdate = (values: any[], handle: number, unencodedValues: number[]): any => {
-    const { onChangeRange } = this.props;
-    onChangeRange([unencodedValues[FIRST_ELEMENT], unencodedValues[SECOND_ELEMENT]]);
+    const { onUpdate } = this.props;
+    onUpdate([unencodedValues[FIRST_ELEMENT], unencodedValues[SECOND_ELEMENT]]);
   };
 
   render(): any {
-    const { min, max, step, disable } = this.props;
+    const { min, max, step, disable, onChange } = this.props;
     const { start } = this.state;
     return (
       <span className="doubleRangeSliderRangeContainer">
@@ -63,6 +64,7 @@ export class DoubleRangeSlider extends React.Component<
           step={step}
           disabled={disable}
           onUpdate={this.onUpdate}
+          onChange={onChange}
           animate={false}
           connect
           tooltips={[

@@ -14,11 +14,15 @@ import s from 'styles/search.module.css';
 export const Search = (): any => {
   const dispatch = useDispatch();
   const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
+  const sortPacks = useSelector<AppRootState, string>(state => state.cardspack.sortPacks);
+  const pageCount = useSelector<AppRootState, number>(state => state.cardspack.pageCount);
+  const page = useSelector<AppRootState, number>(state => state.cardspack.page);
+  const minFilter = useSelector<AppRootState, number>(state => state.cardspack.minFilter);
+  const maxFilter = useSelector<AppRootState, number>(state => state.cardspack.maxFilter);
   const [searchText, setSearchText] = useState<string>(EMPTY_STRING);
   const handleSubmit = (e: FormEvent<HTMLFormElement>): any => {
     e.preventDefault();
-    dispatch(searchPacks(searchText));
-    setSearchText('');
+    dispatch(searchPacks(searchText, sortPacks, pageCount, page, minFilter, maxFilter));
   };
 
   const handleSearchValueChange = (value: string): void => {
