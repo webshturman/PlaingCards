@@ -14,10 +14,12 @@ import {
   updatePackCardsTC,
 } from '../../m2-bll/reducers/cardspack-reducer';
 import { AppRootState } from '../../m2-bll/store';
+import { searchPacks } from '../../m2-bll/thunks/search-thunk';
 
 import { Loader } from './common/Loader';
 import { Pagination } from './Pagination/Pagination';
 import { Search } from './Search';
+import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
 
 export const PacksCardsTable = (): ReturnComponentType => {
@@ -36,9 +38,17 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const portionSize = useSelector<AppRootState, number>(
     state => state.cardspack.portionSize,
   );
+  const searchText = useSelector<AppRootState, string>(
+    state => state.cardspack.searchText,
+  );
+  const sortPacks = useSelector<AppRootState, string>(state => state.cardspack.sortPacks);
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentPageAC(pageNumber));
-    dispatch(setPackCardsTC());
+    if (!searchText) {
+      dispatch(setPackCardsTC());
+    } else {
+      dispatch(searchPacks(searchText, sortPacks, pageCount, pageNumber));
+    }
   };
 
   useEffect(() => {
@@ -67,10 +77,11 @@ export const PacksCardsTable = (): ReturnComponentType => {
 
   return (
     <div className={s.CardsContainer}>
+      <SelectingSidebar />
       <div className={s.CardsBlock}>
         <h1 className={s.titleCardsBlock}>Packs list</h1>
-        <Search />
         <div className={s.loader}>{status && <Loader />}</div>
+        <Search />
         <UniversalTable
           items={packCards}
           headers={packHeaders}

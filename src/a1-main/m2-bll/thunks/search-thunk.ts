@@ -2,24 +2,34 @@ import { searchApi } from '../../m3-dal/search-api';
 import { setStatusAC } from '../actions/app-actions';
 import {
   setCardsPackTotalCountAC,
-  setCurrentPageAC,
   setPackCardsAC,
   setSearchText,
 } from '../reducers/cardspack-reducer';
 import { AppThunk } from '../store';
 
 export const searchPacks =
-  (searchRequest: string): AppThunk =>
-  async (dispatch, getState) => {
-    const one = 1;
-    const { pageCount, page } = getState().cardspack;
+  (
+    searchRequest: string,
+    sortPacks: string,
+    pageCount: number,
+    page: number,
+    minFilter?: number,
+    maxFilter?: number,
+  ): AppThunk =>
+  async dispatch => {
     dispatch(setStatusAC(true));
     try {
-      const response = await searchApi.searchPacks(searchRequest, pageCount, page);
-      dispatch(setCurrentPageAC(one));
+      const response = await searchApi.searchPacks(
+        searchRequest,
+        sortPacks,
+        pageCount,
+        page,
+        minFilter,
+        maxFilter,
+      );
       dispatch(setSearchText(searchRequest));
-      dispatch(setPackCardsAC(response.data.cardPacks));
       dispatch(setCardsPackTotalCountAC(response.data.cardPacksTotalCount));
+      dispatch(setPackCardsAC(response.data.cardPacks));
     } catch (error) {
       console.log(`Error search: ${error}`);
     } finally {
