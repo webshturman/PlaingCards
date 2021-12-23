@@ -17,6 +17,7 @@ import { AppRootState } from '../../m2-bll/store';
 
 import { Loader } from './common/Loader';
 import { Pagination } from './Pagination/Pagination';
+import { Search } from './Search';
 import { UniversalTable } from './UniversalTable';
 
 export const PacksCardsTable = (): ReturnComponentType => {
@@ -37,7 +38,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
   );
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentPageAC(pageNumber));
-    console.log(pageNumber);
+    dispatch(setPackCardsTC());
   };
 
   useEffect(() => {
@@ -67,7 +68,8 @@ export const PacksCardsTable = (): ReturnComponentType => {
   return (
     <div className={s.CardsContainer}>
       <div className={s.CardsBlock}>
-        <h1 className={s.titleCardsBlock}>Playing Cards</h1>
+        <h1 className={s.titleCardsBlock}>Packs list</h1>
+        <Search />
         <div className={s.loader}>{status && <Loader />}</div>
         <UniversalTable
           items={packCards}

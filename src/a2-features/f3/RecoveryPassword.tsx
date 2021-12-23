@@ -7,12 +7,7 @@ import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Butto
 import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
 import { AppRootState } from '../../a1-main/m2-bll/store';
 import { sendMessageOnEmailTC } from '../../a1-main/m2-bll/thunks/password-thunk';
-import {
-  emailValidator,
-  EMPTY_STRING,
-  TITLE_EMAIL,
-  ZERO_LENGTH,
-} from '../../constants/common';
+import { emailValidator, EMPTY_STRING, EMAIL, ZERO_LENGTH } from '../../constants/common';
 import { PATH } from '../../enums/routes';
 import style from '../../styles/Login.module.css';
 
@@ -65,7 +60,6 @@ export const RecoveryPassword = (): ReturnComponentType => {
       dispatch(sendMessageOnEmailTC(letterToThePost));
     }
   };
-  console.log(email);
   return (
     <div>
       {messageSuccess ? (
@@ -80,7 +74,8 @@ export const RecoveryPassword = (): ReturnComponentType => {
         <div>
           <form onSubmit={handleSubmit}>
             <Input
-              title={TITLE_EMAIL}
+              title={EMAIL}
+              placeholder="Email"
               onChangeText={setEmail}
               value={email}
               type="email"

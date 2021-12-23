@@ -1,9 +1,9 @@
 import { instance } from './instance';
 
 export const cardsPackAPI = {
-  readCardsPack(sortPacks: string, pageCount?: number) {
+  readCardsPack(sortPacks: string, pageCount?: number, page?: number) {
     return instance.get<any>(`cards/pack`, {
-      params: { sortPacks, pageCount },
+      params: { sortPacks, pageCount, page },
     });
   },
   createCardsPack(newPack: string) {

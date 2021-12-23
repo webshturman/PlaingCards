@@ -96,6 +96,7 @@ export const NewPassword = (): ReturnComponentType => {
       <form onSubmit={handleSubmit}>
         <Input
           title={PASSWORD}
+          placeholder="Password"
           onChangeText={(passwordValue: string) =>
             handlePasswordValueChange(passwordValue)
           }
@@ -109,6 +110,7 @@ export const NewPassword = (): ReturnComponentType => {
         )}
         <Input
           title={CONFIRM_PASSWORD}
+          placeholder="Password"
           onChangeText={(passwordConfirmValue: string) =>
             handlePasswordConfirmValueChange(passwordConfirmValue)
           }
