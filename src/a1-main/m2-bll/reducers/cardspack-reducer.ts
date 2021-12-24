@@ -137,6 +137,12 @@ export const setPackCardsTC = (): AppThunk => async (dispatch, getState) => {
       dispatch(setCardsPackTotalCountAC(cardsPack.data.cardPacksTotalCount));
       dispatch(setMinCardsCount(cardsPack.data.minCardsCount));
       dispatch(setMaxCardsCount(cardsPack.data.maxCardsCount));
+      if (minCardsCount !== cardsPack.data.minCardsCount) {
+        dispatch(setMinFilter(cardsPack.data.minCardsCount));
+      }
+      if (maxCardsCount !== cardsPack.data.maxCardsCount) {
+        dispatch(setMaxFilter(cardsPack.data.maxCardsCount));
+      }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response;
@@ -157,11 +163,16 @@ export const setPackCardsTC = (): AppThunk => async (dispatch, getState) => {
         minCardsCount,
         maxCardsCount,
       );
-      console.log(response.data);
       dispatch(setPackCardsAC(response.data.cardPacks));
       dispatch(setCardsPackTotalCountAC(response.data.cardPacksTotalCount));
       dispatch(setMinCardsCount(response.data.minCardsCount));
       dispatch(setMaxCardsCount(response.data.maxCardsCount));
+      if (minCardsCount !== response.data.minCardsCount) {
+        dispatch(setMinFilter(response.data.minCardsCount));
+      }
+      if (maxCardsCount !== response.data.maxCardsCount) {
+        dispatch(setMaxFilter(response.data.maxCardsCount));
+      }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response;

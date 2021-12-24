@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { EMPTY_STRING } from '../../../constants/common';
 import s from '../../../styles/Cards.module.css';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 import {
@@ -9,7 +10,12 @@ import {
   deletePackCardsTC,
   PacksType,
   setCurrentPageAC,
+  setMaxCardsCount,
+  setMaxFilter,
+  setMinCardsCount,
+  setMinFilter,
   setPackCardsTC,
+  setSearchText,
   SortPackCardsAC,
   updatePackCardsTC,
 } from '../../m2-bll/reducers/cardspack-reducer';
@@ -54,6 +60,20 @@ export const PacksCardsTable = (): ReturnComponentType => {
   useEffect(() => {
     dispatch(setPackCardsTC());
   }, [sortPack]);
+
+  useEffect(
+    () => () => {
+      const zero = 0;
+      const one = 1;
+      dispatch(setSearchText(EMPTY_STRING));
+      dispatch(setCurrentPageAC(one));
+      dispatch(setMinCardsCount(zero));
+      dispatch(setMaxCardsCount(zero));
+      dispatch(setMinFilter(zero));
+      dispatch(setMaxFilter(zero));
+    },
+    [],
+  );
 
   const packHeaders = {
     user_name: 'writer',
