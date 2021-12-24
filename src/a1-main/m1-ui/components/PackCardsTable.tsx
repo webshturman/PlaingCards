@@ -2,10 +2,6 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { BUTTON_CARDS } from '../../../constants/common';
-import { EMPTY_STRING } from '../../../constants/common';
-import s from '../../../styles/Cards.module.css';
-import { ReturnComponentType } from '../../../types/ReturnComponentType';
 import {
   createPackCardsTC,
   deletePackCardsTC,
@@ -28,6 +24,10 @@ import { Pagination } from './Pagination/Pagination';
 import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
+
+import { EMPTY_STRING, BUTTON_CARDS } from 'constants/common';
+import s from 'styles/Cards.module.css';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const PacksCardsTable = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
