@@ -1,4 +1,4 @@
-.default,.red{
+.default,.red {
     margin: 20px 0 20px 0;
     background-color: rgb(79, 98, 108);
     border-radius: 10px;
@@ -10,12 +10,41 @@
 .default:disabled {
     opacity: 0.5;
 }
-.default:focus {
-    background-color: deepskyblue;
-}
+/*.default:focus {*/
+/*    background-color: deepskyblue;*/
+/*}*/
 .red {
     background: red;
 }
 .changeButton{
     margin-left: 10px;
 }
+
+.sortButton{
+    background-color: darkslateblue;
+    margin: 3px;
+    border-radius: 10px;
+    color:white;
+    cursor: pointer;
+    width: 25px;
+    height: 15px;
+    font-size: 8px;
+}
+.deleteButton, .updateButton, .cardButton{
+    border-radius: 5px;
+    color:white;
+    cursor: pointer;
+    width: 45px;
+    height: 20px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+.deleteButton{
+    background-color: crimson;
+}
+.updateButton{
+    background-color: blue;
+}
+/*.cardButton{*/
+/*    background-color: ;*/
+/*}*/

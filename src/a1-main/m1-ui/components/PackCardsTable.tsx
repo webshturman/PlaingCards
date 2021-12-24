@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { BUTTON_CARDS } from '../../../constants/common';
 import s from '../../../styles/Cards.module.css';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 import {
@@ -89,6 +90,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
           updateItem={updatePack}
           sortFunction={sortPackCards}
           addBlock={addPackCards}
+          extraButton={BUTTON_CARDS}
         />
         <Pagination
           totalItemsCount={cardPacksTotalCount} // это количество всех колод
