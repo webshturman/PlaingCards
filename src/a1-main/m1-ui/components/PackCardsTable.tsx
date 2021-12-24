@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { BUTTON_CARDS } from '../../../constants/common';
 import { EMPTY_STRING } from '../../../constants/common';
 import s from '../../../styles/Cards.module.css';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
@@ -114,13 +115,14 @@ export const PacksCardsTable = (): ReturnComponentType => {
           updateItem={updatePack}
           sortFunction={sortPackCards}
           addBlock={addPackCards}
+          extraButton={BUTTON_CARDS}
         />
         <Pagination
-          totalItemsCount={cardPacksTotalCount} // это количество всех колод
+          totalItemsCount={cardPacksTotalCount}
           currentPage={page}
           onPageChanged={onPageChanged}
-          pageSize={pageCount} // это количество колод на странице
-          portionSize={portionSize} // это количество страниц в блоке перемотки
+          pageSize={pageCount}
+          portionSize={portionSize}
         />
       </div>
     </div>
