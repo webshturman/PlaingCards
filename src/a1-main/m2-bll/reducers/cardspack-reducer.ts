@@ -7,7 +7,7 @@ import { AppThunk } from '../store';
 
 export enum ACTIONS_TYPE_CARDS_PACK {
   GET_CARDS_PACK_DATA = 'cardspack-reducer/GET-CARDS-PACK-DATA',
-  SORT_CARDS_PACK_DATA = 'cardspack-reducer/SORT-CARDS_PACK-DATA',
+  SORT_CARDS_PACK_DATA = 'cardspack-reducer/SORT-CARDS-PACK-DATA',
   SET_CURRENT_PAGE = 'cardspack-reducer/SET-CURRENT-PAGE',
   SET_CARD_PACKS_TOTAL_COUNT = 'cardspack-reducer/SET-CARD-PACKS-TOTAL-COUNT',
   SET_SEARCH_TEXT = 'cardspack-reducer/SET-SEARCH-TEXT',
@@ -15,7 +15,6 @@ export enum ACTIONS_TYPE_CARDS_PACK {
   SET_MAX_CARDS_COUNT = 'cardspack-reducer/SET-MAX-CARDS-COUNT',
   SET_MIN_FILTER = 'cardspack-reducer/SET-MIN-FILTER',
   SET_MAX_FILTER = 'cardspack-reducer/SET-MAX-FILTER',
-  // SORT_CARDS_PACK_DATA = 'cardspack-reducer/SORT_CARDS_PACK_DATA',
 }
 
 export type PacksType = {

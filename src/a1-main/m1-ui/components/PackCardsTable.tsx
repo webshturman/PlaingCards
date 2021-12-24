@@ -39,6 +39,8 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const cardPacksTotalCount = useSelector<AppRootState, number>(
     state => state.cardspack.cardPacksTotalCount,
   );
+  const one = 1;
+  const initialSortValue = '0updated';
   const page = useSelector<AppRootState, number>(state => state.cardspack.page);
   const pageCount = useSelector<AppRootState, number>(state => state.cardspack.pageCount);
   const portionSize = useSelector<AppRootState, number>(
@@ -47,30 +49,33 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const searchText = useSelector<AppRootState, string>(
     state => state.cardspack.searchText,
   );
-  const sortPacks = useSelector<AppRootState, string>(state => state.cardspack.sortPacks);
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentPageAC(pageNumber));
     if (!searchText) {
       dispatch(setPackCardsTC());
     } else {
-      dispatch(searchPacks(searchText, sortPacks, pageCount, pageNumber));
+      dispatch(searchPacks(searchText, sortPack, pageCount, pageNumber));
     }
   };
 
   useEffect(() => {
-    dispatch(setPackCardsTC());
+    if (!searchText) {
+      dispatch(setPackCardsTC());
+    } else {
+      dispatch(searchPacks(searchText, sortPack, pageCount, one));
+    }
   }, [sortPack]);
 
   useEffect(
     () => () => {
       const zero = 0;
-      const one = 1;
       dispatch(setSearchText(EMPTY_STRING));
       dispatch(setCurrentPageAC(one));
       dispatch(setMinCardsCount(zero));
       dispatch(setMaxCardsCount(zero));
       dispatch(setMinFilter(zero));
       dispatch(setMaxFilter(zero));
+      dispatch(SortPackCardsAC(initialSortValue));
     },
     [],
   );
