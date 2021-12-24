@@ -5,6 +5,7 @@ import { AppActionType } from './actions/app-actions';
 import { AuthActionsType } from './actions/auth-actions';
 import { CardsActionsType } from './actions/cards-actions';
 import { PasswordActionType } from './actions/password-actions';
+import { ProfileActionsType } from './actions/profile-actions';
 import { RegisterActionType } from './actions/register-actions';
 import { appReducer } from './reducers/app-reducer';
 import { authReducer } from './reducers/auth-reducer';
@@ -34,7 +35,8 @@ export type AppActionsType =
   | PasswordActionType
   | AppActionType
   | CardsPackActionType
-  | CardsActionsType;
+  | CardsActionsType
+  | ProfileActionsType;
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

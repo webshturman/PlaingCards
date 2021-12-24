@@ -6,6 +6,8 @@ import { Navigate } from 'react-router-dom';
 import { PATH } from '../../../enums/routes';
 import s from '../../../styles/Cards.module.css';
 
+import { SelectingSidebar } from './SelectingSidebar';
+
 import { AppRootState } from 'a1-main/m2-bll/store';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -16,6 +18,7 @@ export const Profile = (): ReturnComponentType => {
 
   return (
     <div className={s.CardsContainer}>
+      <SelectingSidebar />
       <div className={s.CardsBlock}>
         <h1 className={s.titleCardsBlock}>My Packs list</h1>
         {/* <div className={s.loader}>{status && <Loader />}</div> */}
