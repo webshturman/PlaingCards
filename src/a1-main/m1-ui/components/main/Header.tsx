@@ -23,7 +23,7 @@ export const Header = (): ReturnComponentType => {
   return (
     <div className={style.header}>
       <div className={style.headerContainer}>
-        <h1 className={style.title}>Plaing Cards</h1>
+        <h1 className={style.title}>Playing Cards</h1>
         {AuthUserStatus && (
           <div className={style.headerBlock}>
             <div className={style.itemMenu}>

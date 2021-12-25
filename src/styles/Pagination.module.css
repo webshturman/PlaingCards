@@ -3,6 +3,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15px;
+}
+
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .text {

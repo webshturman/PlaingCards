@@ -25,8 +25,7 @@ export const Pagination: React.FC<PaginationPropsType> = ({
   const one = 1;
   const pagesCount = Math.ceil(totalItemsCount / pageSize);
   const pages = [];
-  // eslint-disable-next-line no-plusplus
-  for (let i = 1; i <= pagesCount; i++) {
+  for (let i = 1; i <= pagesCount; i += one) {
     pages.push(i);
   }
   const appStatus = useSelector<AppRootState, boolean>(state => state.app.status);
@@ -38,15 +37,7 @@ export const Pagination: React.FC<PaginationPropsType> = ({
   return (
     <div className={s.pagination}>
       <div>
-        <Button
-          disabled={portionNumber <= one}
-          className={s.button}
-          onClick={() => setPortionNumber(portionNumber - one)}
-        >
-          Prev list
-        </Button>
-
-        <Button
+        {/* <Button
           disabled={currentPage <= one || appStatus}
           className={s.button}
           onClick={() => onPageChanged(currentPage - one)}
@@ -60,35 +51,45 @@ export const Pagination: React.FC<PaginationPropsType> = ({
           onClick={() => onPageChanged(currentPage + one)}
         >
           Next
+        </Button> */}
+      </div>
+      {/* <div className={s.text}>
+        Current page: <span className={s.currentNumber}>{currentPage}</span>
+      </div> */}
+      <div className={s.paginationContainer}>
+        <Button
+          disabled={portionNumber <= one}
+          className={s.button}
+          onClick={() => setPortionNumber(portionNumber - one)}
+        >
+          Prev
         </Button>
-
+        <div>
+          {pages
+            .filter(
+              page => page >= leftPortionPageNumber && page <= rightPortionPageNumber,
+            )
+            .map(page => (
+              <button
+                type="button"
+                key={page}
+                onClick={() => {
+                  onPageChanged(page);
+                }}
+                disabled={appStatus}
+                className={`${s.page} ${currentPage === page ? s.selectPage : ''}`}
+              >
+                {page}
+              </button>
+            ))}
+        </div>
         <Button
           disabled={portionCount <= portionNumber}
           className={s.button}
           onClick={() => setPortionNumber(portionNumber + one)}
         >
-          Next list
+          Next
         </Button>
-      </div>
-      <div className={s.text}>
-        Current page: <span className={s.currentNumber}>{currentPage}</span>
-      </div>
-      <div>
-        {pages
-          .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
-          .map(page => (
-            <button
-              type="button"
-              key={page}
-              onClick={() => {
-                onPageChanged(page);
-              }}
-              disabled={appStatus}
-              className={`${s.page} ${currentPage === page ? s.selectPage : ''}`}
-            >
-              {page}
-            </button>
-          ))}
       </div>
     </div>
   );

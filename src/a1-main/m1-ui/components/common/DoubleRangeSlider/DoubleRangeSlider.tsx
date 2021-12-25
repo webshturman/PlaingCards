@@ -31,14 +31,14 @@ export class DoubleRangeSlider extends React.Component<
   SuperDoubleRangePropsType,
   StateType
 > {
-  constructor(props: any) {
+  constructor(props: SuperDoubleRangePropsType) {
     super(props);
     this.state = {
       start: props.startValues,
     };
   }
 
-  componentDidUpdate(prevProps: Readonly<SuperDoubleRangePropsType>): any {
+  componentDidUpdate(prevProps: Readonly<SuperDoubleRangePropsType>): void {
     const { value1 } = this.props;
     if (value1 !== prevProps.value1) {
       // eslint-disable-next-line react/no-did-update-set-state
@@ -48,12 +48,12 @@ export class DoubleRangeSlider extends React.Component<
     }
   }
 
-  onUpdate = (values: any[], handle: number, unencodedValues: number[]): any => {
+  onUpdate = (values: any[], handle: number, unencodedValues: number[]): void => {
     const { onUpdate } = this.props;
     onUpdate([unencodedValues[FIRST_ELEMENT], unencodedValues[SECOND_ELEMENT]]);
   };
 
-  render(): any {
+  render(): React.ReactElement {
     const { min, max, step, disable, onChange } = this.props;
     const { start } = this.state;
     return (
