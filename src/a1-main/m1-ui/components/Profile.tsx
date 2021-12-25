@@ -1,18 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { PATH } from '../../../enums/routes';
 import s from '../../../styles/Cards.module.css';
 
+import { Loader } from './common/Loader';
+import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
+import { UniversalTable } from './UniversalTable';
 
+import { PacksType, setPackCardsTC } from 'a1-main/m2-bll/reducers/cardspack-reducer';
 import { AppRootState } from 'a1-main/m2-bll/store';
+import { searchPacks } from 'a1-main/m2-bll/thunks/search-thunk';
+import { BUTTON_CARDS, FIRST_PAGE, packHeaders } from 'constants/common';
 import { ReturnComponentType } from 'types/ReturnComponentType';
+import { packUtils } from 'utils/packs-functions';
 
 export const Profile = (): ReturnComponentType => {
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
+  const status = useSelector<AppRootState, boolean>(state => state.app.status);
+  const sortPack = useSelector<AppRootState, string>(state => state.cardspack.sortPacks);
+  const pageCount = useSelector<AppRootState, number>(state => state.cardspack.pageCount);
+  const packCards = useSelector<AppRootState, Array<PacksType>>(
+    state => state.cardspack.cardPacks,
+  );
+  const searchText = useSelector<AppRootState, string>(
+    state => state.cardspack.searchText,
+  );
+  const [addPackCards, sortPackCards, deletePack, updatePack] = packUtils();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!searchText) {
+      dispatch(setPackCardsTC());
+    } else {
+      dispatch(searchPacks(searchText, sortPack, pageCount, FIRST_PAGE));
+    }
+  }, [sortPack]);
 
   if (!AuthUserStatus) return <Navigate to={PATH.LOGIN_FORM} />;
 
@@ -21,15 +47,17 @@ export const Profile = (): ReturnComponentType => {
       <SelectingSidebar />
       <div className={s.CardsBlock}>
         <h1 className={s.titleCardsBlock}>My Packs list</h1>
-        {/* <div className={s.loader}>{status && <Loader />}</div> */}
-        {/* <UniversalTable */}
-        {/*  items={cards} */}
-        {/*  headers={cardsHeaders} */}
-        {/*  deleteItem={handleDeleteCard} */}
-        {/*  updateItem={handleUpdateCard} */}
-        {/*  sortFunction={() => {}} */}
-        {/*  addBlock={handleAddCard} */}
-        {/* /> */}
+        <div className={s.loader}>{status && <Loader />}</div>
+        <Search />
+        <UniversalTable
+          items={packCards}
+          headers={packHeaders}
+          deleteItem={deletePack}
+          updateItem={updatePack}
+          sortFunction={sortPackCards}
+          addBlock={addPackCards}
+          extraButton={BUTTON_CARDS}
+        />
         {/* <Pagination */}
         {/*  totalItemsCount={cardsTotalCount} // это количество всех колод */}
         {/*  currentPage={page} */}

@@ -48,7 +48,7 @@ export const UniversalTable: FC<UniversalTableType> = ({
               <Button
                 className={style.sortButton}
                 type="button"
-                onClick={() => sortFunction(`0${el[FIRST_ELEMENT]}`)}
+                onClick={() => sortFunction(`1${el[FIRST_ELEMENT]}`)}
               >
                 down
               </Button>
