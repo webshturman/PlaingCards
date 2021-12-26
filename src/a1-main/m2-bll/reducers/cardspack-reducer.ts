@@ -5,6 +5,8 @@ import { searchApi } from '../../m3-dal/search-api';
 import { setErrorMessageAC, setStatusAC } from '../actions/app-actions';
 import { AppThunk } from '../store';
 
+import { EMPTY_STRING } from 'constants/common';
+
 export enum ACTIONS_TYPE_CARDS_PACK {
   GET_CARDS_PACK_DATA = 'cardspack-reducer/GET-CARDS-PACK-DATA',
   SORT_CARDS_PACK_DATA = 'cardspack-reducer/SORT-CARDS-PACK-DATA',
@@ -125,65 +127,73 @@ export const cardsPackReducer = (
 export const SortPackCardsAC = (sortValue: string) =>
   ({ type: ACTIONS_TYPE_CARDS_PACK.SORT_CARDS_PACK_DATA, sortValue } as const);
 
-export const setPackCardsTC = (): AppThunk => async (dispatch, getState) => {
-  const { sortPacks, pageCount, page, searchText, minCardsCount, maxCardsCount } =
-    getState().cardspack;
-  dispatch(setStatusAC(true));
-  if (!searchText) {
-    try {
-      const cardsPack = await cardsPackAPI.readCardsPack(sortPacks, pageCount, page);
-      dispatch(setPackCardsAC(cardsPack.data.cardPacks));
-      dispatch(setCardsPackTotalCountAC(cardsPack.data.cardPacksTotalCount));
-      dispatch(setMinCardsCount(cardsPack.data.minCardsCount));
-      dispatch(setMaxCardsCount(cardsPack.data.maxCardsCount));
-      if (minCardsCount !== cardsPack.data.minCardsCount) {
-        dispatch(setMinFilter(cardsPack.data.minCardsCount));
+export const setPackCardsTC =
+  (userId: string): AppThunk =>
+  async (dispatch, getState) => {
+    const { sortPacks, pageCount, page, searchText, minCardsCount, maxCardsCount } =
+      getState().cardspack;
+    dispatch(setStatusAC(true));
+    if (!searchText) {
+      try {
+        const cardsPack = await cardsPackAPI.readCardsPack(
+          sortPacks,
+          pageCount,
+          page,
+          userId,
+        );
+        dispatch(setPackCardsAC(cardsPack.data.cardPacks));
+        dispatch(setCardsPackTotalCountAC(cardsPack.data.cardPacksTotalCount));
+        dispatch(setMinCardsCount(cardsPack.data.minCardsCount));
+        dispatch(setMaxCardsCount(cardsPack.data.maxCardsCount));
+        if (minCardsCount !== cardsPack.data.minCardsCount) {
+          dispatch(setMinFilter(cardsPack.data.minCardsCount));
+        }
+        if (maxCardsCount !== cardsPack.data.maxCardsCount) {
+          dispatch(setMaxFilter(cardsPack.data.maxCardsCount));
+        }
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          const errorMessage = error.response;
+          dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
+        } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+          dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
+        }
+      } finally {
+        dispatch(setStatusAC(false));
       }
-      if (maxCardsCount !== cardsPack.data.maxCardsCount) {
-        dispatch(setMaxFilter(cardsPack.data.maxCardsCount));
+    } else {
+      try {
+        const response = await searchApi.searchPacks(
+          sortPacks,
+          searchText,
+          pageCount,
+          page,
+          userId,
+          minCardsCount,
+          maxCardsCount,
+        );
+        dispatch(setPackCardsAC(response.data.cardPacks));
+        dispatch(setCardsPackTotalCountAC(response.data.cardPacksTotalCount));
+        dispatch(setMinCardsCount(response.data.minCardsCount));
+        dispatch(setMaxCardsCount(response.data.maxCardsCount));
+        if (minCardsCount !== response.data.minCardsCount) {
+          dispatch(setMinFilter(response.data.minCardsCount));
+        }
+        if (maxCardsCount !== response.data.maxCardsCount) {
+          dispatch(setMaxFilter(response.data.maxCardsCount));
+        }
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          const errorMessage = error.response;
+          dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
+        } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+          dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
+        }
+      } finally {
+        dispatch(setStatusAC(false));
       }
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage = error.response;
-        dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
-      } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
-        dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
-      }
-    } finally {
-      dispatch(setStatusAC(false));
     }
-  } else {
-    try {
-      const response = await searchApi.searchPacks(
-        sortPacks,
-        searchText,
-        pageCount,
-        page,
-        minCardsCount,
-        maxCardsCount,
-      );
-      dispatch(setPackCardsAC(response.data.cardPacks));
-      dispatch(setCardsPackTotalCountAC(response.data.cardPacksTotalCount));
-      dispatch(setMinCardsCount(response.data.minCardsCount));
-      dispatch(setMaxCardsCount(response.data.maxCardsCount));
-      if (minCardsCount !== response.data.minCardsCount) {
-        dispatch(setMinFilter(response.data.minCardsCount));
-      }
-      if (maxCardsCount !== response.data.maxCardsCount) {
-        dispatch(setMaxFilter(response.data.maxCardsCount));
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage = error.response;
-        dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
-      } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
-        dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
-      }
-    } finally {
-      dispatch(setStatusAC(false));
-    }
-  }
-};
+  };
 
 export const createPackCardsTC =
   (name: string): AppThunk =>
@@ -191,7 +201,7 @@ export const createPackCardsTC =
     dispatch(setStatusAC(true));
     try {
       const cardsPack = await cardsPackAPI.createCardsPack(name);
-      dispatch(setPackCardsTC());
+      dispatch(setPackCardsTC(EMPTY_STRING));
       console.log(cardsPack.data);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -211,7 +221,7 @@ export const deletePackCardsTC =
     dispatch(setStatusAC(true));
     try {
       const cardsPack = await cardsPackAPI.deleteCardsPack(_id);
-      dispatch(setPackCardsTC());
+      dispatch(setPackCardsTC(EMPTY_STRING));
       console.log(cardsPack.data);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -231,7 +241,7 @@ export const updatePackCardsTC =
     dispatch(setStatusAC(true));
     try {
       const cardsPack = await cardsPackAPI.updatesCardsPack(_id, name);
-      dispatch(setPackCardsTC());
+      dispatch(setPackCardsTC(EMPTY_STRING));
       console.log(cardsPack.data);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,7 +11,11 @@ import { Input } from './common/CustomInput/Input';
 import { EMPTY_STRING, SEARCH } from 'constants/common';
 import s from 'styles/search.module.css';
 
-export const Search = (): any => {
+type SearchType = {
+  // eslint-disable-next-line react/require-default-props
+  userId?: string;
+};
+export const Search: FC<SearchType> = ({ userId }): any => {
   const dispatch = useDispatch();
   const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
   const sortPacks = useSelector<AppRootState, string>(state => state.cardspack.sortPacks);
@@ -22,7 +26,9 @@ export const Search = (): any => {
   const [searchText, setSearchText] = useState<string>(EMPTY_STRING);
   const handleSubmit = (e: FormEvent<HTMLFormElement>): any => {
     e.preventDefault();
-    dispatch(searchPacks(searchText, sortPacks, pageCount, page, minFilter, maxFilter));
+    dispatch(
+      searchPacks(searchText, sortPacks, pageCount, page, userId, minFilter, maxFilter),
+    );
   };
 
   const handleSearchValueChange = (value: string): void => {

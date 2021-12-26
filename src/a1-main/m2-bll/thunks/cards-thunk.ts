@@ -6,17 +6,6 @@ import { AppThunk } from '../store';
 
 import { cardsAddType } from 'a1-main/m3-dal/types/cardsType';
 
-// export const getCards =
-//   (PackId: string, page: number): AppThunk =>
-//   async dispatch => {
-//     try {
-//       // eslint-disable-next-line camelcase
-//       const response = await cardsAPI.getCardsList(PackId, page);
-//       dispatch(setCardsData(response.data));
-//     } catch (error: any) {
-//       console.log(error);
-//     }
-//   };
 export const getCards =
   // eslint-disable-next-line camelcase
     (cardsPack_id: string): AppThunk =>

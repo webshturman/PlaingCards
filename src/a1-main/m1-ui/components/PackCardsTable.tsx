@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,18 +19,23 @@ import {
 import { AppRootState } from '../../m2-bll/store';
 import { searchPacks } from '../../m2-bll/thunks/search-thunk';
 
+import { Button } from './common/CustomButton/Button';
 import { Loader } from './common/Loader';
 import { Pagination } from './Pagination/Pagination';
 import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
 
-import { EMPTY_STRING, BUTTON_CARDS } from 'constants/common';
+import { EMPTY_STRING, BUTTON_CARDS, FIRST_PAGE } from 'constants/common';
 import s from 'styles/Cards.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const PacksCardsTable = (): ReturnComponentType => {
+  const [allPacks, setAllPacks] = useState<boolean>(true);
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
+  // @ts-ignore
+  // eslint-disable-next-line no-underscore-dangle
+  const userId = useSelector<AppRootState, string>(state => state.profile._id);
   const packCards = useSelector<AppRootState, Array<PacksType>>(
     state => state.cardspack.cardPacks,
   );
@@ -40,7 +45,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const cardPacksTotalCount = useSelector<AppRootState, number>(
     state => state.cardspack.cardPacksTotalCount,
   );
-  const one = 1;
+  // const one = 1;
   const initialSortValue = '0updated';
   const page = useSelector<AppRootState, number>(state => state.cardspack.page);
   const pageCount = useSelector<AppRootState, number>(state => state.cardspack.pageCount);
@@ -53,7 +58,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentPageAC(pageNumber));
     if (!searchText) {
-      dispatch(setPackCardsTC());
+      dispatch(setPackCardsTC(EMPTY_STRING));
     } else {
       dispatch(searchPacks(searchText, sortPack, pageCount, pageNumber));
     }
@@ -61,25 +66,26 @@ export const PacksCardsTable = (): ReturnComponentType => {
 
   useEffect(() => {
     if (!searchText) {
-      dispatch(setPackCardsTC());
+      if (allPacks) {
+        dispatch(setPackCardsTC(EMPTY_STRING));
+      } else {
+        dispatch(setPackCardsTC(userId));
+      }
     } else {
-      dispatch(searchPacks(searchText, sortPack, pageCount, one));
+      dispatch(searchPacks(searchText, sortPack, pageCount, FIRST_PAGE));
     }
   }, [sortPack]);
 
-  useEffect(
-    () => () => {
-      const zero = 0;
-      dispatch(setSearchText(EMPTY_STRING));
-      dispatch(setCurrentPageAC(one));
-      dispatch(setMinCardsCount(zero));
-      dispatch(setMaxCardsCount(zero));
-      dispatch(setMinFilter(zero));
-      dispatch(setMaxFilter(zero));
-      dispatch(SortPackCardsAC(initialSortValue));
-    },
-    [],
-  );
+  useEffect(() => {
+    const zero = 0;
+    dispatch(setSearchText(EMPTY_STRING));
+    dispatch(setCurrentPageAC(FIRST_PAGE));
+    dispatch(setMinCardsCount(zero));
+    dispatch(setMaxCardsCount(zero));
+    dispatch(setMinFilter(zero));
+    dispatch(setMaxFilter(zero));
+    dispatch(SortPackCardsAC(initialSortValue));
+  }, []);
 
   const packHeaders = {
     user_name: 'writer',
@@ -100,14 +106,32 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const updatePack = (id: string, title: string): void => {
     dispatch(updatePackCardsTC(id, title));
   };
-
+  const getAllPacks = (): void => {
+    dispatch(setPackCardsTC(EMPTY_STRING));
+    setAllPacks(true);
+  };
+  const getMyPacks = (): void => {
+    dispatch(setPackCardsTC(userId));
+    setAllPacks(false);
+  };
   return (
     <div className={s.CardsContainer}>
-      <SelectingSidebar />
+      <SelectingSidebar>
+        <h1>Show Cards Packs</h1>
+        <div>
+          <Button type="button" disabled={!allPacks} onClick={getMyPacks}>
+            My
+          </Button>
+          <Button type="button" disabled={allPacks} onClick={getAllPacks}>
+            All
+          </Button>
+        </div>
+      </SelectingSidebar>
       <div className={s.CardsBlock}>
         <h1 className={s.titleCardsBlock}>Packs list</h1>
         <div className={s.loader}>{status && <Loader />}</div>
-        <Search />
+        <Search userId={allPacks ? EMPTY_STRING : userId} />
+        {/* {allPacks ? <Search userId={EMPTY_STRING} /> : <Search userId={userId} />} */}
         <UniversalTable
           items={packCards}
           headers={packHeaders}
