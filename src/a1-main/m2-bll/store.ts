@@ -4,12 +4,14 @@ import thunk, { ThunkAction } from 'redux-thunk';
 import { AppActionType } from './actions/app-actions';
 import { AuthActionsType } from './actions/auth-actions';
 import { CardsActionsType } from './actions/cards-actions';
+import { LearnActionsType } from './actions/learn-actions';
 import { PasswordActionType } from './actions/password-actions';
 import { RegisterActionType } from './actions/register-actions';
 import { appReducer } from './reducers/app-reducer';
 import { authReducer } from './reducers/auth-reducer';
 import { cardsReducer } from './reducers/cards-reducer';
 import { CardsPackActionType, cardsPackReducer } from './reducers/cardspack-reducer';
+import { LearnReducer } from './reducers/Learn-reducer';
 import { passwordReducer } from './reducers/password-reducer';
 import { profileReducer } from './reducers/profile-reducer';
 import { registerReducer } from './reducers/register-reducer';
@@ -22,6 +24,7 @@ const rootReducer = combineReducers({
   app: appReducer,
   cardspack: cardsPackReducer,
   cards: cardsReducer,
+  learn: LearnReducer,
 });
 
 // @ts-ignore
@@ -34,7 +37,8 @@ export type AppActionsType =
   | PasswordActionType
   | AppActionType
   | CardsPackActionType
-  | CardsActionsType;
+  | CardsActionsType
+  | LearnActionsType;
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

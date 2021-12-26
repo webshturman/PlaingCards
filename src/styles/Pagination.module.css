@@ -28,6 +28,7 @@
     display: inline-block;
     font-weight: 700;
     background-color: green !important;
+    cursor: default !important;
 }
 
 .page {
@@ -75,8 +76,6 @@
 .button:hover {
      background-color: #00aa00;
      color: #fff;
-     text-shadow: #fff 0 0 4px;
-     box-shadow: #009900 0 0 15px;
  }
 .button:disabled {
      background-color: #555;

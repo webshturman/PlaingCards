@@ -25,7 +25,7 @@ import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
 
-import { EMPTY_STRING, BUTTON_CARDS } from 'constants/common';
+import { EMPTY_STRING, BUTTON_CARDS, ONE } from 'constants/common';
 import s from 'styles/Cards.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -40,7 +40,6 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const cardPacksTotalCount = useSelector<AppRootState, number>(
     state => state.cardspack.cardPacksTotalCount,
   );
-  const one = 1;
   const initialSortValue = '0updated';
   const page = useSelector<AppRootState, number>(state => state.cardspack.page);
   const pageCount = useSelector<AppRootState, number>(state => state.cardspack.pageCount);
@@ -63,7 +62,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
     if (!searchText) {
       dispatch(setPackCardsTC());
     } else {
-      dispatch(searchPacks(searchText, sortPack, pageCount, one));
+      dispatch(searchPacks(searchText, sortPack, pageCount, ONE));
     }
   }, [sortPack]);
 
@@ -71,7 +70,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
     () => () => {
       const zero = 0;
       dispatch(setSearchText(EMPTY_STRING));
-      dispatch(setCurrentPageAC(one));
+      dispatch(setCurrentPageAC(ONE));
       dispatch(setMinCardsCount(zero));
       dispatch(setMaxCardsCount(zero));
       dispatch(setMinFilter(zero));

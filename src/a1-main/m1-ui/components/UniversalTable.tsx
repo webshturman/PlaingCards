@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { FIRST_ELEMENT, SECOND_ELEMENT } from '../../../constants/common';
-import { PATH } from '../../../enums/routes';
-import style from '../../../styles/Button.module.css';
-import s from '../../../styles/Table.module.css';
-import { ReturnComponentType } from '../../../types/ReturnComponentType';
-
 import { Button } from './common/CustomButton/Button';
+
+import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
+import { PATH } from 'enums/routes';
+import style from 'styles/Button.module.css';
+import s from 'styles/Table.module.css';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type UniversalTableType = {
   items: Array<any>;
@@ -86,6 +86,20 @@ export const UniversalTable: FC<UniversalTableType> = ({
               onClick={() => updateItem(pack._id, 'x0x0x0x00x')}
             >
               Update
+            </Button>
+
+            <Button
+              className={style.learnButton}
+              type="button"
+              /* eslint-disable-next-line no-underscore-dangle */
+              onClick={() =>
+                navigate(PATH.LEARN, {
+                  // eslint-disable-next-line no-underscore-dangle
+                  state: { packId: pack._id, packName: pack.name },
+                })
+              }
+            >
+              Learn
             </Button>
             {extraButton && (
               <Button

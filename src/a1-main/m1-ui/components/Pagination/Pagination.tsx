@@ -74,7 +74,9 @@ export const Pagination: React.FC<PaginationPropsType> = ({
                 type="button"
                 key={page}
                 onClick={() => {
-                  onPageChanged(page);
+                  if (currentPage !== page) {
+                    onPageChanged(page);
+                  }
                 }}
                 disabled={appStatus}
                 className={`${s.page} ${currentPage === page ? s.selectPage : ''}`}

@@ -11,4 +11,5 @@ export enum PATH {
   CARDS = '/cards/',
   CARDS_PACK_TABLE = 'cards_pack_table',
   CARDS_TABLE = 'cards_table',
+  LEARN = 'learn',
 }

@@ -79,11 +79,11 @@ export const CardsTable = (): ReturnComponentType => {
           addBlock={handleAddCard}
         />
         <Pagination
-          totalItemsCount={cardsTotalCount} // это количество всех колод
+          totalItemsCount={cardsTotalCount}
           currentPage={page}
           onPageChanged={onPageChanged}
-          pageSize={pageCount} // это количество колод на странице
-          portionSize={PORTION_SIZE} // это количество страниц в блоке перемотки
+          pageSize={pageCount}
+          portionSize={PORTION_SIZE}
         />
       </div>
     </div>
