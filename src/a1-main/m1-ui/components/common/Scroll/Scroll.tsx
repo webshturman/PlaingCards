@@ -1,6 +1,6 @@
 import React from 'react';
 
-import scrollArrow from 'assets/images/present.png';
+import scrollArrow from 'assets/images/scrollArrow.png';
 import { SCROLL_BORDER_X, SCROLL_BORDER_Y, SCROLL_LIMIT } from 'constants/common';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 

@@ -1,14 +1,16 @@
 import React, { FC } from 'react';
 
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { FIRST_ELEMENT, SECOND_ELEMENT } from '../../../constants/common';
-import { PATH } from '../../../enums/routes';
-import style from '../../../styles/Button.module.css';
-import s from '../../../styles/Table.module.css';
-import { ReturnComponentType } from '../../../types/ReturnComponentType';
-
 import { Button } from './common/CustomButton/Button';
+
+import { AppRootState } from 'a1-main/m2-bll/store';
+import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
+import { PATH } from 'enums/routes';
+import style from 'styles/Button.module.css';
+import s from 'styles/Table.module.css';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type UniversalTableType = {
   items: Array<any>;
@@ -16,8 +18,6 @@ type UniversalTableType = {
   sortFunction: (value: string) => void;
   showDelete: (modal: boolean) => void;
   showUpdate: (modal: boolean) => void;
-  // eslint-disable-next-line react/require-default-props
-  extraButton?: string;
   setId: (id: string) => void;
 };
 export const UniversalTable: FC<UniversalTableType> = ({
@@ -26,10 +26,13 @@ export const UniversalTable: FC<UniversalTableType> = ({
   sortFunction,
   showUpdate,
   showDelete,
-  extraButton,
   setId,
 }): ReturnComponentType => {
+  // @ts-ignore
+  const userId = useSelector<AppRootState, string>(state => state.profile._id);
+  // const packId = useSelector<AppRootState, string>(state => state.cardspack.cardPacks);
   const navigate = useNavigate();
+  // const idEqual = userId === packId;
   return (
     <table className={s.table}>
       <tr>
@@ -55,14 +58,10 @@ export const UniversalTable: FC<UniversalTableType> = ({
           </th>
         ))}
         <th>
-          {/* <Button type="button" onClick={() => showCreate(true)}> */}
-          {/*  Add */}
-          {/* </Button> */}
           <span>actions</span>
         </th>
       </tr>
       {items.map(pack => (
-        // eslint-disable-next-line no-underscore-dangle
         <tr key={pack._id}>
           {Object.keys(headers).map(el => (
             <td key={el}>
@@ -70,38 +69,39 @@ export const UniversalTable: FC<UniversalTableType> = ({
             </td>
           ))}
           <td>
-            <Button
-              className={style.deleteButton}
-              type="button"
-              onClick={() => {
-                showDelete(true);
-                // eslint-disable-next-line no-underscore-dangle
-                setId(pack._id);
-              }}
-            >
-              Delete
-            </Button>
+            {userId === pack.user_id && (
+              <>
+                <Button
+                  className={style.deleteButton}
+                  type="button"
+                  onClick={() => {
+                    showDelete(true);
+                    setId(pack._id);
+                  }}
+                >
+                  Delete
+                </Button>
+
+                <Button
+                  className={style.updateButton}
+                  type="button"
+                  onClick={() => {
+                    showUpdate(true);
+                    setId(pack._id);
+                  }}
+                >
+                  Update
+                </Button>
+              </>
+            )}
 
             <Button
-              className={style.updateButton}
+              className={style.cardButton}
               type="button"
-              onClick={() => {
-                showUpdate(true);
-                // eslint-disable-next-line no-underscore-dangle
-                setId(pack._id);
-              }}
+              onClick={() => navigate(PATH.CARDS_TABLE, { state: pack._id })}
             >
-              Update
+              Card
             </Button>
-            {extraButton && (
-              <Button
-                className={style.cardButton}
-                type="button"
-                onClick={() => navigate(PATH.CARDS_TABLE, { state: pack._id })}
-              >
-                {extraButton}
-              </Button>
-            )}
           </td>
         </tr>
       ))}

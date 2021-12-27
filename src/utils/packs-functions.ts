@@ -16,11 +16,11 @@ export const packUtils = (): any => {
   const sortPackCards = (value: string): void => {
     dispatch(SortPackCardsAC(value));
   };
-  const deletePack = (id: string): void => {
-    dispatch(deletePackCardsTC(id));
+  const deletePack = (id: string, userId: string): void => {
+    dispatch(deletePackCardsTC(id, userId));
   };
-  const updatePack = (id: string, title: string): void => {
-    dispatch(updatePackCardsTC(id, title));
+  const updatePack = (id: string, title: string, userId: string): void => {
+    dispatch(updatePackCardsTC(id, title, userId));
   };
   return [addPackCards, sortPackCards, deletePack, updatePack];
 };
