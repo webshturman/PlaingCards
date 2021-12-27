@@ -147,7 +147,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
         <div className={s.loader}>{status && <Loader />}</div>
         <div className={st.searchAddBlock}>
           <Search userId={allPacks ? EMPTY_STRING : userId} />
-          <Button type="button" onClick={addPackCards}>
+          <Button type="button" onClick={() => addPackCards}>
             Add Pack
           </Button>
         </div>
@@ -157,7 +157,6 @@ export const PacksCardsTable = (): ReturnComponentType => {
           headers={packHeaders}
           sortFunction={sortPackCards}
           extraButton={BUTTON_CARDS}
-          showCreate={setCreateModal}
           showDelete={setDeleteModal}
           showUpdate={setUpdateModal}
           setId={setPackId}

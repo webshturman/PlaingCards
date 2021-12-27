@@ -14,7 +14,6 @@ type UniversalTableType = {
   items: Array<any>;
   headers: { [x: string]: string };
   sortFunction: (value: string) => void;
-  showCreate: (modal: boolean) => void;
   showDelete: (modal: boolean) => void;
   showUpdate: (modal: boolean) => void;
   // eslint-disable-next-line react/require-default-props
@@ -25,7 +24,6 @@ export const UniversalTable: FC<UniversalTableType> = ({
   items,
   headers,
   sortFunction,
-  showCreate,
   showUpdate,
   showDelete,
   extraButton,
@@ -49,7 +47,7 @@ export const UniversalTable: FC<UniversalTableType> = ({
               <Button
                 className={style.sortButton}
                 type="button"
-                onClick={() => sortFunction(`0${el[FIRST_ELEMENT]}`)}
+                onClick={() => sortFunction(`1${el[FIRST_ELEMENT]}`)}
               >
                 down
               </Button>
@@ -57,9 +55,9 @@ export const UniversalTable: FC<UniversalTableType> = ({
           </th>
         ))}
         <th>
-          {/*<Button type="button" onClick={() => showCreate(true)}>*/}
-          {/*  Add*/}
-          {/*</Button>*/}
+          {/* <Button type="button" onClick={() => showCreate(true)}> */}
+          {/*  Add */}
+          {/* </Button> */}
           <span>actions</span>
         </th>
       </tr>

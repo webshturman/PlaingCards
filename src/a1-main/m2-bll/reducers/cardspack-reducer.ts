@@ -67,8 +67,6 @@ export const cardsPackReducer = (
   }
 };
 
-// export const SortPackCardsAC = (sortValue: string) =>
-//   ({ type: ACTIONS_TYPE_CARDS_PACK.SORT_CARDS_PACK_DATA, sortValue } as const);
 //
 // export const setPackCardsTC =
 //   (userId: string): AppThunk =>

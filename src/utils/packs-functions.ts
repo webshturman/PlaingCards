@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
 
+import { SortPackCardsAC } from '../a1-main/m2-bll/actions/pack-action';
 import {
   createPackCardsTC,
   deletePackCardsTC,
-  SortPackCardsAC,
   updatePackCardsTC,
-} from '../a1-main/m2-bll/reducers/cardspack-reducer';
+} from '../a1-main/m2-bll/thunks/pack-thunk';
 
 export const packUtils = (): any => {
   const dispatch = useDispatch();

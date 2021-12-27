@@ -95,15 +95,11 @@ export const CardsTable = (): ReturnComponentType => {
           </Button>
         </div>
         <UniversalTable
-          showCreate={setCreateCardModal}
           showDelete={setDeleteCardModal}
           showUpdate={setUpdateCardModal}
           items={cards}
           headers={cardsHeaders}
-          // deleteItem={handleDeleteCard}
-          // updateItem={handleUpdateCard}
           sortFunction={handleSortCards}
-          // addBlock={handleAddCard}
           setId={setCardId}
         />
         <Pagination
