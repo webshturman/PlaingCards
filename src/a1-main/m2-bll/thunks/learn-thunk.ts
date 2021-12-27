@@ -1,6 +1,10 @@
 import { learnAPI } from '../../m3-dal/learn-api';
 import { setStatusAC } from '../actions/app-actions';
-import { setCardsData, setQuestionNumber } from '../actions/learn-actions';
+import {
+  setAnswerStatus,
+  setCardsData,
+  setQuestionNumber,
+} from '../actions/learn-actions';
 import { AppThunk } from '../store';
 
 export const getCards =  // eslint-disable-next-line camelcase
@@ -24,12 +28,22 @@ export const getCards =  // eslint-disable-next-line camelcase
     }
   };
 
-export const incrementQuestionNumber =
+export const changeQuestionNumber =
   (questionNumber: number): AppThunk =>
   async dispatch => {
     try {
       dispatch(setQuestionNumber(questionNumber));
     } catch (error: any) {
-      console.log(`Error set question number. ${error}`);
+      console.log(`Error setting question number. ${error}`);
+    }
+  };
+
+export const changeAnswerStatus =
+  (answer: boolean): AppThunk =>
+  async dispatch => {
+    try {
+      dispatch(setAnswerStatus(answer));
+    } catch (error: any) {
+      console.log(`Error setting answer status. ${error}`);
     }
   };
