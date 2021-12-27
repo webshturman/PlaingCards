@@ -21,6 +21,7 @@ import { searchPacks } from '../../m2-bll/thunks/search-thunk';
 
 import { Button } from './common/CustomButton/Button';
 import { Loader } from './common/Loader';
+import { Scroll } from './common/Scroll/Scroll';
 import { Pagination } from './Pagination/Pagination';
 import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
@@ -45,7 +46,6 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const cardPacksTotalCount = useSelector<AppRootState, number>(
     state => state.cardspack.cardPacksTotalCount,
   );
-  // const one = 1;
   const initialSortValue = '0updated';
   const page = useSelector<AppRootState, number>(state => state.cardspack.page);
   const pageCount = useSelector<AppRootState, number>(state => state.cardspack.pageCount);
@@ -118,6 +118,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
     <div className={s.CardsContainer}>
       <SelectingSidebar>
         <h1>Show Cards Packs</h1>
+        <Scroll />
         <div>
           <Button type="button" disabled={!allPacks} onClick={getMyPacks}>
             My

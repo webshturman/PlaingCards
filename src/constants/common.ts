@@ -10,6 +10,9 @@ export const FIRST_PAGE = 1;
 export const SECOND_ELEMENT = 1;
 export const PORTION_SIZE = 10;
 export const BUTTON_CARDS = 'Cards';
+export const SCROLL_LIMIT = 400;
+export const SCROLL_BORDER_X = 0;
+export const SCROLL_BORDER_Y = 0;
 export const packHeaders = {
   user_name: 'writer',
   name: 'name',

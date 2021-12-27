@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 import { Loader } from './common/Loader';
+import { Scroll } from './common/Scroll/Scroll';
 import { Pagination } from './Pagination/Pagination';
 import { UniversalTable } from './UniversalTable';
 
@@ -69,6 +70,7 @@ export const CardsTable = (): ReturnComponentType => {
     <div className={s.CardsContainer}>
       <div className={s.CardsBlock}>
         <h1 className={s.titleCardsBlock}>Playing Cards</h1>
+        <Scroll />
         <div className={s.loader}>{status && <Loader />}</div>
         <UniversalTable
           items={cards}

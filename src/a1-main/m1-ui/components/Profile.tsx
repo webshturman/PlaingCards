@@ -7,6 +7,7 @@ import { PATH } from '../../../enums/routes';
 import s from '../../../styles/Cards.module.css';
 
 import { Loader } from './common/Loader';
+import { Scroll } from './common/Scroll/Scroll';
 import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
@@ -57,6 +58,7 @@ export const Profile = (): ReturnComponentType => {
       </SelectingSidebar>
       <div className={s.CardsBlock}>
         <h1 className={s.titleCardsBlock}>My Packs list</h1>
+        <Scroll />
         <div className={s.loader}>{status && <Loader />}</div>
         <Search userId={userId} />
         <UniversalTable
