@@ -67,6 +67,7 @@ export const Profile = (): ReturnComponentType => {
     }
   };
 
+
   useEffect(() => {
     if (!searchText) {
       dispatch(setPackCardsTC(userId));
