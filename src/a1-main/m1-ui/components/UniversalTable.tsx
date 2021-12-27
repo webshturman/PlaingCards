@@ -16,7 +16,6 @@ type UniversalTableType = {
   deleteItem: (id: string) => void;
   updateItem: (id: string, title: string) => void;
   sortFunction: (value: string) => void;
-  addBlock: () => void;
   // eslint-disable-next-line react/no-unused-prop-types,react/require-default-props
   extraButton?: string;
 };
@@ -26,7 +25,6 @@ export const UniversalTable: FC<UniversalTableType> = ({
   deleteItem,
   updateItem,
   sortFunction,
-  addBlock,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   extraButton,
 }): ReturnComponentType => {
@@ -56,13 +54,10 @@ export const UniversalTable: FC<UniversalTableType> = ({
           </th>
         ))}
         <th>
-          <Button type="button" onClick={() => addBlock()}>
-            Add
-          </Button>
+          <span>actions</span>
         </th>
       </tr>
       {items.map(pack => (
-        // eslint-disable-next-line no-underscore-dangle
         <tr key={pack._id}>
           {Object.keys(headers).map(el => (
             <td key={el}>
@@ -73,7 +68,6 @@ export const UniversalTable: FC<UniversalTableType> = ({
             <Button
               className={style.deleteButton}
               type="button"
-              /* eslint-disable-next-line no-underscore-dangle */
               onClick={() => deleteItem(pack._id)}
             >
               Delete
@@ -82,7 +76,6 @@ export const UniversalTable: FC<UniversalTableType> = ({
             <Button
               className={style.updateButton}
               type="button"
-              /* eslint-disable-next-line no-underscore-dangle */
               onClick={() => updateItem(pack._id, 'x0x0x0x00x')}
             >
               Update
@@ -91,7 +84,6 @@ export const UniversalTable: FC<UniversalTableType> = ({
               <Button
                 className={style.cardButton}
                 type="button"
-                /* eslint-disable-next-line no-underscore-dangle */
                 onClick={() => navigate(PATH.CARDS_TABLE, { state: pack._id })}
               >
                 {extraButton}

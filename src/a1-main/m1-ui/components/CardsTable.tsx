@@ -3,6 +3,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
+import st from '../../../styles/search.module.css';
+
+import { BackArrow } from './common/BackArrow/BackArrow';
+import { Button } from './common/CustomButton/Button';
 import { Loader } from './common/Loader';
 import { Scroll } from './common/Scroll/Scroll';
 import { Pagination } from './Pagination/Pagination';
@@ -68,17 +72,23 @@ export const CardsTable = (): ReturnComponentType => {
 
   return (
     <div className={s.CardsContainer}>
-      <div className={s.CardsBlock}>
+      <Scroll />
+      <div className={s.cardsBlock}>
+        <BackArrow />
         <h1 className={s.titleCardsBlock}>Playing Cards</h1>
-        <Scroll />
         <div className={s.loader}>{status && <Loader />}</div>
+        <div className={st.searchAddBlock}>
+          <div />
+          <Button type="button" onClick={handleAddCard}>
+            Add Card
+          </Button>
+        </div>
         <UniversalTable
           items={cards}
           headers={cardsHeaders}
           deleteItem={handleDeleteCard}
           updateItem={handleUpdateCard}
           sortFunction={handleSortCards}
-          addBlock={handleAddCard}
         />
         <Pagination
           totalItemsCount={cardsTotalCount} // это количество всех колод

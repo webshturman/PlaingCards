@@ -10,8 +10,8 @@ import {
 export const packUtils = (): any => {
   const dispatch = useDispatch();
 
-  const addPackCards = (): void => {
-    dispatch(createPackCardsTC('lakdlakfaldkad'));
+  const addPackCards = (userId: string): void => {
+    dispatch(createPackCardsTC('lakdlakfaldkad', userId));
   };
   const sortPackCards = (value: string): void => {
     dispatch(SortPackCardsAC(value));

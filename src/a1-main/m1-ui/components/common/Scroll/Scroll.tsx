@@ -6,19 +6,19 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Scroll = (): ReturnComponentType => {
   const scrollBtn = document.querySelector('.showScroll');
-  window.onscroll = () => {
-    if (scrollBtn) {
+  if (scrollBtn) {
+    window.onscroll = () => {
       if (window.scrollY > SCROLL_LIMIT) {
         scrollBtn.classList.remove('hideScroll');
       }
       if (window.scrollY < SCROLL_LIMIT) {
         scrollBtn.classList.add('hideScroll');
       }
-      scrollBtn.addEventListener('click', () => {
-        window.scrollTo(SCROLL_BORDER_X, SCROLL_BORDER_Y);
-      });
-    }
-  };
+    };
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo(SCROLL_BORDER_X, SCROLL_BORDER_Y);
+    });
+  }
 
   return (
     <div id="scrollToTop" className="showScroll hideScroll">

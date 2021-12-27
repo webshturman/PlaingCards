@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import st from '../../../styles/search.module.css';
 import {
   createPackCardsTC,
   deletePackCardsTC,
@@ -35,7 +36,6 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const [allPacks, setAllPacks] = useState<boolean>(true);
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
   // @ts-ignore
-  // eslint-disable-next-line no-underscore-dangle
   const userId = useSelector<AppRootState, string>(state => state.profile._id);
   const packCards = useSelector<AppRootState, Array<PacksType>>(
     state => state.cardspack.cardPacks,
@@ -95,7 +95,8 @@ export const PacksCardsTable = (): ReturnComponentType => {
     rating: 'rating',
   };
   const addPackCards = (): void => {
-    dispatch(createPackCardsTC('lakdlakfaldkad'));
+    dispatch(createPackCardsTC('lakdlakfaldkad', userId));
+    setAllPacks(false);
   };
   const sortPackCards = (value: string): void => {
     dispatch(SortPackCardsAC(value));
@@ -116,9 +117,9 @@ export const PacksCardsTable = (): ReturnComponentType => {
   };
   return (
     <div className={s.CardsContainer}>
+      <Scroll />
       <SelectingSidebar>
         <h1>Show Cards Packs</h1>
-        <Scroll />
         <div>
           <Button type="button" disabled={!allPacks} onClick={getMyPacks}>
             My
@@ -128,10 +129,15 @@ export const PacksCardsTable = (): ReturnComponentType => {
           </Button>
         </div>
       </SelectingSidebar>
-      <div className={s.CardsBlock}>
+      <div className={s.cardsBlock}>
         <h1 className={s.titleCardsBlock}>Packs list</h1>
         <div className={s.loader}>{status && <Loader />}</div>
-        <Search userId={allPacks ? EMPTY_STRING : userId} />
+        <div className={st.searchAddBlock}>
+          <Search userId={allPacks ? EMPTY_STRING : userId} />
+          <Button type="button" onClick={addPackCards}>
+            Add Pack
+          </Button>
+        </div>
         {/* {allPacks ? <Search userId={EMPTY_STRING} /> : <Search userId={userId} />} */}
         <UniversalTable
           items={packCards}
@@ -139,7 +145,6 @@ export const PacksCardsTable = (): ReturnComponentType => {
           deleteItem={deletePack}
           updateItem={updatePack}
           sortFunction={sortPackCards}
-          addBlock={addPackCards}
           extraButton={BUTTON_CARDS}
         />
         <Pagination

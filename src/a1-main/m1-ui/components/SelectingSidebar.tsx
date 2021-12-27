@@ -62,6 +62,11 @@ export const SelectingSidebar: FC<SideBarType> = ({ children }): ReturnComponent
           />
         </div>
       )}
+      {/* {appStatus && ( */}
+      {/*  <div> */}
+      {/*    <Loader /> */}
+      {/*  </div> */}
+      {/* )} */}
     </div>
   );
 };

@@ -196,12 +196,12 @@ export const setPackCardsTC =
   };
 
 export const createPackCardsTC =
-  (name: string): AppThunk =>
+  (name: string, userId: string): AppThunk =>
   async dispatch => {
     dispatch(setStatusAC(true));
     try {
       const cardsPack = await cardsPackAPI.createCardsPack(name);
-      dispatch(setPackCardsTC(EMPTY_STRING));
+      dispatch(setPackCardsTC(userId));
       console.log(cardsPack.data);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

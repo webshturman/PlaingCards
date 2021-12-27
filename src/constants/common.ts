@@ -13,6 +13,8 @@ export const BUTTON_CARDS = 'Cards';
 export const SCROLL_LIMIT = 400;
 export const SCROLL_BORDER_X = 0;
 export const SCROLL_BORDER_Y = 0;
+export const PREVIOUS_PAGE = -1;
+export const INITIAL_SORT_VALUE = '0updated';
 export const packHeaders = {
   user_name: 'writer',
   name: 'name',
