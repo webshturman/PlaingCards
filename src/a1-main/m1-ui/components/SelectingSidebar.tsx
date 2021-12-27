@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setMaxFilter, setMinFilter } from '../../m2-bll/reducers/cardspack-reducer';
+import { setMaxFilter, setMinFilter } from '../../m2-bll/actions/pack-action';
 
 import { DoubleRangeSlider } from './common/DoubleRangeSlider/DoubleRangeSlider';
 

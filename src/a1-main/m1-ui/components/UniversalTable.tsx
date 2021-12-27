@@ -13,22 +13,23 @@ import { Button } from './common/CustomButton/Button';
 type UniversalTableType = {
   items: Array<any>;
   headers: { [x: string]: string };
-  deleteItem: (id: string) => void;
-  updateItem: (id: string, title: string) => void;
   sortFunction: (value: string) => void;
-  addBlock: () => void;
-  // eslint-disable-next-line react/no-unused-prop-types,react/require-default-props
+  showCreate: (modal: boolean) => void;
+  showDelete: (modal: boolean) => void;
+  showUpdate: (modal: boolean) => void;
+  // eslint-disable-next-line react/require-default-props
   extraButton?: string;
+  setId: (id: string) => void;
 };
 export const UniversalTable: FC<UniversalTableType> = ({
   items,
   headers,
-  deleteItem,
-  updateItem,
   sortFunction,
-  addBlock,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  showCreate,
+  showUpdate,
+  showDelete,
   extraButton,
+  setId,
 }): ReturnComponentType => {
   const navigate = useNavigate();
   return (
@@ -56,7 +57,7 @@ export const UniversalTable: FC<UniversalTableType> = ({
           </th>
         ))}
         <th>
-          <Button type="button" onClick={() => addBlock()}>
+          <Button type="button" onClick={() => showCreate(true)}>
             Add
           </Button>
         </th>
@@ -73,8 +74,11 @@ export const UniversalTable: FC<UniversalTableType> = ({
             <Button
               className={style.deleteButton}
               type="button"
-              /* eslint-disable-next-line no-underscore-dangle */
-              onClick={() => deleteItem(pack._id)}
+              onClick={() => {
+                showDelete(true);
+                // eslint-disable-next-line no-underscore-dangle
+                setId(pack._id);
+              }}
             >
               Delete
             </Button>
@@ -82,8 +86,11 @@ export const UniversalTable: FC<UniversalTableType> = ({
             <Button
               className={style.updateButton}
               type="button"
-              /* eslint-disable-next-line no-underscore-dangle */
-              onClick={() => updateItem(pack._id, 'x0x0x0x00x')}
+              onClick={() => {
+                showUpdate(true);
+                // eslint-disable-next-line no-underscore-dangle
+                setId(pack._id);
+              }}
             >
               Update
             </Button>

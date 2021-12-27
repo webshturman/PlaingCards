@@ -1,25 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  createPackCardsTC,
-  deletePackCardsTC,
-  PacksType,
   setCurrentPageAC,
   setMaxCardsCount,
   setMaxFilter,
   setMinCardsCount,
   setMinFilter,
-  setPackCardsTC,
   setSearchText,
   SortPackCardsAC,
-  updatePackCardsTC,
-} from '../../m2-bll/reducers/cardspack-reducer';
+} from '../../m2-bll/actions/pack-action';
+import { PacksType } from '../../m2-bll/reducers/cardspack-reducer';
 import { AppRootState } from '../../m2-bll/store';
+import {
+  createPackCardsTC,
+  deletePackCardsTC,
+  setPackCardsTC,
+  updatePackCardsTC,
+} from '../../m2-bll/thunks/pack-thunk';
 import { searchPacks } from '../../m2-bll/thunks/search-thunk';
 
 import { Loader } from './common/Loader';
+import { Modal } from './common/Modal/Modal';
+import { NewPack } from './common/Modal/NewPack';
+import { PackDelete } from './common/Modal/PackDelete';
+import { PackUpdate } from './common/Modal/PackUpdate';
 import { Pagination } from './Pagination/Pagination';
 import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
@@ -35,8 +41,6 @@ export const PacksCardsTable = (): ReturnComponentType => {
     state => state.cardspack.cardPacks,
   );
   const sortPack = useSelector<AppRootState, string>(state => state.cardspack.sortPacks);
-  const dispatch = useDispatch();
-
   const cardPacksTotalCount = useSelector<AppRootState, number>(
     state => state.cardspack.cardPacksTotalCount,
   );
@@ -50,6 +54,8 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const searchText = useSelector<AppRootState, string>(
     state => state.cardspack.searchText,
   );
+  const dispatch = useDispatch();
+
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentPageAC(pageNumber));
     if (!searchText) {
@@ -81,6 +87,10 @@ export const PacksCardsTable = (): ReturnComponentType => {
     [],
   );
 
+  const [createModal, setCreateModal] = useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [packId, setPackId] = useState(EMPTY_STRING);
   const packHeaders = {
     user_name: 'writer',
     name: 'name',
@@ -88,17 +98,20 @@ export const PacksCardsTable = (): ReturnComponentType => {
     updated: 'updated',
     rating: 'rating',
   };
-  const addPackCards = (): void => {
-    dispatch(createPackCardsTC('lakdlakfaldkad'));
+  const addPackCards = (title: string): void => {
+    dispatch(createPackCardsTC(title));
+    setCreateModal(false);
   };
   const sortPackCards = (value: string): void => {
     dispatch(SortPackCardsAC(value));
   };
-  const deletePack = (id: string): void => {
-    dispatch(deletePackCardsTC(id));
+  const deletePack = (): void => {
+    dispatch(deletePackCardsTC(packId));
+    setDeleteModal(false);
   };
-  const updatePack = (id: string, title: string): void => {
-    dispatch(updatePackCardsTC(id, title));
+  const updatePack = (title: string): void => {
+    dispatch(updatePackCardsTC(packId, title));
+    setUpdateModal(false);
   };
 
   return (
@@ -111,11 +124,12 @@ export const PacksCardsTable = (): ReturnComponentType => {
         <UniversalTable
           items={packCards}
           headers={packHeaders}
-          deleteItem={deletePack}
-          updateItem={updatePack}
           sortFunction={sortPackCards}
-          addBlock={addPackCards}
           extraButton={BUTTON_CARDS}
+          showCreate={setCreateModal}
+          showDelete={setDeleteModal}
+          showUpdate={setUpdateModal}
+          setId={setPackId}
         />
         <Pagination
           totalItemsCount={cardPacksTotalCount}
@@ -125,6 +139,15 @@ export const PacksCardsTable = (): ReturnComponentType => {
           portionSize={portionSize}
         />
       </div>
+      <Modal isOpen={updateModal}>
+        <PackUpdate showUpdate={setUpdateModal} updatePack={updatePack} />
+      </Modal>
+      <Modal isOpen={deleteModal}>
+        <PackDelete showDelete={setDeleteModal} deletePack={deletePack} />
+      </Modal>
+      <Modal isOpen={createModal}>
+        <NewPack showCreate={setCreateModal} addPack={addPackCards} />
+      </Modal>
     </div>
   );
 };
