@@ -128,9 +128,6 @@ export const Register = (): ReturnComponentType => {
           onChangeText={setEmail}
           value={email}
           type="email"
-          // onEnter={showAlert}
-          // error={error}
-          // spanClassName={s.testSpanError}
         />
         {emailError && (
           <div>

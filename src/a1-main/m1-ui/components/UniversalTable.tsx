@@ -57,9 +57,10 @@ export const UniversalTable: FC<UniversalTableType> = ({
           </th>
         ))}
         <th>
-          <Button type="button" onClick={() => showCreate(true)}>
-            Add
-          </Button>
+          {/*<Button type="button" onClick={() => showCreate(true)}>*/}
+          {/*  Add*/}
+          {/*</Button>*/}
+          <span>actions</span>
         </th>
       </tr>
       {items.map(pack => (
@@ -98,7 +99,6 @@ export const UniversalTable: FC<UniversalTableType> = ({
               <Button
                 className={style.cardButton}
                 type="button"
-                /* eslint-disable-next-line no-underscore-dangle */
                 onClick={() => navigate(PATH.CARDS_TABLE, { state: pack._id })}
               >
                 {extraButton}

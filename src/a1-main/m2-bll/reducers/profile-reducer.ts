@@ -1,20 +1,38 @@
+import { PROFILE_ACTIONS_TYPE, ProfileActionsType } from '../actions/profile-actions';
+
+import { MeResponseStateType } from 'a1-main/m3-dal/types/loginType';
+
 export type initialProfileStateType = any;
 
-const initialProfileState: initialProfileStateType = {};
+const initialProfileState: MeResponseStateType = {
+  _id: null,
+  email: null,
+  name: null,
+  avatar: null,
+  publicCardPacksCount: null,
+  created: null,
+  updated: null,
+  isAdmin: null,
+  verified: null,
+  rememberMe: null,
+  error: null,
+};
 
 export const profileReducer = (
-  state: initialProfileStateType = initialProfileState,
-  action: any,
-): initialProfileStateType => {
+  state: MeResponseStateType = initialProfileState,
+  action: ProfileActionsType,
+): MeResponseStateType => {
   switch (action.type) {
-    // case ACTIONS_TYPE.GET_PROFILE_DATA:
+    case PROFILE_ACTIONS_TYPE.SET_USER_DATA: {
+      return {
+        ...state,
+        ...action.authUserData,
+      };
+    }
+    case PROFILE_ACTIONS_TYPE.DELETE_USER_DATA: {
+      return initialProfileState;
+    }
     default:
       return state;
   }
 };
-
-// образец типов экшена
-
-export enum ACTIONS_TYPE {
-  GET_PROFILE_DATA = 'profile-reducer/GET_PROFILE_DATA',
-}

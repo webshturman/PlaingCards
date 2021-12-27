@@ -33,7 +33,9 @@ html, body {
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
-
+html{
+  scroll-behavior: smooth;
+}
 input, button, textarea {
   font-family: inherit;
 }
@@ -84,4 +86,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+/*--------------------------------*/
+#scrollToTop{
+  position: fixed;
+  bottom: 40px;
+  right:40px;
+  cursor: pointer;
+  z-index: 1000;
+}
+.showScroll{
+  opacity: 1;
+  transition: .4s;
+}
+.hideScroll{
+  opacity: 0;
 }

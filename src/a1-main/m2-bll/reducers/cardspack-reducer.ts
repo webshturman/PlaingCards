@@ -35,7 +35,6 @@ const initialPackCardState = {
   searchText: '',
   minFilter: 0,
   maxFilter: 50,
-  user_id: '',
 };
 
 type InitialPackCardStateStateType = typeof initialPackCardState;
@@ -63,9 +62,138 @@ export const cardsPackReducer = (
       return { ...state, minFilter: action.min };
     case ACTIONS_TYPE_CARDS_PACK.SET_MAX_FILTER:
       return { ...state, maxFilter: action.max };
-    case ACTIONS_TYPE_CARDS_PACK.SET_USER_ID:
-      return { ...state, user_id: action.user_id };
     default:
       return state;
   }
 };
+
+// export const SortPackCardsAC = (sortValue: string) =>
+//   ({ type: ACTIONS_TYPE_CARDS_PACK.SORT_CARDS_PACK_DATA, sortValue } as const);
+//
+// export const setPackCardsTC =
+//   (userId: string): AppThunk =>
+//   async (dispatch, getState) => {
+//     const { sortPacks, pageCount, page, searchText, minCardsCount, maxCardsCount } =
+//       getState().cardspack;
+//     dispatch(setStatusAC(true));
+//     if (!searchText) {
+//       try {
+//         const cardsPack = await cardsPackAPI.readCardsPack(
+//           sortPacks,
+//           pageCount,
+//           page,
+//           userId,
+//         );
+//         dispatch(setPackCardsAC(cardsPack.data.cardPacks));
+//         dispatch(setCardsPackTotalCountAC(cardsPack.data.cardPacksTotalCount));
+//         dispatch(setMinCardsCount(cardsPack.data.minCardsCount));
+//         dispatch(setMaxCardsCount(cardsPack.data.maxCardsCount));
+//         if (minCardsCount !== cardsPack.data.minCardsCount) {
+//           dispatch(setMinFilter(cardsPack.data.minCardsCount));
+//         }
+//         if (maxCardsCount !== cardsPack.data.maxCardsCount) {
+//           dispatch(setMaxFilter(cardsPack.data.maxCardsCount));
+//         }
+//       } catch (error) {
+//         if (axios.isAxiosError(error) && error.response) {
+//           const errorMessage = error.response;
+//           dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
+//         } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+//           dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
+//         }
+//       } finally {
+//         dispatch(setStatusAC(false));
+//       }
+//     } else {
+//       try {
+//         const response = await searchApi.searchPacks(
+//           sortPacks,
+//           searchText,
+//           pageCount,
+//           page,
+//           userId,
+//           minCardsCount,
+//           maxCardsCount,
+//         );
+//         dispatch(setPackCardsAC(response.data.cardPacks));
+//         dispatch(setCardsPackTotalCountAC(response.data.cardPacksTotalCount));
+//         dispatch(setMinCardsCount(response.data.minCardsCount));
+//         dispatch(setMaxCardsCount(response.data.maxCardsCount));
+//         if (minCardsCount !== response.data.minCardsCount) {
+//           dispatch(setMinFilter(response.data.minCardsCount));
+//         }
+//         if (maxCardsCount !== response.data.maxCardsCount) {
+//           dispatch(setMaxFilter(response.data.maxCardsCount));
+//         }
+//       } catch (error) {
+//         if (axios.isAxiosError(error) && error.response) {
+//           const errorMessage = error.response;
+//           dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
+//         } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+//           dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
+//         }
+//       } finally {
+//         dispatch(setStatusAC(false));
+//       }
+//     }
+//   };
+//
+// export const createPackCardsTC =
+//   (name: string, userId: string): AppThunk =>
+//   async dispatch => {
+//     dispatch(setStatusAC(true));
+//     try {
+//       const cardsPack = await cardsPackAPI.createCardsPack(name);
+//       dispatch(setPackCardsTC(userId));
+//       console.log(cardsPack.data);
+//     } catch (error) {
+//       if (axios.isAxiosError(error) && error.response) {
+//         const errorMessage = error.response;
+//         dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
+//       } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+//         dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
+//       }
+//     } finally {
+//       dispatch(setStatusAC(false));
+//     }
+//   };
+//
+// export const deletePackCardsTC =
+//   (_id: string): AppThunk =>
+//   async dispatch => {
+//     dispatch(setStatusAC(true));
+//     try {
+//       const cardsPack = await cardsPackAPI.deleteCardsPack(_id);
+//       dispatch(setPackCardsTC(EMPTY_STRING));
+//       console.log(cardsPack.data);
+//     } catch (error) {
+//       if (axios.isAxiosError(error) && error.response) {
+//         const errorMessage = error.response;
+//         dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
+//       } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+//         dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
+//       }
+//     } finally {
+//       dispatch(setStatusAC(false));
+//     }
+//   };
+//
+// export const updatePackCardsTC =
+//   (_id: string, name: string): AppThunk =>
+//   async dispatch => {
+//     dispatch(setStatusAC(true));
+//     try {
+//       const cardsPack = await cardsPackAPI.updatesCardsPack(_id, name);
+//       dispatch(setPackCardsTC(EMPTY_STRING));
+//       console.log(cardsPack.data);
+//     } catch (error) {
+//       if (axios.isAxiosError(error) && error.response) {
+//         const errorMessage = error.response;
+//         dispatch(setErrorMessageAC(true, `error: ${errorMessage}`));
+//       } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
+//         dispatch(setErrorMessageAC(true, `you are not logged out:no connection!`));
+//       }
+//     } finally {
+//       dispatch(setStatusAC(false));
+//     }
+//   };

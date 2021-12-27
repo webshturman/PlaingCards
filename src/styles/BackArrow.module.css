@@ -1,0 +1,12 @@
+.backButton{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.backArrow{
+    margin: 10px 0 0 0;
+    display: flex;
+    align-items: center;
+
+}

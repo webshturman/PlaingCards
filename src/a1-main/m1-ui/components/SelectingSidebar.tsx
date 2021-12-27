@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,7 +11,12 @@ import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
 import s from 'styles/SelectingSidebar.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-export const SelectingSidebar = (): ReturnComponentType => {
+type SideBarType = {
+  // eslint-disable-next-line react/require-default-props
+  children?: any;
+};
+
+export const SelectingSidebar: FC<SideBarType> = ({ children }): ReturnComponentType => {
   const dispatch = useDispatch();
   const min = useSelector<AppRootState, number>(state => state.cardspack.minCardsCount);
   const max = useSelector<AppRootState, number>(state => state.cardspack.maxCardsCount);
@@ -34,11 +39,12 @@ export const SelectingSidebar = (): ReturnComponentType => {
   return (
     <div className={s.SelectingSidebarContainer}>
       <div className={s.profile}>
-        <div className={s.userAvatarContainer}>
-          <div className={s.userAvatar} />
-        </div>
-        <div className={s.userName}>User name</div>
-        <div className={s.userJobTitle}>User job title</div>
+        {children}
+        {/* <div className={s.userAvatarContainer}> */}
+        {/*  <div className={s.userAvatar} /> */}
+        {/* </div> */}
+        {/* <div className={s.userName}>User name</div> */}
+        {/* <div className={s.userJobTitle}>User job title</div> */}
       </div>
       <div className={s.descriptionForDoubleRangeSlider}>Cards count in a pack</div>
       {!appStatus && (
@@ -56,6 +62,11 @@ export const SelectingSidebar = (): ReturnComponentType => {
           />
         </div>
       )}
+      {/* {appStatus && ( */}
+      {/*  <div> */}
+      {/*    <Loader /> */}
+      {/*  </div> */}
+      {/* )} */}
     </div>
   );
 };

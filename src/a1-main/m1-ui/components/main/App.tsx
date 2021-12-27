@@ -18,7 +18,9 @@ export const App: FC = (): ReturnComponentType => {
   const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
   useEffect(() => {
-    dispatch(getAuthUserData());
+    if (!AuthUserStatus) {
+      dispatch(getAuthUserData());
+    }
   }, [AuthUserStatus]);
 
   if (isFetching) {

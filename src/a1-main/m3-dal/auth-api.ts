@@ -16,7 +16,7 @@ export const authAPI = {
   },
 
   me() {
-    return instance.post<{}, AxiosResponse<MeResponseStateType>>(`auth/me`, {});
+    return instance.post<{}, AxiosResponse<MeResponseStateType>>(`auth/me`);
   },
 
   deleteMe() {

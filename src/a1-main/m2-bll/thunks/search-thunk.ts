@@ -13,6 +13,8 @@ export const searchPacks =
     sortPacks: string,
     pageCount: number,
     page: number,
+    // eslint-disable-next-line camelcase
+    user_id?: string,
     minFilter?: number,
     maxFilter?: number,
   ): AppThunk =>
@@ -24,6 +26,8 @@ export const searchPacks =
         sortPacks,
         pageCount,
         page,
+        // eslint-disable-next-line camelcase
+        user_id,
         minFilter,
         maxFilter,
       );

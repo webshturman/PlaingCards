@@ -3,11 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
+import st from '../../../styles/search.module.css';
+
+import { BackArrow } from './common/BackArrow/BackArrow';
+import { Button } from './common/CustomButton/Button';
 import { Loader } from './common/Loader';
 import { CardDelete } from './common/Modal/CardDelete';
 import { CardUpdate } from './common/Modal/CardUpdate';
 import { Modal } from './common/Modal/Modal';
 import { NewCard } from './common/Modal/NewCard';
+import { Scroll } from './common/Scroll/Scroll';
 import { Pagination } from './Pagination/Pagination';
 import { UniversalTable } from './UniversalTable';
 
@@ -78,9 +83,17 @@ export const CardsTable = (): ReturnComponentType => {
 
   return (
     <div className={s.CardsContainer}>
-      <div className={s.CardsBlock}>
+      <Scroll />
+      <div className={s.cardsBlock}>
+        <BackArrow />
         <h1 className={s.titleCardsBlock}>Playing Cards</h1>
         <div className={s.loader}>{status && <Loader />}</div>
+        <div className={st.searchAddBlock}>
+          <div />
+          <Button type="button" onClick={handleAddCard}>
+            Add Card
+          </Button>
+        </div>
         <UniversalTable
           showCreate={setCreateCardModal}
           showDelete={setDeleteCardModal}

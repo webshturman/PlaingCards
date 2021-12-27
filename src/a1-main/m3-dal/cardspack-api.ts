@@ -1,9 +1,10 @@
 import { instance } from './instance';
 
 export const cardsPackAPI = {
-  readCardsPack(sortPacks: string, pageCount?: number, page?: number) {
+  // eslint-disable-next-line camelcase
+  readCardsPack(sortPacks: string, pageCount?: number, page?: number, user_id?: string) {
     return instance.get<any>(`cards/pack`, {
-      params: { sortPacks, pageCount, page },
+      params: { sortPacks, pageCount, page, user_id },
     });
   },
   createCardsPack(newPack: string) {
