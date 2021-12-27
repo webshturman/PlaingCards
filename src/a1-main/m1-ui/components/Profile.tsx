@@ -3,6 +3,18 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
+import {
+  setCurrentPageAC,
+  setMaxCardsCount,
+  setMaxFilter,
+  setMinCardsCount,
+  setMinFilter,
+  setSearchText,
+  SortPackCardsAC,
+} from '../../m2-bll/actions/pack-action';
+import { PacksType } from '../../m2-bll/reducers/cardspack-reducer';
+import { setPackCardsTC } from '../../m2-bll/thunks/pack-thunk';
+
 import { Button } from './common/CustomButton/Button';
 import { Loader } from './common/Loader';
 import { Scroll } from './common/Scroll/Scroll';
@@ -11,17 +23,6 @@ import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
 
-import {
-  PacksType,
-  setCurrentPageAC,
-  setMaxCardsCount,
-  setMaxFilter,
-  setMinCardsCount,
-  setMinFilter,
-  setPackCardsTC,
-  setSearchText,
-  SortPackCardsAC,
-} from 'a1-main/m2-bll/reducers/cardspack-reducer';
 import { AppRootState } from 'a1-main/m2-bll/store';
 import { searchPacks } from 'a1-main/m2-bll/thunks/search-thunk';
 import {
@@ -56,7 +57,7 @@ export const Profile = (): ReturnComponentType => {
   const searchText = useSelector<AppRootState, string>(
     state => state.cardspack.searchText,
   );
-  const [addPackCards, sortPackCards, deletePack, updatePack] = packUtils();
+  const [addPackCards, sortPackCards] = packUtils();
   const dispatch = useDispatch();
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentPageAC(pageNumber));
@@ -108,11 +109,12 @@ export const Profile = (): ReturnComponentType => {
         </div>
         <UniversalTable
           items={packCards}
+          showDelete={() => {}}
+          showUpdate={() => {}}
           headers={packHeaders}
-          deleteItem={deletePack}
-          updateItem={updatePack}
           sortFunction={sortPackCards}
           extraButton={BUTTON_CARDS}
+          setId={() => {}}
         />
         <Pagination
           totalItemsCount={cardPacksTotalCount} // это количество всех колод

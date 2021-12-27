@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -8,6 +8,10 @@ import st from '../../../styles/search.module.css';
 import { BackArrow } from './common/BackArrow/BackArrow';
 import { Button } from './common/CustomButton/Button';
 import { Loader } from './common/Loader';
+import { CardDelete } from './common/Modal/CardDelete';
+import { CardUpdate } from './common/Modal/CardUpdate';
+import { Modal } from './common/Modal/Modal';
+import { NewCard } from './common/Modal/NewCard';
 import { Scroll } from './common/Scroll/Scroll';
 import { Pagination } from './Pagination/Pagination';
 import { UniversalTable } from './UniversalTable';
@@ -21,7 +25,7 @@ import {
   updateCardData,
 } from 'a1-main/m2-bll/thunks/cards-thunk';
 import { cardsType } from 'a1-main/m3-dal/types/cardsType';
-import { PORTION_SIZE } from 'constants/common';
+import { EMPTY_STRING, PORTION_SIZE } from 'constants/common';
 import s from 'styles/Cards.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -37,6 +41,7 @@ export const CardsTable = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const location = useLocation();
   const packId = location.state;
+  const [cardId, setCardId] = useState(EMPTY_STRING);
   const cardsHeaders = {
     question: 'question',
     answer: 'answer',
@@ -55,19 +60,25 @@ export const CardsTable = (): ReturnComponentType => {
   const handleSortCards = (value: string): void => {
     dispatch(SortCardData(value));
   };
+  const [createCardModal, setCreateCardModal] = useState(false);
+  const [updateCardModal, setUpdateCardModal] = useState(false);
+  const [deleteCardModal, setDeleteCardModal] = useState(false);
 
   const handleAddCard = (): void => {
-    dispatch(addNewCard(newCard));
+    dispatch(addNewCard(newCard)); /// /&&&&&&&&&&&&&&&&&&&
+    setCreateCardModal(false);
   };
-  const handleDeleteCard = (cardId: string): void => {
+  const handleDeleteCard = (): void => {
     dispatch(deleteCard(cardId, packId));
   };
-  const handleUpdateCard = (cardId: string, question: string): void => {
+  const handleUpdateCard = (question: string): void => {
     dispatch(updateCardData(cardId, question, packId));
+    setUpdateCardModal(false);
   };
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentCardPage(pageNumber));
     dispatch(getCards(packId));
+    setDeleteCardModal(false);
   };
 
   return (
@@ -84,11 +95,12 @@ export const CardsTable = (): ReturnComponentType => {
           </Button>
         </div>
         <UniversalTable
+          showDelete={setDeleteCardModal}
+          showUpdate={setUpdateCardModal}
           items={cards}
           headers={cardsHeaders}
-          deleteItem={handleDeleteCard}
-          updateItem={handleUpdateCard}
           sortFunction={handleSortCards}
+          setId={setCardId}
         />
         <Pagination
           totalItemsCount={cardsTotalCount} // это количество всех колод
@@ -98,6 +110,15 @@ export const CardsTable = (): ReturnComponentType => {
           portionSize={PORTION_SIZE} // это количество страниц в блоке перемотки
         />
       </div>
+      <Modal isOpen={updateCardModal}>
+        <CardUpdate showUpdate={setUpdateCardModal} handleUpdateCard={handleUpdateCard} />
+      </Modal>
+      <Modal isOpen={deleteCardModal}>
+        <CardDelete showDelete={setDeleteCardModal} handleDeleteCard={handleDeleteCard} />
+      </Modal>
+      <Modal isOpen={createCardModal}>
+        <NewCard showCreate={setCreateCardModal} handleAddCard={handleAddCard} />
+      </Modal>
     </div>
   );
 };

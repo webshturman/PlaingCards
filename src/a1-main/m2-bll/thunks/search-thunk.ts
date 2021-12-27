@@ -4,7 +4,7 @@ import {
   setCardsPackTotalCountAC,
   setPackCardsAC,
   setSearchText,
-} from '../reducers/cardspack-reducer';
+} from '../actions/pack-action';
 import { AppThunk } from '../store';
 
 export const searchPacks =

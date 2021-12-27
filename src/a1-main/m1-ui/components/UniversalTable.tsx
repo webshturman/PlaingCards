@@ -13,20 +13,21 @@ import { Button } from './common/CustomButton/Button';
 type UniversalTableType = {
   items: Array<any>;
   headers: { [x: string]: string };
-  deleteItem: (id: string) => void;
-  updateItem: (id: string, title: string) => void;
   sortFunction: (value: string) => void;
-  // eslint-disable-next-line react/no-unused-prop-types,react/require-default-props
+  showDelete: (modal: boolean) => void;
+  showUpdate: (modal: boolean) => void;
+  // eslint-disable-next-line react/require-default-props
   extraButton?: string;
+  setId: (id: string) => void;
 };
 export const UniversalTable: FC<UniversalTableType> = ({
   items,
   headers,
-  deleteItem,
-  updateItem,
   sortFunction,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  showUpdate,
+  showDelete,
   extraButton,
+  setId,
 }): ReturnComponentType => {
   const navigate = useNavigate();
   return (
@@ -54,10 +55,14 @@ export const UniversalTable: FC<UniversalTableType> = ({
           </th>
         ))}
         <th>
+          {/* <Button type="button" onClick={() => showCreate(true)}> */}
+          {/*  Add */}
+          {/* </Button> */}
           <span>actions</span>
         </th>
       </tr>
       {items.map(pack => (
+        // eslint-disable-next-line no-underscore-dangle
         <tr key={pack._id}>
           {Object.keys(headers).map(el => (
             <td key={el}>
@@ -68,7 +73,11 @@ export const UniversalTable: FC<UniversalTableType> = ({
             <Button
               className={style.deleteButton}
               type="button"
-              onClick={() => deleteItem(pack._id)}
+              onClick={() => {
+                showDelete(true);
+                // eslint-disable-next-line no-underscore-dangle
+                setId(pack._id);
+              }}
             >
               Delete
             </Button>
@@ -76,7 +85,11 @@ export const UniversalTable: FC<UniversalTableType> = ({
             <Button
               className={style.updateButton}
               type="button"
-              onClick={() => updateItem(pack._id, 'x0x0x0x00x')}
+              onClick={() => {
+                showUpdate(true);
+                // eslint-disable-next-line no-underscore-dangle
+                setId(pack._id);
+              }}
             >
               Update
             </Button>
