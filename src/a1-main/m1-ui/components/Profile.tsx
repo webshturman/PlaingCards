@@ -114,11 +114,11 @@ export const Profile = (): ReturnComponentType => {
     setCreateModal(false);
   };
   const deletePack = (): void => {
-    dispatch(deletePackCardsTC(packId));
+    dispatch(deletePackCardsTC(packId, userId));
     setDeleteModal(false);
   };
   const updatePack = (title: string): void => {
-    dispatch(updatePackCardsTC(packId, title));
+    dispatch(updatePackCardsTC(packId, title, userId));
     setUpdateModal(false);
   };
 
@@ -128,7 +128,7 @@ export const Profile = (): ReturnComponentType => {
       <SelectingSidebar>
         <div className={style.userAvatarContainer}>
           <img src={photoAvatar || avatar} alt="" />
-          {/* <div className={style.userAvatar} /> */}
+          <div className={style.userAvatar} />
         </div>
         <div className={style.userName}>User name</div>
         <div className={style.userJobTitle}>User job title</div>
