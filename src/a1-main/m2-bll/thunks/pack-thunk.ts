@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import { EMPTY_STRING } from '../../../constants/common';
 import { cardsPackAPI } from '../../m3-dal/cardspack-api';
 import { searchApi } from '../../m3-dal/search-api';
 import { setErrorMessageAC, setStatusAC } from '../actions/app-actions';
@@ -103,12 +102,12 @@ export const createPackCardsTC =
   };
 
 export const deletePackCardsTC =
-  (_id: string): AppThunk =>
+  (_id: string, userId: string): AppThunk =>
   async dispatch => {
     dispatch(setStatusAC(true));
     try {
       const cardsPack = await cardsPackAPI.deleteCardsPack(_id);
-      dispatch(setPackCardsTC(EMPTY_STRING));
+      dispatch(setPackCardsTC(userId));
       console.log(cardsPack.data);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -123,12 +122,12 @@ export const deletePackCardsTC =
   };
 
 export const updatePackCardsTC =
-  (_id: string, name: string): AppThunk =>
+  (_id: string, name: string, userId: string): AppThunk =>
   async dispatch => {
     dispatch(setStatusAC(true));
     try {
       const cardsPack = await cardsPackAPI.updatesCardsPack(_id, name);
-      dispatch(setPackCardsTC(EMPTY_STRING));
+      dispatch(setPackCardsTC(userId));
       console.log(cardsPack.data);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

@@ -34,7 +34,7 @@ import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
 
-import { EMPTY_STRING, BUTTON_CARDS, FIRST_PAGE } from 'constants/common';
+import { EMPTY_STRING, FIRST_PAGE } from 'constants/common';
 import s from 'styles/Cards.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -113,11 +113,11 @@ export const PacksCardsTable = (): ReturnComponentType => {
     dispatch(SortPackCardsAC(value));
   };
   const deletePack = (): void => {
-    dispatch(deletePackCardsTC(packId));
+    dispatch(deletePackCardsTC(packId, userId));
     setDeleteModal(false);
   };
   const updatePack = (title: string): void => {
-    dispatch(updatePackCardsTC(packId, title));
+    dispatch(updatePackCardsTC(packId, title, userId));
     setUpdateModal(false);
   };
   const getAllPacks = (): void => {
@@ -156,7 +156,6 @@ export const PacksCardsTable = (): ReturnComponentType => {
           items={packCards}
           headers={packHeaders}
           sortFunction={sortPackCards}
-          extraButton={BUTTON_CARDS}
           showDelete={setDeleteModal}
           showUpdate={setUpdateModal}
           setId={setPackId}

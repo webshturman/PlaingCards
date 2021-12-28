@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import arrowBack from 'assets/images/k.png';
+import arrowBack from 'assets/images/backArrow.png';
 import { PREVIOUS_PAGE } from 'constants/common';
 import style from 'styles/BackArrow.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';

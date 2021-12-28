@@ -38,7 +38,6 @@ import { UniversalTable } from './UniversalTable';
 import { AppRootState } from 'a1-main/m2-bll/store';
 import { searchPacks } from 'a1-main/m2-bll/thunks/search-thunk';
 import {
-  BUTTON_CARDS,
   EMPTY_STRING,
   FIRST_PAGE,
   INITIAL_SORT_VALUE,
@@ -153,7 +152,6 @@ export const Profile = (): ReturnComponentType => {
           showUpdate={setUpdateModal}
           headers={packHeaders}
           sortFunction={sortPackCards}
-          extraButton={BUTTON_CARDS}
           setId={setPackId}
         />
         <Pagination
