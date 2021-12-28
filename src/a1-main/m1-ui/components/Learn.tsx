@@ -42,6 +42,12 @@ export const Learn = (): ReturnComponentType => {
   const [radioValue, setRadioValue] = useState<string | undefined>(undefined);
   const endLearnCondition = isShowAnswer && questionNumber + ONE === questionCount;
 
+  const exit = (): void => {
+    setRadioValue(undefined);
+    dispatch(changeQuestionNumber(ZERO));
+    dispatch(changeAnswerStatus(false));
+    navigate(PATH.CARDS);
+  };
   const showAnswer = (): void => {
     dispatch(changeAnswerStatus(true));
   };
@@ -53,10 +59,13 @@ export const Learn = (): ReturnComponentType => {
     setRadioValue(undefined);
     dispatch(changeQuestionNumber(currentQuestionNumber + ONE));
   };
-  const exit = (): void => {
-    dispatch(changeQuestionNumber(ZERO));
-    dispatch(changeAnswerStatus(false));
-    navigate(PATH.CARDS);
+  const sendAndExit = (currentQuestionNumber: number): void => {
+    // eslint-disable-next-line no-underscore-dangle
+    const cardId = cards[currentQuestionNumber]._id;
+    const promise = dispatch(sendCardRate(Number(radioValue), cardId));
+    Promise.all([promise]).then(() => {
+      exit();
+    });
   };
 
   useEffect(() => {
@@ -120,7 +129,11 @@ export const Learn = (): ReturnComponentType => {
             <Button
               className={s.Button}
               type="button"
-              onClick={() => (endLearnCondition ? exit() : nextQuestion(questionNumber))}
+              onClick={() =>
+                endLearnCondition
+                  ? sendAndExit(questionNumber)
+                  : nextQuestion(questionNumber)
+              }
               disabled={!radioValue}
             >
               {endLearnCondition ? <div>Done</div> : <div>Next</div>}

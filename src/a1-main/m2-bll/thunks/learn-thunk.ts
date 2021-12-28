@@ -56,7 +56,9 @@ export const sendCardRate =
       const response = await learnAPI.sendCardRate(rate, cardId);
       console.log(response);
       dispatch(setStatusAC(false));
+      return Promise.resolve();
     } catch (error: any) {
       console.log(`Error sending card rate. ${error}`);
+      return Promise.reject();
     }
   };
