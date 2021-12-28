@@ -30,9 +30,7 @@ export const UniversalTable: FC<UniversalTableType> = ({
 }): ReturnComponentType => {
   // @ts-ignore
   const userId = useSelector<AppRootState, string>(state => state.profile._id);
-  // const packId = useSelector<AppRootState, string>(state => state.cardspack.cardPacks);
   const navigate = useNavigate();
-  // const idEqual = userId === packId;
   return (
     <table className={s.table}>
       <tr>
