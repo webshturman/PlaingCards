@@ -36,14 +36,33 @@ export type cardsResponseType = {
   pageCount: number;
   packUserId: string;
 };
+
 export type cardsAddType = cardsType & {
   answerImg?: string;
   questionImg?: string;
   questionVideo?: string;
   answerVideo?: string;
 };
+
 export type cardsUpdateType = {
   _id: string;
   answer?: string;
   question?: string;
+};
+
+export type cardRateRequestType = {
+  grade: number;
+  cardId: string;
+};
+
+export type cardRateResponseType = {
+  _id: string;
+  // eslint-disable-next-line camelcase
+  cardsPack_id: string;
+  // eslint-disable-next-line camelcase
+  card_id: string;
+  // eslint-disable-next-line camelcase
+  user_id: string;
+  grade: number;
+  shots: number;
 };

@@ -47,3 +47,16 @@ export const changeAnswerStatus =
       console.log(`Error setting answer status. ${error}`);
     }
   };
+
+export const sendCardRate =
+  (rate: number, cardId: string): AppThunk =>
+  async dispatch => {
+    dispatch(setStatusAC(true));
+    try {
+      const response = await learnAPI.sendCardRate(rate, cardId);
+      console.log(response);
+      dispatch(setStatusAC(false));
+    } catch (error: any) {
+      console.log(`Error sending card rate. ${error}`);
+    }
+  };

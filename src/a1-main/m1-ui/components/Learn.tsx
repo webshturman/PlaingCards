@@ -15,8 +15,9 @@ import {
   changeAnswerStatus,
   getCards,
   changeQuestionNumber,
+  sendCardRate,
 } from 'a1-main/m2-bll/thunks/learn-thunk';
-import { ONE, ZERO, ZERO_LENGTH } from 'constants/common';
+import { ZERO, ZERO_LENGTH, ONE } from 'constants/common';
 import { PATH } from 'enums/routes';
 import s from 'styles/Learn.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
@@ -24,10 +25,10 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 export const Learn = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
   const cards = useSelector<AppRootState, any>(state => state.learn.cards);
-  const questionCount = useSelector<AppRootState, any>(
+  const questionCount = useSelector<AppRootState, number>(
     state => state.learn.cardsTotalCount,
   );
-  const questionNumber = useSelector<AppRootState, any>(
+  const questionNumber = useSelector<AppRootState, number>(
     state => state.learn.questionNumber,
   );
   const isShowAnswer = useSelector<AppRootState, boolean>(
@@ -37,13 +38,7 @@ export const Learn = (): ReturnComponentType => {
   const navigate = useNavigate();
   const location = useLocation();
   const { packName, packId } = location.state;
-  const options = [
-    'Did not know',
-    'Forgot',
-    'A lot of thought',
-    'Confused',
-    'Knew the answer',
-  ];
+  const options = ['1', '2', '3', '4', '5'];
   const [radioValue, setRadioValue] = useState<string | undefined>(undefined);
   const endLearnCondition = isShowAnswer && questionNumber + ONE === questionCount;
 
@@ -51,8 +46,11 @@ export const Learn = (): ReturnComponentType => {
     dispatch(changeAnswerStatus(true));
   };
   const nextQuestion = (currentQuestionNumber: number): void => {
-    setRadioValue(undefined);
+    // eslint-disable-next-line no-underscore-dangle
+    const cardId = cards[currentQuestionNumber]._id;
+    dispatch(sendCardRate(Number(radioValue), cardId));
     dispatch(changeAnswerStatus(false));
+    setRadioValue(undefined);
     dispatch(changeQuestionNumber(currentQuestionNumber + ONE));
   };
   const exit = (): void => {
@@ -60,6 +58,10 @@ export const Learn = (): ReturnComponentType => {
     dispatch(changeAnswerStatus(false));
     navigate(PATH.CARDS);
   };
+
+  useEffect(() => {
+    dispatch(getCards(packId));
+  }, []);
 
   if (cards.length !== ZERO_LENGTH) {
     const cardsId = cards.map(
@@ -69,10 +71,6 @@ export const Learn = (): ReturnComponentType => {
     );
     dispatch(setCardsId(cardsId));
   }
-
-  useEffect(() => {
-    dispatch(getCards(packId));
-  }, []);
 
   if (status) {
     return <Loader />;
@@ -112,6 +110,7 @@ export const Learn = (): ReturnComponentType => {
               value={radioValue}
               onChangeOption={setRadioValue}
               containerClass={s.radioContainer}
+              labelClass={s.radioLabel}
             />
           </div>
           <div className={s.buttonContainer}>
