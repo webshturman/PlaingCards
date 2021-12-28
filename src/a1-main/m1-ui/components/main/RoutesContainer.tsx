@@ -7,6 +7,7 @@ import { CardsPack } from '../CardsPack';
 import { CardsTable } from '../CardsTable';
 import { Error404 } from '../common/ErrorPages/Error404';
 import { LoginForm } from '../common/LoginForm';
+import { Learn } from '../Learn';
 import { PacksCardsTable } from '../PackCardsTable';
 import { Profile } from '../Profile';
 import { TestComponent } from '../TestComponent';
@@ -35,6 +36,7 @@ export const RoutesContainer = (): ReturnComponentType => (
       <Route path={PATH.CARDS} element={<CardsPack />}>
         <Route index element={<PacksCardsTable />} />
         <Route path={PATH.CARDS_TABLE} element={<CardsTable />} />
+        <Route path={PATH.LEARN} element={<Learn />} />
       </Route>
     </Routes>
   </div>

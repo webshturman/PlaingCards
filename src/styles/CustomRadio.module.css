@@ -1,0 +1,28 @@
+.checkboxChecked {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    background: linear-gradient(#00c700, #006f00);
+    border: 3px solid #024e02;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    margin-right: 5px;
+}
+
+.checkboxUnchecked {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    background: #ddd;
+    border: 2px solid green;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    margin-right: 5px;
+}

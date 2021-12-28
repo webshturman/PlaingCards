@@ -8,7 +8,7 @@ import s from 'styles/App.module.css';
 
 export const LoginForm = (): ReturnComponentType => (
   <div className={s.loginBlock}>
-    <h1 className={s.titleBlock}>Plaing Cards</h1>
+    <h1 className={s.titleBlock}>Playing Cards</h1>
     <Outlet />
   </div>
 );

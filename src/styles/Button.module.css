@@ -30,7 +30,7 @@
     height: 15px;
     font-size: 12px;
 }
-.deleteButton, .updateButton, .cardButton{
+.deleteButton, .updateButton, .cardButton, .learnButton{
     border-radius: 5px;
     color:white;
     cursor: pointer;
@@ -44,6 +44,9 @@
 }
 .updateButton{
     background-color: #7373ea;
+}
+.learnButton{
+    background-color: dodgerblue;
 }
 /*.cardButton{*/
 /*    background-color: ;*/

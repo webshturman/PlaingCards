@@ -25,8 +25,7 @@ export const Pagination: React.FC<PaginationPropsType> = ({
   const one = 1;
   const pagesCount = Math.ceil(totalItemsCount / pageSize);
   const pages = [];
-  // eslint-disable-next-line no-plusplus
-  for (let i = 1; i <= pagesCount; i++) {
+  for (let i = 1; i <= pagesCount; i += one) {
     pages.push(i);
   }
   const appStatus = useSelector<AppRootState, boolean>(state => state.app.status);
@@ -70,9 +69,6 @@ export const Pagination: React.FC<PaginationPropsType> = ({
           Next list
         </Button>
       </div>
-      {/* <div className={s.text}> */}
-      {/*  Current page: <span className={s.currentNumber}>{currentPage}</span> */}
-      {/* </div> */}
       <div>
         <div className={s.pageBlock}>
           {pages

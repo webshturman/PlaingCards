@@ -13,7 +13,7 @@ export const LoginForm = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
   return (
     <div className={s.loginBlock}>
-      <h1 className={s.titleBlock}>Plaing Cards</h1>
+      <h1 className={s.titleBlock}>Playing Cards</h1>
       <div className={s.loader}>{status && <Loader />}</div>
       <Outlet />
     </div>

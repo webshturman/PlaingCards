@@ -100,6 +100,19 @@ export const UniversalTable: FC<UniversalTableType> = ({
             >
               Card
             </Button>
+            <Button
+              className={style.learnButton}
+              type="button"
+              /* eslint-disable-next-line no-underscore-dangle */
+              onClick={() =>
+                navigate(PATH.LEARN, {
+                  // eslint-disable-next-line no-underscore-dangle
+                  state: { packId: pack._id, packName: pack.name },
+                })
+              }
+            >
+              Learn
+            </Button>
           </td>
         </tr>
       ))}
