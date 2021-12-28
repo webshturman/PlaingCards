@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { EMPTY_STRING } from '../../../../../constants/common';
+import s from '../../../../../styles/Modal.module.css';
 import { ReturnComponentType } from '../../../../../types/ReturnComponentType';
 import { Button } from '../CustomButton/Button';
 import { Input } from '../CustomInput/Input';
@@ -20,11 +21,11 @@ export const CardUpdate: React.FC<CardUpdateType> = ({
     handleUpdateCard(newName);
   };
   return (
-    <div>
-      <h1>Update Card</h1>
+    <div className={s.containerModal}>
+      <h1 className={s.titleModal}>Update Card</h1>
       <Input
         title=""
-        placeholder="new pack name"
+        placeholder="enter card name"
         onChangeText={setNewName}
         value={newName}
         type="text"

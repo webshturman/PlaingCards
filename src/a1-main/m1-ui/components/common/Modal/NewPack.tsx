@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { EMPTY_STRING } from '../../../../../constants/common';
+import s from '../../../../../styles/Modal.module.css';
 import { ReturnComponentType } from '../../../../../types/ReturnComponentType';
 import { Button } from '../CustomButton/Button';
 import { Input } from '../CustomInput/Input';
@@ -20,11 +21,11 @@ export const NewPack: React.FC<NewPackType> = ({
     addPack(newName);
   };
   return (
-    <div>
-      <h1>Create new Pack</h1>
+    <div className={s.containerModal}>
+      <h1 className={s.titleModal}>Create new Pack</h1>
       <Input
         title=""
-        placeholder="pack name"
+        placeholder="enter pack name"
         onChangeText={setNewName}
         value={newName}
         type="text"

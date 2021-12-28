@@ -5,7 +5,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Login } from '../../../../a2-features/f1/Login';
 import { CardsPack } from '../CardsPack';
 import { CardsTable } from '../CardsTable';
-import { Error404 } from '../common/Error404';
+import { Error404 } from '../common/ErrorPages/Error404';
 import { LoginForm } from '../common/LoginForm';
 import { PacksCardsTable } from '../PackCardsTable';
 import { Profile } from '../Profile';

@@ -21,14 +21,14 @@
 }
 
 .sortButton{
-    background-color: darkslateblue;
+    background: rgb(159, 194, 210);
     margin: 3px;
     border-radius: 10px;
     color:white;
     cursor: pointer;
     width: 25px;
     height: 15px;
-    font-size: 8px;
+    font-size: 12px;
 }
 .deleteButton, .updateButton, .cardButton{
     border-radius: 5px;
@@ -40,10 +40,10 @@
     margin-right: 5px;
 }
 .deleteButton{
-    background-color: crimson;
+    background-color: #ec5068;
 }
 .updateButton{
-    background-color: blue;
+    background-color: #7373ea;
 }
 /*.cardButton{*/
 /*    background-color: ;*/

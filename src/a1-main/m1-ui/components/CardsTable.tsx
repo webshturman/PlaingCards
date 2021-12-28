@@ -48,11 +48,11 @@ export const CardsTable = (): ReturnComponentType => {
     grade: 'grade',
     updated: 'updated',
   };
-  const newCard = {
-    cardsPack_id: packId,
-    question: '[1,2,3] + 1 =?',
-    answer: '1,2,31',
-  };
+  // const newCard = {
+  //   cardsPack_id: packId,
+  //   question: '[1,2,3] + 1 =?',
+  //   answer: '1,2,31',
+  // };
 
   useEffect(() => {
     dispatch(getCards(packId));
@@ -64,8 +64,8 @@ export const CardsTable = (): ReturnComponentType => {
   const [updateCardModal, setUpdateCardModal] = useState(false);
   const [deleteCardModal, setDeleteCardModal] = useState(false);
 
-  const handleAddCard = (): void => {
-    dispatch(addNewCard(newCard)); /// /&&&&&&&&&&&&&&&&&&&
+  const handleAddCard = (question: string, answer: string): void => {
+    dispatch(addNewCard({ cardsPack_id: packId, question, answer }));
     setCreateCardModal(false);
   };
   const handleDeleteCard = (): void => {
@@ -90,7 +90,7 @@ export const CardsTable = (): ReturnComponentType => {
         <div className={s.loader}>{status && <Loader />}</div>
         <div className={st.searchAddBlock}>
           <div />
-          <Button type="button" onClick={handleAddCard}>
+          <Button type="button" onClick={() => setCreateCardModal(true)}>
             Add Card
           </Button>
         </div>

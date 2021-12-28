@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ReturnComponentType } from '../../../../types/ReturnComponentType';
-import { setErrorMessageAC } from '../../../m2-bll/actions/app-actions';
-import { AppRootState } from '../../../m2-bll/store';
+import { ReturnComponentType } from '../../../../../types/ReturnComponentType';
+import { setErrorMessageAC } from '../../../../m2-bll/actions/app-actions';
+import { AppRootState } from '../../../../m2-bll/store';
 
 import s from 'styles/App.module.css';
 

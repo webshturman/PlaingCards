@@ -42,14 +42,14 @@ export const UniversalTable: FC<UniversalTableType> = ({
                 type="button"
                 onClick={() => sortFunction(`0${el[FIRST_ELEMENT]}`)}
               >
-                up
+                &uArr;
               </Button>
+              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
               <Button
                 className={style.sortButton}
-                type="button"
                 onClick={() => sortFunction(`1${el[FIRST_ELEMENT]}`)}
               >
-                down
+                &dArr;
               </Button>
             </div>
           </th>
@@ -76,6 +76,7 @@ export const UniversalTable: FC<UniversalTableType> = ({
               onClick={() => {
                 showDelete(true);
                 // eslint-disable-next-line no-underscore-dangle
+                console.log('fffffffffffffff');
                 setId(pack._id);
               }}
             >

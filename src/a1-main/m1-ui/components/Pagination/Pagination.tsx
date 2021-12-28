@@ -37,7 +37,7 @@ export const Pagination: React.FC<PaginationPropsType> = ({
 
   return (
     <div className={s.pagination}>
-      <div>
+      <div className={s.buttonBlock}>
         <Button
           disabled={portionNumber <= one}
           className={s.button}
@@ -70,25 +70,29 @@ export const Pagination: React.FC<PaginationPropsType> = ({
           Next list
         </Button>
       </div>
-      <div className={s.text}>
-        Current page: <span className={s.currentNumber}>{currentPage}</span>
-      </div>
+      {/* <div className={s.text}> */}
+      {/*  Current page: <span className={s.currentNumber}>{currentPage}</span> */}
+      {/* </div> */}
       <div>
-        {pages
-          .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
-          .map(page => (
-            <button
-              type="button"
-              key={page}
-              onClick={() => {
-                onPageChanged(page);
-              }}
-              disabled={appStatus}
-              className={`${s.page} ${currentPage === page ? s.selectPage : ''}`}
-            >
-              {page}
-            </button>
-          ))}
+        <div className={s.pageBlock}>
+          {pages
+            .filter(
+              page => page >= leftPortionPageNumber && page <= rightPortionPageNumber,
+            )
+            .map(page => (
+              <button
+                type="button"
+                key={page}
+                onClick={() => {
+                  onPageChanged(page);
+                }}
+                disabled={appStatus}
+                className={`${s.page} ${currentPage === page ? s.selectPage : ''}`}
+              >
+                {page}
+              </button>
+            ))}
+        </div>
       </div>
     </div>
   );

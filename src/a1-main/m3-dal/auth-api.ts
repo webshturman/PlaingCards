@@ -22,4 +22,7 @@ export const authAPI = {
   deleteMe() {
     return instance.delete<AxiosResponse<DeleteMeResponseStateType>>(`auth/me`);
   },
+  renewDataUser(newName: string, newAvatar: File) {
+    return instance.put<any>(`auth/me`, { name: newName, avatar: newAvatar });
+  },
 };

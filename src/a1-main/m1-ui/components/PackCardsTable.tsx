@@ -147,7 +147,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
         <div className={s.loader}>{status && <Loader />}</div>
         <div className={st.searchAddBlock}>
           <Search userId={allPacks ? EMPTY_STRING : userId} />
-          <Button type="button" onClick={() => addPackCards}>
+          <Button type="button" onClick={() => setCreateModal(true)}>
             Add Pack
           </Button>
         </div>

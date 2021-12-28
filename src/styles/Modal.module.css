@@ -37,4 +37,10 @@
     cursor: pointer;
     margin-top: -10px;
 }
-
+.containerModal{
+    text-align: center  ;
+}
+.titleModal{
+    font-size:larger;
+    padding: 0px 80px 30px 80px;
+}
