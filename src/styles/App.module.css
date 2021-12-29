@@ -1,12 +1,11 @@
 .container {
     /*text-align: center;*/
     /*padding:0 15px;*/
-    height: 100vh;
-    margin: 0 auto;
+    /*height: 100vh;
+    margin: 0 auto;*/
 }
 
 body {
-    background: linear-gradient(0deg, rgb(159, 194, 210) 5%, rgb(235, 247, 247) 92%);
     font-weight: bold;
     color: rgb(79, 98, 108);
 }

@@ -42,6 +42,7 @@
     display: inline-block;
     font-weight: 800;
     background-color: rgb(159, 194, 210) !important;
+    cursor: default;
 }
 
 /*.page:first-child {*/

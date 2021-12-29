@@ -42,7 +42,7 @@ export const Header = (): ReturnComponentType => {
                 Packs List
               </NavLink>
             </div>
-            <div>
+            <div className={style.logout}>
               <Button onClick={logOut} disabled={isFetching}>
                 Log out
               </Button>

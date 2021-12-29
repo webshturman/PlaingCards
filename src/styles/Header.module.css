@@ -1,12 +1,9 @@
 .header{
-    /*border-bottom: 1px solid darkblue;*/
-    margin-bottom: 50px;
     background-color: rgb(249, 253, 253);
 }
 
 .headerContainer{
-    max-width: 800px;
-    height: 60px;
+    max-width: 950px;
     display:flex;
     justify-content: space-around;
     align-items: center;
@@ -16,12 +13,12 @@
     display: flex;
     align-items: center;
 }
-.itemMenu{
+.itemMenu, .logout {
     padding: 0 30px;
+    font-size: 16px;
 }
 .itemMenu a{
     color: rgb(159, 194, 210);
-
 }
 .itemMenu a.active{
     color: rgb(79, 98, 108);

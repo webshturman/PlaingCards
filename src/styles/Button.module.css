@@ -4,50 +4,71 @@
     border-radius: 10px;
     color:white;
     cursor: pointer;
-    width: 80px;
-    height: 30px;
+    min-width: 50px;
+    font-size: 15px;
+    min-height: 30px;
+    padding: 0 15px;
 }
+
 .default:disabled {
     opacity: 0.5;
 }
+
 /*.default:focus {*/
 /*    background-color: deepskyblue;*/
 /*}*/
+
 .red {
     background: red;
 }
-.changeButton{
+
+.changeButton {
     margin-left: 10px;
 }
 
-.sortButton{
-    background: rgb(159, 194, 210);
-    margin: 3px;
-    border-radius: 10px;
-    color:white;
+.sortButton {
+    border-radius: 6px;
+    color: white;
     cursor: pointer;
-    width: 25px;
-    height: 15px;
-    font-size: 12px;
+    font-size: 16px;
+    min-height: auto;
+    min-width: auto;
+    font-weight: bolder;
+    padding: 0 8px;
+    margin: 0;
 }
-.deleteButton, .updateButton, .cardButton, .learnButton{
+
+.sortButton:last-child {
+    margin-left: 10px;
+}
+
+.deleteButton, .updateButton, .cardButton, .learnButton {
     border-radius: 5px;
     color:white;
     cursor: pointer;
-    width: 45px;
-    height: 20px;
-    font-size: 12px;
+    min-width: 70px;
+    min-height: 28px;
+    font-size: 15px;
+    padding: 0 10px;
+    margin: 5px 0;
+}
+
+.deleteButton:nth-child(odd), .updateButton:nth-child(odd), .cardButton:nth-child(odd), .learnButton:nth-child(odd) {
     margin-right: 5px;
 }
-.deleteButton{
+
+.deleteButton {
     background-color: #ec5068;
 }
-.updateButton{
+
+.updateButton {
     background-color: #7373ea;
 }
-.learnButton{
+
+.learnButton {
     background-color: dodgerblue;
 }
-/*.cardButton{*/
-/*    background-color: ;*/
-/*}*/
+
+.cardButton{
+    background-color: dodgerblue;
+}

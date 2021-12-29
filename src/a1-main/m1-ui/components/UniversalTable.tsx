@@ -37,20 +37,20 @@ export const UniversalTable: FC<UniversalTableType> = ({
         {Object.entries(headers).map(el => (
           <th key={el[FIRST_ELEMENT]} className={s.headerItem}>
             {el[SECOND_ELEMENT]}
-            <div>
+            <div className={s.sortButtonContainer}>
               <Button
                 className={style.sortButton}
                 type="button"
                 onClick={() => sortFunction(`0${el[FIRST_ELEMENT]}`)}
               >
-                &uArr;
+                &#129045;
               </Button>
               <Button
                 className={style.sortButton}
                 type="button"
                 onClick={() => sortFunction(`1${el[FIRST_ELEMENT]}`)}
               >
-                &dArr;
+                &#129047;
               </Button>
             </div>
           </th>
@@ -66,7 +66,7 @@ export const UniversalTable: FC<UniversalTableType> = ({
               <span>{pack[el]}</span>
             </td>
           ))}
-          <td>
+          <td className={s.buttons}>
             {userId === pack.user_id && (
               <>
                 <Button

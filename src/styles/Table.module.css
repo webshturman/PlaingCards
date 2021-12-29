@@ -4,17 +4,28 @@
     text-align: center;
     margin: 10px 0;
 }
+
 th, td {
     border-style: solid;
-    border-width: 4px 4px 4px 4px;
+    border-width: 2px 2px 2px 2px;
     border-color: rgb(79, 98, 108);
     color: rgb(114, 149, 162);
     padding: 10px;
+    max-width: 315px;
+    word-break: break-word;
 }
 
 th {
-    background: rgb(159, 194, 210);
+    background: rgb(158, 198, 219);
     color: white;
-
 }
 
+td.buttons {
+    width: 170px;
+}
+
+.sortButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}

@@ -27,7 +27,7 @@ const initialPackCardState = {
   maxCardsCount: 0,
   minCardsCount: 0,
   page: 1,
-  pageCount: 4,
+  pageCount: 15,
   portionSize: 10,
   token: '',
   tokenDeathTime: 0,
