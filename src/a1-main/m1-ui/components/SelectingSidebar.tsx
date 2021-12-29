@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setMaxFilter, setMinFilter } from '../../m2-bll/actions/pack-action';
 
 import { DoubleRangeSlider } from './common/DoubleRangeSlider/DoubleRangeSlider';
+import { LoaderRelative } from './common/LoaderRelative';
 
 import { AppRootState } from 'a1-main/m2-bll/store';
 import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
@@ -47,6 +48,7 @@ export const SelectingSidebar: FC<SideBarType> = ({ children }): ReturnComponent
         {/* <div className={s.userJobTitle}>User job title</div> */}
       </div>
       <div className={s.descriptionForDoubleRangeSlider}>Cards count in a pack</div>
+      {appStatus && <LoaderRelative />}
       {!appStatus && (
         <div className={s.DoubleRangeSliderContainer}>
           <DoubleRangeSlider
