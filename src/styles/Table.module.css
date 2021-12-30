@@ -22,10 +22,15 @@ th {
 
 td.buttons {
     width: 170px;
+    /*display: none;*/
 }
 
 .sortButtonContainer {
     display: flex;
     justify-content: center;
     margin-top: 5px;
+}
+
+.hideAllButtons{
+    display:none;
 }

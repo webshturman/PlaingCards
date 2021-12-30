@@ -31,6 +31,7 @@ export const UniversalTable: FC<UniversalTableType> = ({
   // @ts-ignore
   const userId = useSelector<AppRootState, string>(state => state.profile._id);
   const navigate = useNavigate();
+
   return (
     <table className={s.table}>
       <tr>
@@ -98,15 +99,13 @@ export const UniversalTable: FC<UniversalTableType> = ({
               type="button"
               onClick={() => navigate(PATH.CARDS_TABLE, { state: pack._id })}
             >
-              Card
+              Cards
             </Button>
             <Button
               className={style.learnButton}
               type="button"
-              /* eslint-disable-next-line no-underscore-dangle */
               onClick={() =>
                 navigate(PATH.LEARN, {
-                  // eslint-disable-next-line no-underscore-dangle
                   state: { packId: pack._id, packName: pack.name },
                 })
               }

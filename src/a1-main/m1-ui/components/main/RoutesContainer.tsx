@@ -3,7 +3,7 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Login } from '../../../../a2-features/f1/Login';
-import { CardsPack } from '../CardsPack';
+// import { CardsPack } from '../CardsPack';
 import { CardsTable } from '../CardsTable';
 import { Error404 } from '../common/ErrorPages/Error404';
 import { LoginForm } from '../common/LoginForm';
@@ -22,6 +22,11 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 export const RoutesContainer = (): ReturnComponentType => (
   <div className={style.routesContainer}>
     <Routes>
+      <Route path={PATH.MAIN} element={<Navigate to={PATH.PROFILE} />} />
+      <Route path={PATH.PROFILE} element={<Profile />} />
+      <Route path={PATH.CARDS} element={<PacksCardsTable />} />
+      <Route path={PATH.CARDS_TABLE} element={<CardsTable />} />
+      <Route path={PATH.LEARN} element={<Learn />} />
       <Route path={PATH.LOGIN_FORM} element={<LoginForm />}>
         <Route index element={<Login />} />
         <Route path={PATH.REGISTER} element={<Register />} />
@@ -33,12 +38,6 @@ export const RoutesContainer = (): ReturnComponentType => (
       <Route path={PATH.ERROR} element={<Error404 />} />
       <Route path={PATH.WRONG_PAGE} element={<Navigate to={PATH.ERROR} />} />
       <Route path={PATH.TEST_PAGE} element={<TestComponent />} />
-      <Route path={PATH.PROFILE} element={<Profile />} />
-      <Route path={PATH.CARDS} element={<CardsPack />}>
-        <Route index element={<PacksCardsTable />} />
-        <Route path={PATH.CARDS_TABLE} element={<CardsTable />} />
-        <Route path={PATH.LEARN} element={<Learn />} />
-      </Route>
     </Routes>
   </div>
 );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 import st from '../../../styles/search.module.css';
 
@@ -26,11 +26,13 @@ import {
 } from 'a1-main/m2-bll/thunks/cards-thunk';
 import { cardsType } from 'a1-main/m3-dal/types/cardsType';
 import { EMPTY_STRING, PORTION_SIZE } from 'constants/common';
+import { PATH } from 'enums/routes';
 import s from 'styles/Cards.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const CardsTable = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
+  const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
   const cards = useSelector<AppRootState, cardsType[]>(state => state.cards.cards);
   const cardsTotalCount = useSelector<AppRootState, number>(
     state => state.cards.cardsTotalCount,
@@ -48,11 +50,6 @@ export const CardsTable = (): ReturnComponentType => {
     grade: 'grade',
     updated: 'updated',
   };
-  // const newCard = {
-  //   cardsPack_id: packId,
-  //   question: '[1,2,3] + 1 =?',
-  //   answer: '1,2,31',
-  // };
 
   useEffect(() => {
     dispatch(getCards(packId));
@@ -80,6 +77,8 @@ export const CardsTable = (): ReturnComponentType => {
     dispatch(getCards(packId));
     setDeleteCardModal(false);
   };
+
+  if (!AuthUserStatus) return <Navigate to={PATH.LOGIN_FORM} />;
 
   return (
     <div className={s.CardsContainer}>

@@ -39,14 +39,7 @@ export const SelectingSidebar: FC<SideBarType> = ({ children }): ReturnComponent
 
   return (
     <div className={s.SelectingSidebarContainer}>
-      <div className={s.profile}>
-        {children}
-        {/* <div className={s.userAvatarContainer}> */}
-        {/*  <div className={s.userAvatar} /> */}
-        {/* </div> */}
-        {/* <div className={s.userName}>User name</div> */}
-        {/* <div className={s.userJobTitle}>User job title</div> */}
-      </div>
+      <div className={s.profile}>{children}</div>
       <div className={s.descriptionForDoubleRangeSlider}>Cards count in a pack</div>
       {appStatus && <LoaderRelative />}
       {!appStatus && (
@@ -64,11 +57,6 @@ export const SelectingSidebar: FC<SideBarType> = ({ children }): ReturnComponent
           />
         </div>
       )}
-      {/* {appStatus && ( */}
-      {/*  <div> */}
-      {/*    <Loader /> */}
-      {/*  </div> */}
-      {/* )} */}
     </div>
   );
 };

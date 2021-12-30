@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 import st from '../../../styles/search.module.css';
 import {
@@ -35,12 +36,14 @@ import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
 
 import { EMPTY_STRING, FIRST_PAGE } from 'constants/common';
+import { PATH } from 'enums/routes';
 import s from 'styles/Cards.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const PacksCardsTable = (): ReturnComponentType => {
   const [allPacks, setAllPacks] = useState<boolean>(true);
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
+  const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
   // @ts-ignore
   const userId = useSelector<AppRootState, string>(state => state.profile._id);
   const packCards = useSelector<AppRootState, Array<PacksType>>(
@@ -59,6 +62,9 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const searchText = useSelector<AppRootState, string>(
     state => state.cardspack.searchText,
   );
+  // const min = useSelector<AppRootState, number>(state => state.cardspack.minCardsCount);
+  // const max = useSelector<AppRootState, number>(state => state.cardspack.maxCardsCount);
+
   const dispatch = useDispatch();
 
   const onPageChanged = (pageNumber: number): void => {
@@ -71,6 +77,9 @@ export const PacksCardsTable = (): ReturnComponentType => {
   };
 
   useEffect(() => {
+    if (!AuthUserStatus) {
+      return;
+    }
     if (!searchText) {
       if (allPacks) {
         dispatch(setPackCardsTC(EMPTY_STRING));
@@ -81,6 +90,13 @@ export const PacksCardsTable = (): ReturnComponentType => {
       dispatch(searchPacks(searchText, sortPack, pageCount, FIRST_PAGE));
     }
   }, [sortPack]);
+
+  // useEffect(() => {
+  //   if (max !== ZERO) {
+  //     dispatch(setMinFilter(min));
+  //     dispatch(setMaxFilter(max));
+  //   }
+  // });
 
   useEffect(() => {
     const zero = 0;
@@ -128,6 +144,9 @@ export const PacksCardsTable = (): ReturnComponentType => {
     dispatch(setPackCardsTC(userId));
     setAllPacks(false);
   };
+
+  if (!AuthUserStatus) return <Navigate to={PATH.LOGIN_FORM} />;
+
   return (
     <div className={s.CardsContainer}>
       <Scroll />

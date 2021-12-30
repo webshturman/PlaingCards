@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 import { setCardsId } from '../../m2-bll/actions/learn-actions';
 import { cardsType } from '../../m3-dal/types/cardsType';
@@ -24,6 +24,7 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Learn = (): ReturnComponentType => {
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
+  const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
   const cards = useSelector<AppRootState, any>(state => state.learn.cards);
   const questionCount = useSelector<AppRootState, number>(
     state => state.learn.cardsTotalCount,
@@ -95,6 +96,8 @@ export const Learn = (): ReturnComponentType => {
       </div>
     );
   }
+
+  if (!AuthUserStatus) return <Navigate to={PATH.LOGIN_FORM} />;
 
   return (
     <div className={s.Container}>

@@ -2,9 +2,8 @@ import React from 'react';
 
 import { Outlet } from 'react-router-dom';
 
-import { ReturnComponentType } from '../../../../types/ReturnComponentType';
-
 import s from 'styles/App.module.css';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const LoginForm = (): ReturnComponentType => (
   <div className={s.loginBlock}>
