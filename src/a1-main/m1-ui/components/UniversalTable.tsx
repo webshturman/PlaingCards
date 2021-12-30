@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from './common/CustomButton/Button';
 
+import { SortButton } from 'a1-main/m1-ui/components/common/SortButton';
 import { AppRootState } from 'a1-main/m2-bll/store';
 import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
 import { PATH } from 'enums/routes';
@@ -34,87 +35,80 @@ export const UniversalTable: FC<UniversalTableType> = ({
 
   return (
     <table className={s.table}>
-      <tr>
-        {Object.entries(headers).map(el => (
-          <th key={el[FIRST_ELEMENT]} className={s.headerItem}>
-            {el[SECOND_ELEMENT]}
-            <div className={s.sortButtonContainer}>
-              <Button
-                className={style.sortButton}
-                type="button"
-                onClick={() => sortFunction(`0${el[FIRST_ELEMENT]}`)}
-              >
-                &#129045;
-              </Button>
-              <Button
-                className={style.sortButton}
-                type="button"
-                onClick={() => sortFunction(`1${el[FIRST_ELEMENT]}`)}
-              >
-                &#129047;
-              </Button>
-            </div>
-          </th>
-        ))}
-        <th>
-          <span>actions</span>
-        </th>
-      </tr>
-      {items.map(pack => (
-        <tr key={pack._id}>
-          {Object.keys(headers).map(el => (
-            <td key={el}>
-              <span>{pack[el]}</span>
-            </td>
+      <thead>
+        <tr>
+          {Object.entries(headers).map(el => (
+            <th key={el[FIRST_ELEMENT]} className={s.headerItem}>
+              {el[SECOND_ELEMENT]}
+              <SortButton
+                elementOne={`0${el[FIRST_ELEMENT]}`}
+                elementTwo={`1${el[FIRST_ELEMENT]}`}
+                sortFunction={sortFunction}
+              />
+            </th>
           ))}
-          <td className={s.buttons}>
-            {userId === pack.user_id && (
-              <>
-                <Button
-                  className={style.deleteButton}
-                  type="button"
-                  onClick={() => {
-                    showDelete(true);
-                    setId(pack._id);
-                  }}
-                >
-                  Delete
-                </Button>
-
-                <Button
-                  className={style.updateButton}
-                  type="button"
-                  onClick={() => {
-                    showUpdate(true);
-                    setId(pack._id);
-                  }}
-                >
-                  Update
-                </Button>
-              </>
-            )}
-
-            <Button
-              className={style.cardButton}
-              type="button"
-              onClick={() => navigate(PATH.CARDS_TABLE, { state: pack._id })}
-            >
-              Cards
-            </Button>
-            <Button
-              className={style.learnButton}
-              type="button"
-              onClick={() =>
-                navigate(PATH.LEARN, {
-                  state: { packId: pack._id, packName: pack.name },
-                })
-              }
-            >
-              Learn
-            </Button>
-          </td>
+          <th>
+            <span>actions</span>
+          </th>
         </tr>
-      ))}
+      </thead>
+      <tbody>
+        {items.map(pack => (
+          <tr key={pack._id}>
+            {Object.keys(headers).map(el => (
+              <td key={el}>
+                <span>{pack[el]}</span>
+              </td>
+            ))}
+            <td className={s.buttons}>
+              {userId === pack.user_id && (
+                <>
+                  <Button
+                    className={style.deleteButton}
+                    type="button"
+                    onClick={() => {
+                      showDelete(true);
+                      setId(pack._id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+
+                  <Button
+                    className={style.updateButton}
+                    type="button"
+                    onClick={() => {
+                      showUpdate(true);
+                      setId(pack._id);
+                    }}
+                  >
+                    Update
+                  </Button>
+                </>
+              )}
+
+              <Button
+                className={style.cardButton}
+                type="button"
+                onClick={() => navigate(PATH.CARDS_TABLE, { state: pack._id })}
+              >
+                Cards
+              </Button>
+              <Button
+                className={style.learnButton}
+                type="button"
+                onClick={() =>
+                  navigate(PATH.LEARN, {
+                    state: { packId: pack._id, packName: pack.name },
+                  })
+                }
+              >
+                Learn
+              </Button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 };
