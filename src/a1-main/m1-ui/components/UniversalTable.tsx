@@ -1,15 +1,12 @@
 import React, { FC } from 'react';
 
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
-import { Button } from './common/CustomButton/Button';
 
 import { SortButton } from 'a1-main/m1-ui/components/common/SortButton';
+import { TableActionButtons } from 'a1-main/m1-ui/components/common/TableActionsButton';
+import { TableNavigateButtons } from 'a1-main/m1-ui/components/common/TableNavigateButtons';
 import { AppRootState } from 'a1-main/m2-bll/store';
 import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
-import { PATH } from 'enums/routes';
-import style from 'styles/Button.module.css';
 import s from 'styles/Table.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -34,7 +31,7 @@ export const UniversalTable: FC<UniversalTableType> = ({
 }): ReturnComponentType => {
   // @ts-ignore
   const userId = useSelector<AppRootState, string>(state => state.profile._id);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <table className={s.table}>
@@ -65,52 +62,14 @@ export const UniversalTable: FC<UniversalTableType> = ({
             ))}
             <td className={s.buttons}>
               {userId === pack.user_id && (
-                <>
-                  <Button
-                    className={style.deleteButton}
-                    type="button"
-                    onClick={() => {
-                      showDelete(true);
-                      setId(pack._id);
-                    }}
-                  >
-                    Delete
-                  </Button>
-
-                  <Button
-                    className={style.updateButton}
-                    type="button"
-                    onClick={() => {
-                      showUpdate(true);
-                      setId(pack._id);
-                    }}
-                  >
-                    Update
-                  </Button>
-                </>
+                <TableActionButtons
+                  showDelete={showDelete}
+                  showUpdate={showUpdate}
+                  setId={setId}
+                  packID={pack._id}
+                />
               )}
-              {buttons && (
-                <>
-                  <Button
-                    className={style.cardButton}
-                    type="button"
-                    onClick={() => navigate(PATH.CARDS_TABLE, { state: pack._id })}
-                  >
-                    Cards
-                  </Button>
-                  <Button
-                    className={style.learnButton}
-                    type="button"
-                    onClick={() =>
-                      navigate(PATH.LEARN, {
-                        state: { packId: pack._id, packName: pack.name },
-                      })
-                    }
-                  >
-                    Learn
-                  </Button>
-                </>
-              )}
+              {buttons && <TableNavigateButtons packName={pack.name} packId={pack._id} />}
             </td>
           </tr>
         ))}
