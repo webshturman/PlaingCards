@@ -20,6 +20,8 @@ type UniversalTableType = {
   showDelete: (modal: boolean) => void;
   showUpdate: (modal: boolean) => void;
   setId: (id: string) => void;
+  // eslint-disable-next-line react/require-default-props
+  buttons?: boolean;
 };
 export const UniversalTable: FC<UniversalTableType> = ({
   items,
@@ -28,6 +30,7 @@ export const UniversalTable: FC<UniversalTableType> = ({
   showUpdate,
   showDelete,
   setId,
+  buttons,
 }): ReturnComponentType => {
   // @ts-ignore
   const userId = useSelector<AppRootState, string>(state => state.profile._id);
@@ -86,25 +89,28 @@ export const UniversalTable: FC<UniversalTableType> = ({
                   </Button>
                 </>
               )}
-
-              <Button
-                className={style.cardButton}
-                type="button"
-                onClick={() => navigate(PATH.CARDS_TABLE, { state: pack._id })}
-              >
-                Cards
-              </Button>
-              <Button
-                className={style.learnButton}
-                type="button"
-                onClick={() =>
-                  navigate(PATH.LEARN, {
-                    state: { packId: pack._id, packName: pack.name },
-                  })
-                }
-              >
-                Learn
-              </Button>
+              {buttons && (
+                <>
+                  <Button
+                    className={style.cardButton}
+                    type="button"
+                    onClick={() => navigate(PATH.CARDS_TABLE, { state: pack._id })}
+                  >
+                    Cards
+                  </Button>
+                  <Button
+                    className={style.learnButton}
+                    type="button"
+                    onClick={() =>
+                      navigate(PATH.LEARN, {
+                        state: { packId: pack._id, packName: pack.name },
+                      })
+                    }
+                  >
+                    Learn
+                  </Button>
+                </>
+              )}
             </td>
           </tr>
         ))}

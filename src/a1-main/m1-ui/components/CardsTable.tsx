@@ -100,6 +100,7 @@ export const CardsTable = (): ReturnComponentType => {
           headers={cardsHeaders}
           sortFunction={handleSortCards}
           setId={setCardId}
+          buttons={false}
         />
         <Pagination
           totalItemsCount={cardsTotalCount}

@@ -156,6 +156,7 @@ export const Profile = (): ReturnComponentType => {
           headers={packHeaders}
           sortFunction={sortPackCards}
           setId={setPackId}
+          buttons
         />
         <Pagination
           totalItemsCount={cardPacksTotalCount} // это количество всех колод
