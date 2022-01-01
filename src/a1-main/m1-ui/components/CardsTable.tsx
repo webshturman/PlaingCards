@@ -102,6 +102,7 @@ export const CardsTable = (): ReturnComponentType => {
               headers={cardsHeaders}
               sortFunction={handleSortCards}
               setId={setCardId}
+              buttons={false}
             />
             <Pagination
               totalItemsCount={cardsTotalCount}
@@ -112,22 +113,6 @@ export const CardsTable = (): ReturnComponentType => {
             />
           </div>
         )}
-        <UniversalTable
-          showDelete={setDeleteCardModal}
-          showUpdate={setUpdateCardModal}
-          items={cards}
-          headers={cardsHeaders}
-          sortFunction={handleSortCards}
-          setId={setCardId}
-          buttons={false}
-        />
-        <Pagination
-          totalItemsCount={cardsTotalCount}
-          currentPage={page}
-          onPageChanged={onPageChanged}
-          pageSize={pageCount}
-          portionSize={PORTION_SIZE}
-        />
       </div>
       <Modal isOpen={updateCardModal}>
         <CardUpdate showUpdate={setUpdateCardModal} handleUpdateCard={handleUpdateCard} />
