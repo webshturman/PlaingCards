@@ -1,4 +1,3 @@
-import { searchApi } from '../../m3-dal/search-api';
 import { setStatusAC } from '../actions/app-actions';
 import {
   setCardsPackTotalCountAC,
@@ -6,6 +5,8 @@ import {
   setSearchText,
 } from '../actions/pack-action';
 import { AppThunk } from '../store';
+
+import { searchApi } from 'a1-main/m3-dal/search-api';
 
 export const searchPacks =
   (

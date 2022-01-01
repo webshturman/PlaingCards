@@ -2,29 +2,26 @@ import React, { FC, FormEvent, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AppRootState } from '../../m2-bll/store';
-import { searchPacks } from '../../m2-bll/thunks/search-thunk';
-
 import { Button } from './common/CustomButton/Button';
 import { Input } from './common/CustomInput/Input';
 
+import { AppRootState } from 'a1-main/m2-bll/store';
+import { searchPacks } from 'a1-main/m2-bll/thunks/search-thunk';
+import { SearchType } from 'a1-main/m3-dal/types/searchType';
 import { EMPTY_STRING, SEARCH } from 'constants/common';
-import s from 'styles/search.module.css';
+import s from 'styles/Search.module.css';
 
-type SearchType = {
-  // eslint-disable-next-line react/require-default-props
-  userId?: string;
-};
-export const Search: FC<SearchType> = ({ userId }): any => {
+export const Search: FC<SearchType> = ({ userId }): React.ReactElement => {
   const dispatch = useDispatch();
+  const [searchText, setSearchText] = useState<string>(EMPTY_STRING);
   const isFetching = useSelector<AppRootState, boolean>(state => state.app.isFetching);
   const sortPacks = useSelector<AppRootState, string>(state => state.cardspack.sortPacks);
   const pageCount = useSelector<AppRootState, number>(state => state.cardspack.pageCount);
   const page = useSelector<AppRootState, number>(state => state.cardspack.page);
   const minFilter = useSelector<AppRootState, number>(state => state.cardspack.minFilter);
   const maxFilter = useSelector<AppRootState, number>(state => state.cardspack.maxFilter);
-  const [searchText, setSearchText] = useState<string>(EMPTY_STRING);
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): any => {
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     dispatch(
       searchPacks(searchText, sortPacks, pageCount, page, userId, minFilter, maxFilter),

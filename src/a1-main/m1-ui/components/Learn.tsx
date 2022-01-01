@@ -22,6 +22,9 @@ import s from 'styles/Learn.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Learn = (): ReturnComponentType => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
   const cards = useSelector<AppRootState, any>(state => state.learn.cards);
@@ -34,9 +37,6 @@ export const Learn = (): ReturnComponentType => {
   const isShowAnswer = useSelector<AppRootState, boolean>(
     state => state.learn.isShowAnswer,
   );
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
   const { packName, packId } = location.state;
   const options = ['1', '2', '3', '4', '5'];
   const [radioValue, setRadioValue] = useState<string | undefined>(undefined);
@@ -48,9 +48,11 @@ export const Learn = (): ReturnComponentType => {
     dispatch(changeAnswerStatus(false));
     navigate(PATH.CARDS);
   };
+
   const showAnswer = (): void => {
     dispatch(changeAnswerStatus(true));
   };
+
   const nextQuestion = (currentQuestionNumber: number): void => {
     // eslint-disable-next-line no-underscore-dangle
     const cardId = cards[currentQuestionNumber]._id;
@@ -59,6 +61,7 @@ export const Learn = (): ReturnComponentType => {
     setRadioValue(undefined);
     dispatch(changeQuestionNumber(currentQuestionNumber + ONE));
   };
+
   const sendAndExit = (currentQuestionNumber: number): void => {
     // eslint-disable-next-line no-underscore-dangle
     const cardId = cards[currentQuestionNumber]._id;

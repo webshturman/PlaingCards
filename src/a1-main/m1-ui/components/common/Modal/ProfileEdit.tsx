@@ -2,11 +2,12 @@ import React, { ChangeEvent } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { FIRST_ELEMENT } from '../../../../../constants/common';
-import s from '../../../../../styles/Modal.module.css';
-import { ReturnComponentType } from '../../../../../types/ReturnComponentType';
-import { saveUserDataTC } from '../../../../m2-bll/thunks/profile-thunk';
 import { Button } from '../CustomButton/Button';
+
+import { saveUserDataTC } from 'a1-main/m2-bll/thunks/profile-thunk';
+import { FIRST_ELEMENT } from 'constants/common';
+import s from 'styles/Modal.module.css';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type PackUpdateType = {
   showEdit: (modal: boolean) => void;
@@ -41,8 +42,12 @@ export const ProfileEdit: React.FC<PackUpdateType> = ({
       {/* /> */}
       {/* <Input title="" placeholder="" onChangeText={setNewEmail} value="" type="file" /> */}
       <input type="file" onChange={onAvatarPhoto} />
-      <Button onClick={() => showEdit(false)}>update</Button>
-      <Button onClick={() => showEdit(false)}>cancel</Button>
+      <Button onClick={() => showEdit(false)} className={s.buttonLRMargin}>
+        update
+      </Button>
+      <Button onClick={() => showEdit(false)} className={s.buttonLRMargin}>
+        cancel
+      </Button>
     </div>
   );
 };

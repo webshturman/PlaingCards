@@ -36,14 +36,38 @@ export type cardsResponseType = {
   pageCount: number;
   packUserId: string;
 };
+
 export type cardsAddType = cardsType & {
   answerImg?: string;
   questionImg?: string;
   questionVideo?: string;
   answerVideo?: string;
 };
+
 export type cardsUpdateType = {
   _id: string;
   answer?: string;
   question?: string;
+};
+
+export type cardsPacksRequestType = {
+  searchRequest?: string;
+  sortPacks?: string;
+  pageCount?: number;
+  page?: number;
+  // eslint-disable-next-line camelcase
+  user_id?: string;
+  minFilter?: number;
+  maxFilter?: number;
+};
+
+export type cardsPacksResponseType = {
+  cardPacks: Array<any>;
+  cardPacksTotalCount: number;
+  maxCardsCount: number;
+  minCardsCount: number;
+  page: number;
+  pageCount: number;
+  token?: string;
+  tokenDeathTime?: number;
 };

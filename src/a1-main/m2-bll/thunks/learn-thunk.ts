@@ -1,4 +1,3 @@
-import { learnAPI } from '../../m3-dal/learn-api';
 import { setStatusAC } from '../actions/app-actions';
 import {
   setAnswerStatus,
@@ -6,6 +5,8 @@ import {
   setQuestionNumber,
 } from '../actions/learn-actions';
 import { AppThunk } from '../store';
+
+import { learnAPI } from 'a1-main/m3-dal/learn-api';
 
 export const getCards =  // eslint-disable-next-line camelcase
   (cardsPack_id: string): AppThunk =>
@@ -54,8 +55,9 @@ export const sendCardRate =
     dispatch(setStatusAC(true));
     try {
       const response = await learnAPI.sendCardRate(rate, cardId);
-      console.log(response);
-      dispatch(setStatusAC(false));
+      if (response.statusText === 'OK') {
+        dispatch(setStatusAC(false));
+      }
       return Promise.resolve();
     } catch (error: any) {
       console.log(`Error sending card rate. ${error}`);

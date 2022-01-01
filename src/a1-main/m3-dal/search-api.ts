@@ -1,6 +1,9 @@
 import { AxiosResponse } from 'axios';
 
+import { cardsPacksRequestType, cardsPacksResponseType } from './types/cardsType';
+
 import { instance } from 'a1-main/m3-dal/instance';
+import { EMPTY_STRING } from 'constants/common';
 
 export const searchApi = {
   searchPacks(
@@ -13,26 +16,14 @@ export const searchApi = {
     minFilter?: number,
     maxFilter?: number,
   ) {
-    return instance.get<any, AxiosResponse<any>>(
+    return instance.get<cardsPacksRequestType, AxiosResponse<cardsPacksResponseType>>(
       // eslint-disable-next-line camelcase
-      `cards/pack?packName=${searchRequest}&sortPacks=${sortPacks}&page=${page}&pageCount=${pageCount}&user_id=${user_id}&min=${minFilter}&max=${maxFilter}`,
+      `cards/pack?packName=${searchRequest}&sortPacks=${sortPacks}&page=${page}&pageCount=${pageCount}${
+        // eslint-disable-next-line camelcase
+        user_id !== undefined && user_id !== EMPTY_STRING ? `&user_id=${user_id}` : ''
+      }${minFilter !== undefined ? `&min=${minFilter}` : ''}${
+        maxFilter !== undefined ? `&max=${maxFilter}` : ''
+      }`,
     );
   },
 };
-
-// type searchRequestType = {
-//   searchText: string;
-//   sortPacks: string;
-//   pageCount: number;
-//   page: number;
-//   // eslint-disable-next-line camelcase
-//   user_id?: string;
-//   minFilter?: number;
-//   maxFilter?: number;
-// };
-//
-// export const searchApi = {
-//   searchPacks(searchData: searchRequestType) {
-//     return instance.get<any, AxiosResponse<any>>(`cards/pack`, { params: searchData });
-//   },
-// };

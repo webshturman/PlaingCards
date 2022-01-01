@@ -1,14 +1,15 @@
 import axios from 'axios';
 
-import { ReamePasswordType } from '../../../a2-features/f3/NewPassword';
-import { LetterType } from '../../../a2-features/f3/RecoveryPassword';
-import { passwordAPI } from '../../m3-dal/password-api';
 import { setErrorMessageAC, setStatusAC } from '../actions/app-actions';
 import {
   successRenamePasswordAC,
   successSendMessgeAC,
 } from '../actions/password-actions';
 import { AppThunk } from '../store';
+
+import { passwordAPI } from 'a1-main/m3-dal/password-api';
+import { ReamePasswordType } from 'a2-features/f3/NewPassword';
+import { LetterType } from 'a2-features/f3/RecoveryPassword';
 
 export const sendMessageOnEmailTC =
   (letterToThePost: LetterType): AppThunk =>

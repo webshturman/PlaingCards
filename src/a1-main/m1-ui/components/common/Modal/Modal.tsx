@@ -1,7 +1,7 @@
 import React from 'react';
 
-import s from '../../../../../styles/Modal.module.css';
-import { ReturnComponentType } from '../../../../../types/ReturnComponentType';
+import s from 'styles/Modal.module.css';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type ModalType = {
   isOpen: boolean;

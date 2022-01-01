@@ -12,15 +12,13 @@ import { PackUpdate } from './common/Modal/PackUpdate';
 import { Scroll } from './common/Scroll/Scroll';
 import { Pagination } from './Pagination/Pagination';
 import { Search } from './Search';
-import { SelectingSidebar } from './SelectingSidebar';
+import { Sidebar } from './Sidebar';
 import { UniversalTable } from './UniversalTable';
 
 import {
   setCurrentPageAC,
   setMaxCardsCount,
-  setMaxFilter,
   setMinCardsCount,
-  setMinFilter,
   setSearchText,
   SortPackCardsAC,
 } from 'a1-main/m2-bll/actions/pack-action';
@@ -36,10 +34,11 @@ import { searchPacks } from 'a1-main/m2-bll/thunks/search-thunk';
 import { EMPTY_STRING, FIRST_PAGE, ZERO } from 'constants/common';
 import { PATH } from 'enums/routes';
 import s from 'styles/Cards.module.css';
-import st from 'styles/search.module.css';
+import st from 'styles/Search.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const PacksCardsTable = (): ReturnComponentType => {
+  const dispatch = useDispatch();
   const [allPacks, setAllPacks] = useState<boolean>(true);
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
@@ -61,10 +60,6 @@ export const PacksCardsTable = (): ReturnComponentType => {
   const searchText = useSelector<AppRootState, string>(
     state => state.cardspack.searchText,
   );
-  // const min = useSelector<AppRootState, number>(state => state.cardspack.minCardsCount);
-  // const max = useSelector<AppRootState, number>(state => state.cardspack.maxCardsCount);
-
-  const dispatch = useDispatch();
 
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentPageAC(pageNumber));
@@ -90,20 +85,11 @@ export const PacksCardsTable = (): ReturnComponentType => {
     }
   }, [sortPack]);
 
-  // useEffect(() => {
-  //   if (max !== ZERO) {
-  //     dispatch(setMinFilter(min));
-  //     dispatch(setMaxFilter(max));
-  //   }
-  // });
-
   useEffect(() => {
     dispatch(setSearchText(EMPTY_STRING));
     dispatch(setCurrentPageAC(FIRST_PAGE));
     dispatch(setMinCardsCount(ZERO));
     dispatch(setMaxCardsCount(ZERO));
-    dispatch(setMinFilter(ZERO));
-    dispatch(setMaxFilter(ZERO));
     dispatch(SortPackCardsAC(initialSortValue));
   }, []);
 
@@ -148,17 +134,37 @@ export const PacksCardsTable = (): ReturnComponentType => {
   return (
     <div className={s.CardsContainer}>
       <Scroll />
-      <SelectingSidebar>
+      <Sidebar>
         <h1>Show Cards Packs</h1>
-        <div>
-          <Button type="button" disabled={!allPacks} onClick={getMyPacks}>
-            My
-          </Button>
-          <Button type="button" disabled={allPacks} onClick={getAllPacks}>
-            All
-          </Button>
+        <div className={s.selectPacksButtonsContainer}>
+          <div
+            className={
+              !allPacks ? s.selectPacksButtonActive : s.selectPacksButtonUnActive
+            }
+          >
+            <Button
+              type="button"
+              disabled={!allPacks}
+              onClick={getMyPacks}
+              className={s.selectPacksButton}
+            >
+              My
+            </Button>
+          </div>
+          <div
+            className={allPacks ? s.selectPacksButtonActive : s.selectPacksButtonUnActive}
+          >
+            <Button
+              type="button"
+              disabled={allPacks}
+              onClick={getAllPacks}
+              className={s.selectPacksButton}
+            >
+              All
+            </Button>
+          </div>
         </div>
-      </SelectingSidebar>
+      </Sidebar>
       <div className={s.cardsBlock}>
         <h1 className={s.titleCardsBlock}>Packs list</h1>
         <div className={s.loader}>{status && <Loader />}</div>

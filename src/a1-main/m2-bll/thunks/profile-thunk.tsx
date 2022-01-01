@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-import { authAPI } from '../../m3-dal/auth-api';
 import { setErrorMessageAC, setStatusAC } from '../actions/app-actions';
 import { AppThunk } from '../store';
+
+import { authAPI } from 'a1-main/m3-dal/auth-api';
 
 export const saveUserDataTC =
   (newName: string, newAvatar: File): AppThunk =>
   async dispatch => {
-    console.log('2');
     dispatch(setStatusAC(true));
     try {
       await authAPI.renewDataUser(newName, newAvatar);

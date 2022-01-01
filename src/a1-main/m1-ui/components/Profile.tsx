@@ -13,7 +13,7 @@ import { ProfileEdit } from './common/Modal/ProfileEdit';
 import { Scroll } from './common/Scroll/Scroll';
 import { Pagination } from './Pagination/Pagination';
 import { Search } from './Search';
-import { SelectingSidebar } from './SelectingSidebar';
+import { Sidebar } from './Sidebar';
 import { UniversalTable } from './UniversalTable';
 
 import {
@@ -34,7 +34,7 @@ import {
   updatePackCardsTC,
 } from 'a1-main/m2-bll/thunks/pack-thunk';
 import { searchPacks } from 'a1-main/m2-bll/thunks/search-thunk';
-import avatar from 'assets/images/avatar.jpg';
+import avatar from 'assets/images/avatar.png';
 import {
   EMPTY_STRING,
   FIRST_PAGE,
@@ -45,12 +45,13 @@ import {
 } from 'constants/common';
 import { PATH } from 'enums/routes';
 import s from 'styles/Cards.module.css';
-import st from 'styles/search.module.css';
-import style from 'styles/SelectingSidebar.module.css';
+import st from 'styles/Search.module.css';
+import style from 'styles/Sidebar.module.css';
 import { Nullable } from 'types/Nullable';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Profile = (): ReturnComponentType => {
+  const dispatch = useDispatch();
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
   const status = useSelector<AppRootState, boolean>(state => state.app.status);
   const sortPack = useSelector<AppRootState, string>(state => state.cardspack.sortPacks);
@@ -61,17 +62,19 @@ export const Profile = (): ReturnComponentType => {
   );
   // @ts-ignore
   const userId = useSelector<AppRootState, string>(state => state.profile._id);
-  const packCards = useSelector<AppRootState, Array<PacksType>>(
+  const userName = useSelector<AppRootState, Nullable<string>>(
+    state => state.profile.name,
+  );
+  const cardPacks = useSelector<AppRootState, Array<PacksType>>(
     state => state.cardspack.cardPacks,
   );
   const searchText = useSelector<AppRootState, string>(
     state => state.cardspack.searchText,
   );
-  const photoAvatar = useSelector<AppRootState, Nullable<string>>(
+  /* const photoAvatar = useSelector<AppRootState, Nullable<string>>(
     state => state.profile.avatar!,
-  );
+  ); */
 
-  const dispatch = useDispatch();
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentPageAC(pageNumber));
     if (!searchText) {
@@ -91,6 +94,7 @@ export const Profile = (): ReturnComponentType => {
       dispatch(searchPacks(searchText, sortPack, pageCount, FIRST_PAGE, userId));
     }
   }, [sortPack]);
+
   useEffect(() => {
     dispatch(setSearchText(EMPTY_STRING));
     dispatch(setCurrentPageAC(FIRST_PAGE));
@@ -100,6 +104,7 @@ export const Profile = (): ReturnComponentType => {
     dispatch(setMaxFilter(ZERO));
     dispatch(SortPackCardsAC(INITIAL_SORT_VALUE));
   }, []);
+
   const [editProfileModal, setEditProfileModal] = useState(false);
   const [createModal, setCreateModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(false);
@@ -123,44 +128,54 @@ export const Profile = (): ReturnComponentType => {
   };
 
   if (!AuthUserStatus) return <Navigate to={PATH.LOGIN_FORM} />;
+
   return (
     <div className={s.CardsContainer}>
-      <SelectingSidebar>
+      <Sidebar>
         <div className={style.userAvatarContainer}>
-          <img src={photoAvatar || avatar} alt="" />
-          {/* <div className={style.userAvatar} /> */}
+          <img
+            className={style.userAvatar}
+            src={/* photoAvatar || */ avatar}
+            alt="User avatar"
+          />
         </div>
-        <div className={style.userName}>User name</div>
-        <div className={style.userJobTitle}>User job title</div>
+        <div className={style.userName}>{userName || 'User name'}</div>
+        <div className={style.userJobTitle}>Front-end developer</div>
         <Button type="button" onClick={() => setEditProfileModal(true)}>
           edit profile
         </Button>
-      </SelectingSidebar>
+      </Sidebar>
       <div className={s.cardsBlock}>
         <h1 className={s.titleCardsBlock}>My Packs list</h1>
         <Scroll />
         <div className={s.loader}>{status && <Loader />}</div>
         <div className={st.searchAddBlock}>
-          <Search userId={userId} />
+          {cardPacks.length > ZERO && <Search userId={userId} />}
           <Button type="button" onClick={() => setCreateModal(true)}>
             Add Pack
           </Button>
         </div>
-        <UniversalTable
-          items={packCards}
-          showDelete={setDeleteModal}
-          showUpdate={setUpdateModal}
-          headers={packHeaders}
-          sortFunction={sortPackCards}
-          setId={setPackId}
-        />
-        <Pagination
-          totalItemsCount={cardPacksTotalCount} // это количество всех колод
-          currentPage={page}
-          onPageChanged={onPageChanged}
-          pageSize={pageCount} // это количество колод на странице
-          portionSize={PORTION_SIZE} // это количество страниц в блоке перемотки
-        />
+        {cardPacks.length > ZERO ? (
+          <>
+            <UniversalTable
+              items={cardPacks}
+              showDelete={setDeleteModal}
+              showUpdate={setUpdateModal}
+              headers={packHeaders}
+              sortFunction={sortPackCards}
+              setId={setPackId}
+            />
+            <Pagination
+              totalItemsCount={cardPacksTotalCount}
+              currentPage={page}
+              onPageChanged={onPageChanged}
+              pageSize={pageCount}
+              portionSize={PORTION_SIZE}
+            />
+          </>
+        ) : (
+          <div className={s.noCardsTextContainer}>You have no any cards pack</div>
+        )}
       </div>
       <Modal isOpen={editProfileModal}>
         <ProfileEdit showEdit={setEditProfileModal} />

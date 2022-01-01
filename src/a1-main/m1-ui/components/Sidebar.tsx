@@ -9,7 +9,7 @@ import { LoaderRelative } from './common/LoaderRelative';
 
 import { AppRootState } from 'a1-main/m2-bll/store';
 import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
-import s from 'styles/SelectingSidebar.module.css';
+import s from 'styles/Sidebar.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type SideBarType = {
@@ -17,7 +17,7 @@ type SideBarType = {
   children?: any;
 };
 
-export const SelectingSidebar: FC<SideBarType> = ({ children }): ReturnComponentType => {
+export const Sidebar: FC<SideBarType> = ({ children }): ReturnComponentType => {
   const dispatch = useDispatch();
   const min = useSelector<AppRootState, number>(state => state.cardspack.minCardsCount);
   const max = useSelector<AppRootState, number>(state => state.cardspack.maxCardsCount);

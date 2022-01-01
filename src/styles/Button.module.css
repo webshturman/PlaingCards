@@ -12,6 +12,7 @@
 
 .default:disabled {
     opacity: 0.5;
+    cursor: default;
 }
 
 /*.default:focus {*/

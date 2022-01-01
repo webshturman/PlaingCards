@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-import { EMPTY_STRING } from '../../../../../constants/common';
-import s from '../../../../../styles/Modal.module.css';
-import { ReturnComponentType } from '../../../../../types/ReturnComponentType';
 import { Button } from '../CustomButton/Button';
 import { Input } from '../CustomInput/Input';
+
+import { EMPTY_STRING } from 'constants/common';
+import s from 'styles/Modal.module.css';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type NewPackType = {
   showCreate: (modal: boolean) => void;
@@ -30,8 +31,12 @@ export const NewPack: React.FC<NewPackType> = ({
         value={newName}
         type="text"
       />
-      <Button onClick={addNewPack}>add</Button>
-      <Button onClick={() => showCreate(false)}>cancel</Button>
+      <Button onClick={addNewPack} className={s.buttonLRMargin}>
+        add
+      </Button>
+      <Button onClick={() => showCreate(false)} className={s.buttonLRMargin}>
+        cancel
+      </Button>
     </div>
   );
 };

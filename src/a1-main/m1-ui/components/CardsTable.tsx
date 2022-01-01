@@ -23,10 +23,10 @@ import {
   updateCardData,
 } from 'a1-main/m2-bll/thunks/cards-thunk';
 import { cardsType } from 'a1-main/m3-dal/types/cardsType';
-import { EMPTY_STRING, PORTION_SIZE } from 'constants/common';
+import { EMPTY_STRING, PORTION_SIZE, ZERO } from 'constants/common';
 import { PATH } from 'enums/routes';
 import s from 'styles/Cards.module.css';
-import st from 'styles/search.module.css';
+import st from 'styles/Search.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const CardsTable = (): ReturnComponentType => {
@@ -42,30 +42,27 @@ export const CardsTable = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const location = useLocation();
   const packId = location.state;
-  const [cardId, setCardId] = useState(EMPTY_STRING);
   const cardsHeaders = {
     question: 'question',
     answer: 'answer',
     grade: 'grade',
     updated: 'updated',
   };
-
-  useEffect(() => {
-    dispatch(getCards(packId));
-  }, [sortCards]);
-  const handleSortCards = (value: string): void => {
-    dispatch(SortCardData(value));
-  };
+  const [cardId, setCardId] = useState(EMPTY_STRING);
   const [createCardModal, setCreateCardModal] = useState(false);
   const [updateCardModal, setUpdateCardModal] = useState(false);
   const [deleteCardModal, setDeleteCardModal] = useState(false);
 
+  const handleSortCards = (value: string): void => {
+    dispatch(SortCardData(value));
+  };
   const handleAddCard = (question: string, answer: string): void => {
     dispatch(addNewCard({ cardsPack_id: packId, question, answer }));
     setCreateCardModal(false);
   };
   const handleDeleteCard = (): void => {
     dispatch(deleteCard(cardId, packId));
+    setDeleteCardModal(false);
   };
   const handleUpdateCard = (question: string): void => {
     dispatch(updateCardData(cardId, question, packId));
@@ -77,12 +74,16 @@ export const CardsTable = (): ReturnComponentType => {
     setDeleteCardModal(false);
   };
 
+  useEffect(() => {
+    dispatch(getCards(packId));
+  }, [sortCards]);
+
   if (!AuthUserStatus) return <Navigate to={PATH.LOGIN_FORM} />;
 
   return (
     <div className={s.CardsContainer}>
       <Scroll />
-      <div className={s.cardsBlock}>
+      <div className={cards.length === ZERO ? s.cardsBlockWithCards : s.cardsBlock}>
         <BackArrow />
         <h1 className={s.titleCardsBlock}>Playing Cards</h1>
         <div className={s.loader}>{status && <Loader />}</div>
@@ -92,21 +93,25 @@ export const CardsTable = (): ReturnComponentType => {
             Add Card
           </Button>
         </div>
-        <UniversalTable
-          showDelete={setDeleteCardModal}
-          showUpdate={setUpdateCardModal}
-          items={cards}
-          headers={cardsHeaders}
-          sortFunction={handleSortCards}
-          setId={setCardId}
-        />
-        <Pagination
-          totalItemsCount={cardsTotalCount}
-          currentPage={page}
-          onPageChanged={onPageChanged}
-          pageSize={pageCount}
-          portionSize={PORTION_SIZE}
-        />
+        {cards.length !== ZERO && (
+          <div>
+            <UniversalTable
+              showDelete={setDeleteCardModal}
+              showUpdate={setUpdateCardModal}
+              items={cards}
+              headers={cardsHeaders}
+              sortFunction={handleSortCards}
+              setId={setCardId}
+            />
+            <Pagination
+              totalItemsCount={cardsTotalCount}
+              currentPage={page}
+              onPageChanged={onPageChanged}
+              pageSize={pageCount}
+              portionSize={PORTION_SIZE}
+            />
+          </div>
+        )}
       </div>
       <Modal isOpen={updateCardModal}>
         <CardUpdate showUpdate={setUpdateCardModal} handleUpdateCard={handleUpdateCard} />

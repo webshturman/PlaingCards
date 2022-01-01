@@ -25,10 +25,11 @@
 .page {
     font-weight: 800;
     display: inline-block;
-    text-align: center;
-    min-width: 45px;
+    width: 45px;
+    height: 45px;
     padding: 10px 0;
     font-size: 16px;
+    line-height: 1;
     background-color: white;
     border-radius: 50%;
     cursor: pointer;
@@ -40,7 +41,7 @@
     color: #fff;
     display: inline-block;
     font-weight: 800;
-    background-color: rgb(159, 194, 210) !important;
+    background-color: rgb(159, 194, 210);
     cursor: default;
 }
 

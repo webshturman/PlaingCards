@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-import { EMPTY_STRING } from '../../../../../constants/common';
-import s from '../../../../../styles/Modal.module.css';
-import { ReturnComponentType } from '../../../../../types/ReturnComponentType';
 import { Button } from '../CustomButton/Button';
 import { Input } from '../CustomInput/Input';
+
+import { EMPTY_STRING } from 'constants/common';
+import s from 'styles/Modal.module.css';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type CardUpdateType = {
   showUpdate: (modal: boolean) => void;
@@ -30,8 +31,12 @@ export const CardUpdate: React.FC<CardUpdateType> = ({
         value={newName}
         type="text"
       />
-      <Button onClick={updateCardName}>update</Button>
-      <Button onClick={() => showUpdate(false)}>cancel</Button>
+      <Button onClick={updateCardName} className={s.buttonLRMargin}>
+        update
+      </Button>
+      <Button onClick={() => showUpdate(false)} className={s.buttonLRMargin}>
+        cancel
+      </Button>
     </div>
   );
 };

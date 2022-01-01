@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import { cardsPackAPI } from '../../m3-dal/cardspack-api';
-import { searchApi } from '../../m3-dal/search-api';
 import { setErrorMessageAC, setStatusAC } from '../actions/app-actions';
 import {
   setCardsPackTotalCountAC,
@@ -12,6 +10,9 @@ import {
   setPackCardsAC,
 } from '../actions/pack-action';
 import { AppThunk } from '../store';
+
+import { cardsPackAPI } from 'a1-main/m3-dal/cardspack-api';
+import { searchApi } from 'a1-main/m3-dal/search-api';
 
 export const setPackCardsTC =
   (userId: string): AppThunk =>

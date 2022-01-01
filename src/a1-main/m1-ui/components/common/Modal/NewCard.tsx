@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-import { EMPTY_STRING } from '../../../../../constants/common';
-import s from '../../../../../styles/Modal.module.css';
-import { ReturnComponentType } from '../../../../../types/ReturnComponentType';
 import { Button } from '../CustomButton/Button';
 import { Input } from '../CustomInput/Input';
+
+import { EMPTY_STRING } from 'constants/common';
+import s from 'styles/Modal.module.css';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type NewCardType = {
   showCreate: (modal: boolean) => void;
@@ -39,8 +40,12 @@ export const NewCard: React.FC<NewCardType> = ({
         value={answer}
         type="text"
       />
-      <Button onClick={() => addNewCard()}>add</Button>
-      <Button onClick={() => showCreate(false)}>cancel</Button>
+      <Button onClick={() => addNewCard()} className={s.buttonLRMargin}>
+        add
+      </Button>
+      <Button onClick={() => showCreate(false)} className={s.buttonLRMargin}>
+        cancel
+      </Button>
     </div>
   );
 };
