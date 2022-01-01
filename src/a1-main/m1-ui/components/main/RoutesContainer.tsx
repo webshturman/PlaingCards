@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Login } from '../../../../a2-features/f1/Login';
 // import { CardsPack } from '../CardsPack';
 import { CardsTable } from '../CardsTable';
 import { Error404 } from '../common/ErrorPages/Error404';
@@ -12,6 +11,7 @@ import { PacksCardsTable } from '../PackCardsTable';
 import { Profile } from '../Profile';
 import { TestComponent } from '../TestComponent';
 
+import { Login } from 'a2-features/f1/Login';
 import { Register } from 'a2-features/f2/Register';
 import { NewPassword } from 'a2-features/f3/NewPassword';
 import { RecoveryPassword } from 'a2-features/f3/RecoveryPassword';

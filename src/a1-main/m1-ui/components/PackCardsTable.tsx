@@ -3,26 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import st from '../../../styles/search.module.css';
-import {
-  setCurrentPageAC,
-  setMaxCardsCount,
-  setMaxFilter,
-  setMinCardsCount,
-  setMinFilter,
-  setSearchText,
-  SortPackCardsAC,
-} from '../../m2-bll/actions/pack-action';
-import { PacksType } from '../../m2-bll/reducers/cardspack-reducer';
-import { AppRootState } from '../../m2-bll/store';
-import {
-  createPackCardsTC,
-  deletePackCardsTC,
-  setPackCardsTC,
-  updatePackCardsTC,
-} from '../../m2-bll/thunks/pack-thunk';
-import { searchPacks } from '../../m2-bll/thunks/search-thunk';
-
 import { Button } from './common/CustomButton/Button';
 import { Loader } from './common/Loader';
 import { Modal } from './common/Modal/Modal';
@@ -35,9 +15,28 @@ import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
 
-import { EMPTY_STRING, FIRST_PAGE } from 'constants/common';
+import {
+  setCurrentPageAC,
+  setMaxCardsCount,
+  setMaxFilter,
+  setMinCardsCount,
+  setMinFilter,
+  setSearchText,
+  SortPackCardsAC,
+} from 'a1-main/m2-bll/actions/pack-action';
+import { PacksType } from 'a1-main/m2-bll/reducers/cardspack-reducer';
+import { AppRootState } from 'a1-main/m2-bll/store';
+import {
+  createPackCardsTC,
+  deletePackCardsTC,
+  setPackCardsTC,
+  updatePackCardsTC,
+} from 'a1-main/m2-bll/thunks/pack-thunk';
+import { searchPacks } from 'a1-main/m2-bll/thunks/search-thunk';
+import { EMPTY_STRING, FIRST_PAGE, ZERO } from 'constants/common';
 import { PATH } from 'enums/routes';
 import s from 'styles/Cards.module.css';
+import st from 'styles/search.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const PacksCardsTable = (): ReturnComponentType => {
@@ -99,13 +98,12 @@ export const PacksCardsTable = (): ReturnComponentType => {
   // });
 
   useEffect(() => {
-    const zero = 0;
     dispatch(setSearchText(EMPTY_STRING));
     dispatch(setCurrentPageAC(FIRST_PAGE));
-    dispatch(setMinCardsCount(zero));
-    dispatch(setMaxCardsCount(zero));
-    dispatch(setMinFilter(zero));
-    dispatch(setMaxFilter(zero));
+    dispatch(setMinCardsCount(ZERO));
+    dispatch(setMaxCardsCount(ZERO));
+    dispatch(setMinFilter(ZERO));
+    dispatch(setMaxFilter(ZERO));
     dispatch(SortPackCardsAC(initialSortValue));
   }, []);
 

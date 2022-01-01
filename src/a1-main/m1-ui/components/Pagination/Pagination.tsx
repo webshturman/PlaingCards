@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { AppRootState } from '../../../m2-bll/store';
 import { Button } from '../common/CustomButton/Button';
 
+import { AppRootState } from 'a1-main/m2-bll/store';
 import s from 'styles/Pagination.module.css';
 
 type PaginationPropsType = {

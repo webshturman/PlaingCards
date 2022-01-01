@@ -5,10 +5,16 @@
     align-items: center;
 }
 
-
-.buttonBlock,.pageBlock{
+.buttonBlock, .pageBlock{
     margin-bottom: 20px;
 }
+
+.pageBlock {
+    display: flex;
+    align-items: center;
+    height: 45px;
+}
+
 .currentNumber {
     display: inline-block;
     font-size: 16px;
@@ -27,13 +33,6 @@
     border-radius: 50%;
     cursor: pointer;
     color:rgb(79, 98, 108);
-
-    /*&:first-child {*/
-    /*    border-radius: 10px 0 0 10px;*/
-    /*}*/
-    /*&:last-child {*/
-    /*    border-radius: 0 10px 10px 0;*/
-    /*}*/
 }
 
 .selectPage {
@@ -45,35 +44,14 @@
     cursor: default;
 }
 
-/*.page:first-child {*/
-/*    border-radius: 10px 0 0 10px;*/
-/*}*/
-
-/*.page:last-child {*/
-/*    border-radius: 0 10px 10px 0;*/
-/*}*/
-
 .button {
     color: #fff;
     font-size: 14px;
     background-color: rgb(79, 98, 108);
-    /*padding: 6px 12px;*/
     padding: 3px;
     border-radius: 8px;
     margin: 0 10px;
     white-space: nowrap;
-    /*&:hover {*/
-    /*    background-color: #00aa00;*/
-    /*    color: #fff;*/
-    /*    text-shadow: #fff 0 0 4px;*/
-    /*    box-shadow: #009900 0 0 15px;*/
-    /*}*/
-    /*&:disabled {*/
-    /*    background-color: #555;*/
-    /*    text-shadow: none;*/
-    /*    box-shadow: none;*/
-    /*    cursor: auto;*/
-    /*}*/
 }
 
 .button:hover {

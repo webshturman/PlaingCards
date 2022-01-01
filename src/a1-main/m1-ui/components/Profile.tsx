@@ -3,25 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import avatar from '../../../assets/images/avatar.jpg';
-import { Nullable } from '../../../types/Nullable';
-import {
-  setCurrentPageAC,
-  setMaxCardsCount,
-  setMaxFilter,
-  setMinCardsCount,
-  setMinFilter,
-  setSearchText,
-  SortPackCardsAC,
-} from '../../m2-bll/actions/pack-action';
-import { PacksType } from '../../m2-bll/reducers/cardspack-reducer';
-import {
-  createPackCardsTC,
-  deletePackCardsTC,
-  setPackCardsTC,
-  updatePackCardsTC,
-} from '../../m2-bll/thunks/pack-thunk';
-
 import { Button } from './common/CustomButton/Button';
 import { Loader } from './common/Loader';
 import { Modal } from './common/Modal/Modal';
@@ -35,21 +16,39 @@ import { Search } from './Search';
 import { SelectingSidebar } from './SelectingSidebar';
 import { UniversalTable } from './UniversalTable';
 
+import {
+  setCurrentPageAC,
+  setMaxCardsCount,
+  setMaxFilter,
+  setMinCardsCount,
+  setMinFilter,
+  setSearchText,
+  SortPackCardsAC,
+} from 'a1-main/m2-bll/actions/pack-action';
+import { PacksType } from 'a1-main/m2-bll/reducers/cardspack-reducer';
 import { AppRootState } from 'a1-main/m2-bll/store';
+import {
+  createPackCardsTC,
+  deletePackCardsTC,
+  setPackCardsTC,
+  updatePackCardsTC,
+} from 'a1-main/m2-bll/thunks/pack-thunk';
 import { searchPacks } from 'a1-main/m2-bll/thunks/search-thunk';
+import avatar from 'assets/images/avatar.jpg';
 import {
   EMPTY_STRING,
   FIRST_PAGE,
   INITIAL_SORT_VALUE,
   packHeaders,
   PORTION_SIZE,
+  ZERO,
 } from 'constants/common';
 import { PATH } from 'enums/routes';
 import s from 'styles/Cards.module.css';
 import st from 'styles/search.module.css';
 import style from 'styles/SelectingSidebar.module.css';
+import { Nullable } from 'types/Nullable';
 import { ReturnComponentType } from 'types/ReturnComponentType';
-// import { packUtils } from 'utils/packs-functions';
 
 export const Profile = (): ReturnComponentType => {
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
@@ -68,7 +67,6 @@ export const Profile = (): ReturnComponentType => {
   const searchText = useSelector<AppRootState, string>(
     state => state.cardspack.searchText,
   );
-  // const [sortPackCards] = packUtils();
   const photoAvatar = useSelector<AppRootState, Nullable<string>>(
     state => state.profile.avatar!,
   );
@@ -94,13 +92,12 @@ export const Profile = (): ReturnComponentType => {
     }
   }, [sortPack]);
   useEffect(() => {
-    const zero = 0;
     dispatch(setSearchText(EMPTY_STRING));
     dispatch(setCurrentPageAC(FIRST_PAGE));
-    dispatch(setMinCardsCount(zero));
-    dispatch(setMaxCardsCount(zero));
-    dispatch(setMinFilter(zero));
-    dispatch(setMaxFilter(zero));
+    dispatch(setMinCardsCount(ZERO));
+    dispatch(setMaxCardsCount(ZERO));
+    dispatch(setMinFilter(ZERO));
+    dispatch(setMaxFilter(ZERO));
     dispatch(SortPackCardsAC(INITIAL_SORT_VALUE));
   }, []);
   const [editProfileModal, setEditProfileModal] = useState(false);

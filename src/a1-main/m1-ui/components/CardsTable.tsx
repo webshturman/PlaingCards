@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import st from '../../../styles/search.module.css';
-
 import { BackArrow } from './common/BackArrow/BackArrow';
 import { Button } from './common/CustomButton/Button';
 import { Loader } from './common/Loader';
@@ -28,6 +26,7 @@ import { cardsType } from 'a1-main/m3-dal/types/cardsType';
 import { EMPTY_STRING, PORTION_SIZE } from 'constants/common';
 import { PATH } from 'enums/routes';
 import s from 'styles/Cards.module.css';
+import st from 'styles/search.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const CardsTable = (): ReturnComponentType => {

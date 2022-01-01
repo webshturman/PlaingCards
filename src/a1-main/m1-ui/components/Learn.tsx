@@ -3,13 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
-import { setCardsId } from '../../m2-bll/actions/learn-actions';
-import { cardsType } from '../../m3-dal/types/cardsType';
-
 import { Button } from './common/CustomButton/Button';
 import Radio from './common/CustomRadio/CustomRadio';
 import { Loader } from './common/Loader';
 
+import { setCardsId } from 'a1-main/m2-bll/actions/learn-actions';
 import { AppRootState } from 'a1-main/m2-bll/store';
 import {
   changeAnswerStatus,
@@ -17,6 +15,7 @@ import {
   changeQuestionNumber,
   sendCardRate,
 } from 'a1-main/m2-bll/thunks/learn-thunk';
+import { cardsType } from 'a1-main/m3-dal/types/cardsType';
 import { ZERO, ZERO_LENGTH, ONE } from 'constants/common';
 import { PATH } from 'enums/routes';
 import s from 'styles/Learn.module.css';
