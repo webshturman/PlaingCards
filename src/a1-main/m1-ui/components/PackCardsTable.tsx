@@ -182,6 +182,7 @@ export const PacksCardsTable = (): ReturnComponentType => {
           showDelete={setDeleteModal}
           showUpdate={setUpdateModal}
           setId={setPackId}
+          buttons
         />
         <Pagination
           totalItemsCount={cardPacksTotalCount}
