@@ -71,9 +71,9 @@ export const Profile = (): ReturnComponentType => {
   const searchText = useSelector<AppRootState, string>(
     state => state.cardspack.searchText,
   );
-  /* const photoAvatar = useSelector<AppRootState, Nullable<string>>(
+  const photoAvatar = useSelector<AppRootState, Nullable<string>>(
     state => state.profile.avatar!,
-  ); */
+  );
 
   const onPageChanged = (pageNumber: number): void => {
     dispatch(setCurrentPageAC(pageNumber));
@@ -135,7 +135,7 @@ export const Profile = (): ReturnComponentType => {
         <div className={style.userAvatarContainer}>
           <img
             className={style.userAvatar}
-            src={/* photoAvatar || */ avatar}
+            src={photoAvatar || avatar}
             alt="User avatar"
           />
         </div>
