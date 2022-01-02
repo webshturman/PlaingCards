@@ -8,6 +8,7 @@ import { cardsAddType } from 'a1-main/m3-dal/types/cardsType';
 export const getCards =  // eslint-disable-next-line camelcase
   (cardsPack_id: string): AppThunk =>
   async (dispatch, getState) => {
+    dispatch(setStatusAC(true));
     const { sortCards, page, pageCount } = getState().cards;
     try {
       // eslint-disable-next-line camelcase
@@ -20,6 +21,8 @@ export const getCards =  // eslint-disable-next-line camelcase
       dispatch(setCardsData(response.data));
     } catch (error: any) {
       console.log(error);
+    } finally {
+      dispatch(setStatusAC(false));
     }
   };
 

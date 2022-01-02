@@ -23,15 +23,17 @@ import {
   updateCardData,
 } from 'a1-main/m2-bll/thunks/cards-thunk';
 import { cardsType } from 'a1-main/m3-dal/types/cardsType';
-import { EMPTY_STRING, PORTION_SIZE, ZERO } from 'constants/common';
+import { EMPTY_STRING, PORTION_SIZE, ZERO_LENGTH } from 'constants/common';
 import { PATH } from 'enums/routes';
 import s from 'styles/Cards.module.css';
 import st from 'styles/Search.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const CardsTable = (): ReturnComponentType => {
-  const status = useSelector<AppRootState, boolean>(state => state.app.status);
+  const appStatus = useSelector<AppRootState, boolean>(state => state.app.status);
   const AuthUserStatus = useSelector<AppRootState, boolean>(state => state.auth.isAuth);
+  // @ts-ignore
+  const userId = useSelector<AppRootState, string>(state => state.profile._id);
   const cards = useSelector<AppRootState, cardsType[]>(state => state.cards.cards);
   const cardsTotalCount = useSelector<AppRootState, number>(
     state => state.cards.cardsTotalCount,
@@ -41,7 +43,7 @@ export const CardsTable = (): ReturnComponentType => {
   const sortCards = useSelector<AppRootState, string>(state => state.cards.sortCards);
   const dispatch = useDispatch();
   const location = useLocation();
-  const packId = location.state;
+  const { packId, packName, userIdOwnerThisPack } = location.state;
   const cardsHeaders = {
     question: 'question',
     answer: 'answer',
@@ -83,17 +85,37 @@ export const CardsTable = (): ReturnComponentType => {
   return (
     <div className={s.CardsContainer}>
       <Scroll />
-      <div className={cards.length === ZERO ? s.cardsBlockWithCards : s.cardsBlock}>
+      <div
+        className={cards.length === ZERO_LENGTH ? s.cardsBlockWithCards : s.cardsBlock}
+      >
         <BackArrow />
-        <h1 className={s.titleCardsBlock}>Playing Cards</h1>
-        <div className={s.loader}>{status && <Loader />}</div>
+        {!appStatus && (
+          <div className={s.titleCardsBlock}>
+            {cards.length === ZERO_LENGTH ? (
+              <div className={s.title}>
+                This card pack &quot;{packName}&quot; has no any card
+                {userId === userIdOwnerThisPack ? (
+                  <span>. You can add a card - click on the Add Card</span>
+                ) : (
+                  ''
+                )}
+              </div>
+            ) : (
+              <div>Card pack &quot;{packName}&quot;</div>
+            )}
+          </div>
+        )}
+        <div className={s.loader}>{appStatus && <Loader />}</div>
         <div className={st.searchAddBlock}>
-          <div />
-          <Button type="button" onClick={() => setCreateCardModal(true)}>
-            Add Card
-          </Button>
+          {userId === userIdOwnerThisPack ? (
+            <Button type="button" onClick={() => setCreateCardModal(true)}>
+              Add Card
+            </Button>
+          ) : (
+            ''
+          )}
         </div>
-        {cards.length !== ZERO && (
+        {cards.length !== ZERO_LENGTH && (
           <div>
             <UniversalTable
               showDelete={setDeleteCardModal}

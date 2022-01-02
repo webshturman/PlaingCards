@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
+import { BackArrow } from './common/BackArrow/BackArrow';
 import { Button } from './common/CustomButton/Button';
 import Radio from './common/CustomRadio/CustomRadio';
 import { Loader } from './common/Loader';
@@ -42,10 +43,13 @@ export const Learn = (): ReturnComponentType => {
   const [radioValue, setRadioValue] = useState<string | undefined>(undefined);
   const endLearnCondition = isShowAnswer && questionNumber + ONE === questionCount;
 
-  const exit = (): void => {
+  const clearLearnSessionData = (): void => {
     setRadioValue(undefined);
     dispatch(changeQuestionNumber(ZERO));
     dispatch(changeAnswerStatus(false));
+  };
+
+  const exit = (): void => {
     navigate(PATH.CARDS);
   };
 
@@ -73,6 +77,9 @@ export const Learn = (): ReturnComponentType => {
 
   useEffect(() => {
     dispatch(getCards(packId));
+    return () => {
+      clearLearnSessionData();
+    };
   }, []);
 
   if (cards.length !== ZERO_LENGTH) {
@@ -91,10 +98,8 @@ export const Learn = (): ReturnComponentType => {
   if (cards.length === ZERO_LENGTH) {
     return (
       <div className={s.Container}>
+        <BackArrow />
         <span className={s.title}>This card pack has no any cards</span>
-        <Button className={s.Button} type="button" onClick={() => exit()}>
-          Exit
-        </Button>
       </div>
     );
   }

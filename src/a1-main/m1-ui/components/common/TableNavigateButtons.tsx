@@ -10,11 +10,13 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 type TableActionButtonsType = {
   packName: string;
   packId: string;
+  userIdOwnerThisPack: string;
 };
 
 export const TableNavigateButtons: FC<TableActionButtonsType> = ({
   packName,
   packId,
+  userIdOwnerThisPack,
 }): ReturnComponentType => {
   const navigate = useNavigate();
   return (
@@ -22,7 +24,9 @@ export const TableNavigateButtons: FC<TableActionButtonsType> = ({
       <Button
         className={style.cardButton}
         type="button"
-        onClick={() => navigate(PATH.CARDS_TABLE, { state: packId })}
+        onClick={() =>
+          navigate(PATH.CARDS_TABLE, { state: { packId, packName, userIdOwnerThisPack } })
+        }
       >
         Cards
       </Button>
@@ -31,7 +35,7 @@ export const TableNavigateButtons: FC<TableActionButtonsType> = ({
         type="button"
         onClick={() =>
           navigate(PATH.LEARN, {
-            state: { packId, packName },
+            state: { packId, packName, userIdOwnerThisPack },
           })
         }
       >

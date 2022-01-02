@@ -69,7 +69,13 @@ export const UniversalTable: FC<UniversalTableType> = ({
                   packID={pack._id}
                 />
               )}
-              {buttons && <TableNavigateButtons packName={pack.name} packId={pack._id} />}
+              {buttons && (
+                <TableNavigateButtons
+                  packName={pack.name}
+                  packId={pack._id}
+                  userIdOwnerThisPack={pack.user_id}
+                />
+              )}
             </td>
           </tr>
         ))}

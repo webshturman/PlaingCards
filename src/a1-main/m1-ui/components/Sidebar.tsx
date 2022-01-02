@@ -1,14 +1,13 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-
-import { setMaxFilter, setMinFilter } from '../../m2-bll/actions/pack-action';
 
 import { DoubleRangeSlider } from './common/DoubleRangeSlider/DoubleRangeSlider';
 import { LoaderRelative } from './common/LoaderRelative';
 
+import { setMaxFilter, setMinFilter } from 'a1-main/m2-bll/actions/pack-action';
 import { AppRootState } from 'a1-main/m2-bll/store';
-import { FIRST_ELEMENT, SECOND_ELEMENT } from 'constants/common';
+import { FIRST_ELEMENT, SECOND_ELEMENT, ZERO } from 'constants/common';
 import s from 'styles/Sidebar.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -24,18 +23,19 @@ export const Sidebar: FC<SideBarType> = ({ children }): ReturnComponentType => {
   const minFilter = useSelector<AppRootState, number>(state => state.cardspack.minFilter);
   const maxFilter = useSelector<AppRootState, number>(state => state.cardspack.maxFilter);
   const appStatus = useSelector<AppRootState, boolean>(state => state.app.status);
-  const [value1, setValue1] = useState<number>(min);
-  const [value2, setValue2] = useState<number>(max);
-
-  const onUpdate = (values: [number, number]): void => {
-    setValue1(values[FIRST_ELEMENT]);
-    setValue2(values[SECOND_ELEMENT]);
-  };
 
   const onChange = (values: [number, number]): void => {
     dispatch(setMinFilter(Math.round(Number(values[FIRST_ELEMENT]))));
     dispatch(setMaxFilter(Math.round(Number(values[SECOND_ELEMENT]))));
   };
+
+  // need to restore the filter values when after viewing the cards of the deck, the user click "Back"
+  useEffect(() => {
+    if (maxFilter === ZERO && max !== ZERO) {
+      dispatch(setMinFilter(min));
+      dispatch(setMaxFilter(max));
+    }
+  });
 
   return (
     <div className={s.SelectingSidebarContainer}>
@@ -50,9 +50,6 @@ export const Sidebar: FC<SideBarType> = ({ children }): ReturnComponentType => {
             max={max}
             step={1}
             disable={appStatus}
-            value1={value1}
-            value2={value2}
-            onUpdate={onUpdate}
             onChange={onChange}
           />
         </div>
