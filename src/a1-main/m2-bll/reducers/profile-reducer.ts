@@ -29,6 +29,12 @@ export const profileReducer = (
         ...action.authUserData,
       };
     }
+    case PROFILE_ACTIONS_TYPE.UPDATE_USER_DATA: {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    }
     case PROFILE_ACTIONS_TYPE.DELETE_USER_DATA: {
       return initialProfileState;
     }

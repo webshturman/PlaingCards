@@ -6,6 +6,7 @@ import {
   LoginCredentialsSendType,
   MeResponseStateType,
 } from 'a1-main/m3-dal/types/loginType';
+import { Nullable } from 'types/Nullable';
 
 export const authAPI = {
   login(credentials: LoginCredentialsSendType) {
@@ -22,7 +23,7 @@ export const authAPI = {
   deleteMe() {
     return instance.delete<AxiosResponse<DeleteMeResponseStateType>>(`auth/me`);
   },
-  renewDataUser(newName: string, newAvatar: File) {
-    return instance.put<any>(`auth/me`, { name: newName, avatar: newAvatar });
+  renewDataUser(name: Nullable<string>, avatar: Nullable<string> | undefined) {
+    return instance.put<AxiosResponse<MeResponseStateType>>(`auth/me`, { name, avatar });
   },
 };
