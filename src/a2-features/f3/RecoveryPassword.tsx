@@ -3,14 +3,13 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Button';
-import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
-import { AppRootState } from '../../a1-main/m2-bll/store';
-import { sendMessageOnEmailTC } from '../../a1-main/m2-bll/thunks/password-thunk';
-import { emailValidator, EMPTY_STRING, EMAIL, ZERO_LENGTH } from '../../constants/common';
-import { PATH } from '../../enums/routes';
-import style from '../../styles/Login.module.css';
-
+import { Button } from 'a1-main/m1-ui/components/common/CustomButton/Button';
+import { Input } from 'a1-main/m1-ui/components/common/CustomInput/Input';
+import { AppRootState } from 'a1-main/m2-bll/store';
+import { sendMessageOnEmailTC } from 'a1-main/m2-bll/thunks/password-thunk';
+import { emailValidator, EMPTY_STRING, EMAIL, ZERO_LENGTH } from 'constants/common';
+import { PATH } from 'enums/routes';
+import style from 'styles/Login.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export type LetterType = {

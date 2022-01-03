@@ -3,8 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import { Button } from '../common/CustomButton/Button';
-
+import { Button } from 'a1-main/m1-ui/components/common/CustomButton/Button';
 import { setEmailAC } from 'a1-main/m2-bll/actions/app-actions';
 import { AppRootState } from 'a1-main/m2-bll/store';
 import { deleteAuthUserData } from 'a1-main/m2-bll/thunks/auth-thunk';

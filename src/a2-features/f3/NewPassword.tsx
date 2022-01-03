@@ -3,19 +3,13 @@ import React, { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { Button } from '../../a1-main/m1-ui/components/common/CustomButton/Button';
-import { Input } from '../../a1-main/m1-ui/components/common/CustomInput/Input';
-import { AppRootState } from '../../a1-main/m2-bll/store';
-import { renamePasswordTC } from '../../a1-main/m2-bll/thunks/password-thunk';
-import {
-  CONFIRM_PASSWORD,
-  EMPTY_STRING,
-  PASSWORD,
-  ZERO_LENGTH,
-} from '../../constants/common';
-import { PATH } from '../../enums/routes';
-import style from '../../styles/Login.module.css';
-
+import { Button } from 'a1-main/m1-ui/components/common/CustomButton/Button';
+import { Input } from 'a1-main/m1-ui/components/common/CustomInput/Input';
+import { AppRootState } from 'a1-main/m2-bll/store';
+import { renamePasswordTC } from 'a1-main/m2-bll/thunks/password-thunk';
+import { CONFIRM_PASSWORD, EMPTY_STRING, PASSWORD, ZERO_LENGTH } from 'constants/common';
+import { PATH } from 'enums/routes';
+import style from 'styles/Login.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export type ReamePasswordType = {

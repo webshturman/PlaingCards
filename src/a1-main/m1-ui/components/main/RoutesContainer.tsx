@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-// import { CardsPack } from '../CardsPack';
 import { CardsTable } from '../CardsTable';
 import { Error404 } from '../common/ErrorPages/Error404';
 import { LoginForm } from '../common/LoginForm';
