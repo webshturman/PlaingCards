@@ -35,12 +35,18 @@ export const RecoveryPassword = (): ReturnComponentType => {
   }, [sendMessageSuccess]);
 
   const dispatch = useDispatch();
+  const { origin } = window.location;
+  const localhost = 'new_pass#/login_form/new_pass/$token$/';
+  const github = '#/login_form/new_pass/$token$/';
+  const baseUrl = `${origin}/PlaingCards/`;
+  const condition = origin === 'http://localhost:3000' ? localhost : github;
+  const url = baseUrl + condition;
 
   const letterToThePost: LetterType = {
     email,
     from: 'test-front-admin <ai73a@yandex.by>',
     message: `<div style='background-color: #d6f8f0; padding: 20px'>
-'password recovery link': <a href='http://localhost:3000/PlaingCards/new_pass#/new_pass/$token$/'>link</a></div>`,
+'password recovery link': <a href=${url}>link</a></div>`,
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
