@@ -2,7 +2,7 @@ import { PROFILE_ACTIONS_TYPE, ProfileActionsType } from '../actions/profile-act
 
 import { MeResponseStateType } from 'a1-main/m3-dal/types/loginType';
 
-export type initialProfileStateType = any;
+export type InitialProfileStateType = any;
 
 const initialProfileState: MeResponseStateType = {
   _id: null,
@@ -42,21 +42,3 @@ export const profileReducer = (
       return state;
   }
 };
-
-// export const saveUserDataTC =
-//   (newName: string, newAvatar: File): AppThunk =>
-//   async dispatch => {
-//     dispatch(setStatusAC(true));
-//     try {
-//       await authAPI.renewDataUser(newName, newAvatar);
-//     } catch (error) {
-//       if (axios.isAxiosError(error) && error.response) {
-//         const errorMessage = error.response;
-//         dispatch(setErrorMessageAC(true, `Error: ${errorMessage}`));
-//       } else if (axios.isAxiosError(error) && error.message === 'Network Error') {
-//         dispatch(setErrorMessageAC(true, `Error:no connection!`));
-//       }
-//     } finally {
-//       dispatch(setStatusAC(false));
-//     }
-//   };

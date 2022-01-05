@@ -4,7 +4,7 @@ const initialRegisterState = {
   signUpStatus: false,
 };
 
-type InitialRegisterStateType = typeof initialRegisterState;
+export type InitialRegisterStateType = typeof initialRegisterState;
 
 export const registerReducer = (
   state: InitialRegisterStateType = initialRegisterState,

@@ -4,13 +4,11 @@ const initialAuthState = {
   isAuth: false,
 };
 
-type AuthStateType = {
-  isAuth: boolean;
-};
+export type InitialAuthStateType = typeof initialAuthState;
 export const authReducer = (
-  state: AuthStateType = initialAuthState,
+  state: InitialAuthStateType = initialAuthState,
   action: AuthActionsType,
-): AuthStateType => {
+): InitialAuthStateType => {
   switch (action.type) {
     case AUTH_ACTIONS_TYPE.SET_AUTH_STATUS: {
       return {

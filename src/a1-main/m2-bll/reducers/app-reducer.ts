@@ -8,7 +8,7 @@ const initialRecoveryState = {
   status: false,
 };
 
-type InitialRecoveryStateType = typeof initialRecoveryState;
+export type InitialRecoveryStateType = typeof initialRecoveryState;
 
 export const appReducer = (
   state: InitialRecoveryStateType = initialRecoveryState,
