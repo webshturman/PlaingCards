@@ -1,7 +1,7 @@
 import { cardsType } from '../../m3-dal/types/learnType';
 import { LEARN_ACTIONS_TYPE, LearnActionsType } from '../actions/learn-actions';
 
-type initialLearnStateType = typeof initialLearnState;
+export type InitialLearnStateType = typeof initialLearnState;
 
 const initialLearnState = {
   cards: [] as cardsType[],
@@ -19,9 +19,9 @@ const initialLearnState = {
 };
 
 export const LearnReducer = (
-  state: initialLearnStateType = initialLearnState,
+  state: InitialLearnStateType = initialLearnState,
   action: LearnActionsType,
-): initialLearnStateType => {
+): InitialLearnStateType => {
   switch (action.type) {
     case LEARN_ACTIONS_TYPE.SET_CARDS_DATA:
       return {

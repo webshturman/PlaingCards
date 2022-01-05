@@ -37,7 +37,7 @@ const initialPackCardState = {
   maxFilter: 50,
 };
 
-type InitialPackCardStateStateType = typeof initialPackCardState;
+export type InitialPackCardStateStateType = typeof initialPackCardState;
 
 export const cardsPackReducer = (
   state: InitialPackCardStateStateType = initialPackCardState,

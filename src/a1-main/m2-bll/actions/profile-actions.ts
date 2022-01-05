@@ -22,6 +22,7 @@ export const setAuthUserData = (authUserData: MeResponseStateType) =>
     type: PROFILE_ACTIONS_TYPE.SET_USER_DATA,
     authUserData,
   } as const);
+
 export const updateUserData = (
   name: Nullable<string>,
   avatar: Nullable<string> | undefined,
@@ -30,6 +31,7 @@ export const updateUserData = (
     type: PROFILE_ACTIONS_TYPE.UPDATE_USER_DATA,
     payload: { name, avatar },
   } as const);
+
 export const deleteUserData = () =>
   ({
     type: PROFILE_ACTIONS_TYPE.DELETE_USER_DATA,

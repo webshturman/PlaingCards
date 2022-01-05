@@ -4,7 +4,7 @@ const initialPasswordState = {
   sendMessageSuccess: false,
   passwordRename: false,
 };
-type InitialPasswordStateType = typeof initialPasswordState;
+export type InitialPasswordStateType = typeof initialPasswordState;
 
 export const passwordReducer = (
   state: InitialPasswordStateType = initialPasswordState,

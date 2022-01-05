@@ -10,7 +10,7 @@ export enum ACTIONS_TYPE_CARDS_PACK {
   SET_MAX_CARDS_COUNT = 'cardspack-reducer/SET-MAX-CARDS-COUNT',
   SET_MIN_FILTER = 'cardspack-reducer/SET-MIN-FILTER',
   SET_MAX_FILTER = 'cardspack-reducer/SET-MAX-FILTER',
-  SET_USER_ID = 'cardspack-reducer/SET_USER_ID',
+  // SET_USER_ID = 'cardspack-reducer/SET_USER_ID',
 }
 
 export type CardsPackActionType =
@@ -22,8 +22,8 @@ export type CardsPackActionType =
   | ReturnType<typeof setMinCardsCount>
   | ReturnType<typeof setMaxCardsCount>
   | ReturnType<typeof setMinFilter>
-  | ReturnType<typeof setMaxFilter>
-  | ReturnType<typeof setUserIdAC>;
+  | ReturnType<typeof setMaxFilter>;
+// | ReturnType<typeof setUserIdAC>;
 
 export const setMinFilter = (min: number) =>
   ({ type: ACTIONS_TYPE_CARDS_PACK.SET_MIN_FILTER, min } as const);
@@ -43,9 +43,9 @@ export const setSearchText = (searchText: string) =>
 export const setPackCardsAC = (cardPacks: Array<PacksType>) =>
   ({ type: ACTIONS_TYPE_CARDS_PACK.GET_CARDS_PACK_DATA, cardPacks } as const);
 
-// eslint-disable-next-line camelcase
-export const setUserIdAC = (user_id: string) =>
-  ({ type: ACTIONS_TYPE_CARDS_PACK.SET_USER_ID, user_id } as const);
+// // eslint-disable-next-line camelcase
+// export const setUserIdAC = (user_id: string) =>
+//   ({ type: ACTIONS_TYPE_CARDS_PACK.SET_USER_ID, user_id } as const);
 
 export const setCurrentPageAC = (page: number) =>
   ({ type: ACTIONS_TYPE_CARDS_PACK.SET_CURRENT_PAGE, page } as const);

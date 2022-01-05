@@ -11,11 +11,12 @@ const initialCardsState = {
   packUserId: '',
   sortCards: '0updated',
 };
-type initialCardsStateType = typeof initialCardsState;
+export type InitialCardsStateType = typeof initialCardsState;
+
 export const cardsReducer = (
-  state: initialCardsStateType = initialCardsState,
+  state: InitialCardsStateType = initialCardsState,
   action: CardsActionsType,
-): initialCardsStateType => {
+): InitialCardsStateType => {
   switch (action.type) {
     case CARDS_ACTIONS_TYPE.SET_CARDS_DATA:
       return {
