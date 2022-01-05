@@ -19,7 +19,7 @@ export const PREVIOUS_PAGE = -1;
 export const INITIAL_SORT_VALUE = '0updated';
 export const TWO = 2;
 export const FOUR = 4;
-export const TEST_ONE_HUNDRED_THREE=103
+export const TEST_ONE_HUNDRED_THREE = 103;
 export const packHeaders = {
   user_name: 'writer',
   name: 'name',

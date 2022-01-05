@@ -1,9 +1,5 @@
 import { setStatusAC } from '../actions/app-actions';
-import {
-  setAnswerStatus,
-  setCardsData,
-  setQuestionNumber,
-} from '../actions/learn-actions';
+import { setCardsData } from '../actions/learn-actions';
 import { AppThunk } from '../store';
 
 import { learnAPI } from 'a1-main/m3-dal/learn-api';
@@ -29,38 +25,15 @@ export const getCards =  // eslint-disable-next-line camelcase
     }
   };
 
-export const changeQuestionNumber =
-  (questionNumber: number): AppThunk =>
-  async dispatch => {
-    try {
-      dispatch(setQuestionNumber(questionNumber));
-    } catch (error: any) {
-      console.log(`Error setting question number. ${error}`);
-    }
-  };
-
-export const changeAnswerStatus =
-  (answer: boolean): AppThunk =>
-  async dispatch => {
-    try {
-      dispatch(setAnswerStatus(answer));
-    } catch (error: any) {
-      console.log(`Error setting answer status. ${error}`);
-    }
-  };
-
 export const sendCardRate =
   (rate: number, cardId: string): AppThunk =>
   async dispatch => {
     dispatch(setStatusAC(true));
     try {
-      const response = await learnAPI.sendCardRate(rate, cardId);
-      if (response.statusText === 'OK') {
-        dispatch(setStatusAC(false));
-      }
-      return Promise.resolve();
+      await learnAPI.sendCardRate(rate, cardId);
     } catch (error: any) {
       console.log(`Error sending card rate. ${error}`);
-      return Promise.reject();
+    } finally {
+      dispatch(setStatusAC(false));
     }
   };
